@@ -5,7 +5,7 @@ TaskBridge and a super amdin who has access to all the org details. DEV
 - The application name will be task bridge, the superAdmin will be me (DEVELOPER). These details will never be edited. This is fixed.
 
 ```js
-application : {
+taskbridge : {
     superAdminDets: {
         firstName: sAFirstName,
         lastName: sALastName,
@@ -79,6 +79,24 @@ application : {
         // Application can have multiple organizations
     }
 }
+```
+
+#### MongoDB Collection
+```js
+// users collection
+{
+  _id: ObjectId,
+  uuid: "...",
+  firstName: "...",
+  lastName: "...",
+  email: "...",
+  passwordHash: "...",
+  role: "SUPER_ADMIN" | "ADMIN" | "EMPLOYEE",
+  organizationId: ObjectId,
+  permissions: ["CREATE_TASK"],
+  createdAt: ISODate()
+}
+
 ```
 
 ---
