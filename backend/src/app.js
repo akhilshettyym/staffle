@@ -3,17 +3,18 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+
 app.use(express.json());
 app.use(cookieParser());
 
-/**
- * - routes
-*/
-import authRouter from "./routes/auth.routes.js";
+// /**
+//  * - routes
+// */
+// import authRouter from "./routes/auth.routes.js";
 
-/**
- * - use routes
-*/
-app.use("/api/auth", authRouter);
+// /**
+//  * - use routes
+// */
+// app.use("/api/auth", authRouter);
 
 export default app;

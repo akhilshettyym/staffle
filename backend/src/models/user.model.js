@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import crypto from "node:crypto";
 
 const userSchema = new mongoose.Schema(
     {
@@ -78,6 +79,13 @@ const userSchema = new mongoose.Schema(
         toObject: { virtuals: true },
     }
 );
+
+userSchema.pre("save", function (next) {
+    if (this.isNew && !this.uuid) {
+        this.uuid = crypto.randomUUID();
+    }
+    next();
+});
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
