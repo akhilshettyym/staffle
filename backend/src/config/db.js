@@ -12,6 +12,7 @@ const connectDB = async () => {
 
 export default connectDB;
 
+
 // function connectToDB() {
 //     mongoose.connect(process.env.MONGO_URI)
 //         .then(() => {
