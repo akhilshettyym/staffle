@@ -86,7 +86,6 @@ const taskSchema = new mongoose.Schema(
 
 taskSchema.index({ organizationId: 1, status: 1 });
 taskSchema.index({ assignedTo: 1, dueDate: 1 });
-taskSchema.index({ uuid: 1 });
 taskSchema.index({ dueDate: 1 });
 
 taskSchema.virtual("isOverdue").get(function () {
@@ -96,11 +95,10 @@ taskSchema.virtual("isOverdue").get(function () {
     return false;
 });
 
-taskSchema.pre("save", function (next) {
+taskSchema.pre("save", function () {
     if (this.isModified("title")) {
         this.title = this.title.trim();
     }
-    next();
 });
 
 const taskModel = mongoose.model("Task", taskSchema);

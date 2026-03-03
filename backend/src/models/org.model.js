@@ -5,8 +5,8 @@ const organizationSchema = new mongoose.Schema(
     {
         uuid: {
             type: String,
-            required: true,
             unique: true,
+            default: () => crypto.randomUUID(),
             trim: true,
         },
 
@@ -68,16 +68,7 @@ const organizationSchema = new mongoose.Schema(
     }
 );
 
-// organizationSchema.index({ orgDomain: 1 });
-// organizationSchema.index({ uuid: 1 });
 organizationSchema.index({ createdBy: 1 });
-
-organizationSchema.pre("save", function (next) {
-    if (this.isNew && !this.uuid) {
-        this.uuid = crypto.randomUUID();
-    }
-    next();
-});
 
 const orgModel = mongoose.model("Organization", organizationSchema);
 

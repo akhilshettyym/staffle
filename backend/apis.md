@@ -476,3 +476,96 @@ Environment and scripts: Add scripts to package.json such as "start": "node serv
 With these pieces in place, your backend will support the full flow: organization creation with an admin, adding employees, finalizing registration, and later task management. Each phase builds on the previous one. For example, after Phase 4 you would implement a login route (POST /api/auth/login) that authenticates either admins or employees and returns a JWT, so the front end can show the appropriate dashboard. Similarly, when you start adding Task CRUD operations, you’ll create Task controllers and routes that only admins (or assigned employees) can use, using the same JWT and permissions checks.
 
 References: The above design follows common Node.js/Express patterns. For example, using a dedicated DB module and calling it before starting the server, defining unique indexed fields in Mongoose, hashing passwords with bcrypt, and protecting routes with JWT middleware are all standard practices in modern MERN-stack apps.
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+#### POST create-organization - localhost:3000/api/auth/create-organization
+```json
+{
+  "firstName": "Akhil",
+  "lastName": "Shetty",
+  "email": "akhil@gmail.com",
+  "password": "password123",
+  "confirmPassword": "password123",
+  "dateOfBirth": "2003-03-29",
+  "designation": "Sr. Manager",
+  "orgName": "TaskBridge Technologies",
+  "orgDomain": "taskbridge.com",
+  "orgDescription": "Project and employee management platform",
+  "orgCountry": "IN"
+}
+```
+
+#### POST add-employee - localhost:3000/api/employee/add-employee
+```json
+{
+  "firstName": "Test4",
+  "lastName": "Sharma",
+  "email": "test4@taskbridge.com",
+  "password": "password123",
+  "dateOfBirth": "1995-04-30",
+  "designation": "Software Engineer"
+}
+```
+
+#### POST login - localhost:3000/api/auth/login - super admin
+```json
+{
+  "email": "superadmin@taskbridge.com",
+  "password": "StrongPassword123"
+}
+
+{
+  "email": "akhil@gmail.com",
+  "password": "password123"
+}
+```
+
+#### PATCH approve - localhost:3000/api/org/approve/69a6aef51fe673b0c5aef661
+
+#### PATCH reject - localhost:3000/api/org/reject/69a6aef51fe673b0c5aef661
+
+#### POST create-task - localhost:3000/api/tasks/create-task
+```json
+{
+  "title": "Fix Login Bugs",
+  "category": "Login Development",
+  "description": "Fix the issue where login fails on Safari browser.",
+  "assignedTo": "69a6f25660dc6de0c4131825",
+  "dueDate": "2026-03-10T10:00:00.000Z",
+  "priority": "HIGH"
+}
+```
+
+.env
+SUPER_ADMIN_EMAIL=superadmin@taskbridge.com
+SUPER_ADMIN_PASSWORD=StrongPassword123
+
+- add revoke to super_admin.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Option 1 (Recommended – Production Way)
+Use an Axios interceptor. It automatically:
+Detects 401
+Calls refresh
+Retries request
+User never notices
+Example:
+```js
+axios.interceptors.response.use(
+  response => response,
+  async error => {
+    if (error.response.status === 401) {
+      const refreshResponse = await axios.post("/api/auth/refresh", {}, { withCredentials: true });
+      const newAccessToken = refreshResponse.data.accessToken;
+
+      error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
+      return axios(error.config);
+    }
+    return Promise.reject(error);
+  }
+);
+```
+-------------------------------------------------------------------------------------------------------------------
