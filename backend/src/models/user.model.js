@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
             required: [true, "First name is required"],
             trim: true,
             minlength: [2, "First name must be at least 2 characters"],
-            maxlength: [50, "First name cannot exceed 50 characters"],
+            maxlength: [50, "First name cannot exceed 50 characters"]
         },
 
         lastName: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
             required: [true, "Last name is required"],
             trim: true,
             minlength: [2, "Last name must be at least 2 characters"],
-            maxlength: [50, "Last name cannot exceed 50 characters"],
+            maxlength: [50, "Last name cannot exceed 50 characters"]
         },
 
         email: {
@@ -33,40 +33,44 @@ const userSchema = new mongoose.Schema(
             unique: true,
             lowercase: true,
             trim: true,
-            match: [
-                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                "Please enter a valid email address",
-            ],
-            maxlength: [100, "Email cannot exceed 100 characters"],
+            match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Please enter a valid email address"],
+            maxlength: [100, "Email cannot exceed 100 characters"]
         },
 
         password: {
             type: String,
             required: [true, "Password is required"],
             minlength: [8, "Password must be at least 8 characters"],
-            select: false,
-        },
-
-        role: {
-            type: String,
-            enum: {
-                values: ["SUPER_ADMIN", "ADMIN", "EMPLOYEE"],
-                message:
-                    "{VALUE} is not a valid role. Must be SUPER_ADMIN, ADMIN, or EMPLOYEE",
-            },
-            required: [true, "User role is required"],
-            uppercase: true,
+            select: false
         },
 
         dateOfBirth: {
             type: Date,
             required: [true, "Date of birth is required"],
+            validate: {
+                validator: function (value) {
+                    return value < new Date();
+                },
+                message: "Date of birth cannot be in the future"
+            }
         },
 
         designation: {
             type: String,
             required: [true, "Designation is required"],
             trim: true,
+            minlength: [2, "Designation must be at least 2 characters"],
+            maxlength: [100, "Designation cannot exceed 100 characters"]
+        },
+
+        role: {
+            type: String,
+            enum: {
+                values: ["SUPER_ADMIN", "ADMIN", "EMPLOYEE"],
+                message: "{VALUE} is not a valid role. Must be SUPER_ADMIN, ADMIN, or EMPLOYEE",
+            },
+            required: [true, "User role is required"],
+            uppercase: true
         },
 
         organizationId: {
@@ -79,6 +83,7 @@ const userSchema = new mongoose.Schema(
         permissions: {
             type: [String],
             default: [],
+            // add enum if permissions are fixed set
         },
     },
     {
@@ -94,21 +99,27 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-/* Hash password before save */
 userSchema.pre("save", async function () {
-    if (!this.isModified("password")) return;
-
+    if (!this.isModified("password")) {
+        return;
+    }
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-/* Compare password */
 userSchema.methods.comparePassword = async function (candidatePassword) {
+    // console.log(candidatePassword, this.password);
     return bcrypt.compare(candidatePassword, this.password);
 };
 
+// userSchema.index({ email: 1 });
 userSchema.index({ role: 1 });
 userSchema.index({ organizationId: 1, role: 1 });
+
+
+userSchema.methods.belongsToOrganization = function (orgId) {
+    return this.organizationId?.equals(orgId);
+};
 
 const userModel = mongoose.model("User", userSchema);
 

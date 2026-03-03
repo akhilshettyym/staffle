@@ -1,4 +1,6 @@
 import userModel from "../models/user.model.js";
+import organizationModel from "../models/org.model.js";
+import { ROLE_PERMISSIONS } from "../constants/rolePermissions.js";
 
 const addEmployeeController = async (req, res) => {
     try {
@@ -41,6 +43,31 @@ const addEmployeeController = async (req, res) => {
             });
         }
 
+        const organization = await organizationModel.findById(req.user.organizationId);
+
+        if (!organization) {
+            return res.status(404).json({
+                success: false,
+                message: "Organization not found",
+            });
+        }
+
+        if (organization.status === "PENDING") {
+
+            const employeeCount = await userModel.countDocuments({
+                organizationId: organization._id,
+                role: "EMPLOYEE",
+            });
+
+            if (employeeCount >= 3) {
+                return res.status(403).json({
+                    success: false,
+                    message:
+                        "Organization approval status is pending. You can only add up to 3 employees until approval.",
+                });
+            }
+        }
+
         const newEmployee = await userModel.create({
             firstName,
             lastName,
@@ -50,7 +77,7 @@ const addEmployeeController = async (req, res) => {
             designation,
             role: "EMPLOYEE",
             organizationId: req.user.organizationId,
-            permissions: ["task:view", "task:update"],
+            permissions: ROLE_PERMISSIONS["EMPLOYEE"] || [],
         });
 
         return res.status(201).json({
@@ -58,10 +85,12 @@ const addEmployeeController = async (req, res) => {
             message: "Employee added successfully",
             employee: newEmployee,
         });
+
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: "Server error while adding employee",
+            error: error.message,
         });
     }
 };
