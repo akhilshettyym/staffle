@@ -478,9 +478,7 @@ With these pieces in place, your backend will support the full flow: organizatio
 References: The above design follows common Node.js/Express patterns. For example, using a dedicated DB module and calling it before starting the server, defining unique indexed fields in Mongoose, hashing passwords with bcrypt, and protecting routes with JWT middleware are all standard practices in modern MERN-stack apps.
 
 
-
-
-----------------------
+-------------------------------------------------------------------------------------------------------------------
 
 #### POST create-organization - localhost:3000/api/auth/create-organization
 ```json
@@ -502,9 +500,9 @@ References: The above design follows common Node.js/Express patterns. For exampl
 #### POST add-employee - localhost:3000/api/employee/add-employee
 ```json
 {
-  "firstName": "Test",
+  "firstName": "Test4",
   "lastName": "Sharma",
-  "email": "test@taskbridge.com",
+  "email": "test4@taskbridge.com",
   "password": "password123",
   "dateOfBirth": "1995-04-30",
   "designation": "Software Engineer"
@@ -517,11 +515,28 @@ References: The above design follows common Node.js/Express patterns. For exampl
   "email": "superadmin@taskbridge.com",
   "password": "StrongPassword123"
 }
+
+{
+  "email": "akhil@gmail.com",
+  "password": "password123"
+}
 ```
 
 #### PATCH approve - localhost:3000/api/org/approve/69a6aef51fe673b0c5aef661
 
 #### PATCH reject - localhost:3000/api/org/reject/69a6aef51fe673b0c5aef661
+
+#### POST create-task - localhost:3000/api/tasks/create-task
+```json
+{
+  "title": "Fix Login Bugs",
+  "category": "Login Development",
+  "description": "Fix the issue where login fails on Safari browser.",
+  "assignedTo": "69a6f25660dc6de0c4131825",
+  "dueDate": "2026-03-10T10:00:00.000Z",
+  "priority": "HIGH"
+}
+```
 
 .env
 SUPER_ADMIN_EMAIL=superadmin@taskbridge.com
@@ -529,16 +544,10 @@ SUPER_ADMIN_PASSWORD=StrongPassword123
 
 - add revoke to super_admin.
 
-
-
-
-
-
-
+-------------------------------------------------------------------------------------------------------------------
 
 Option 1 (Recommended – Production Way)
-Use an Axios interceptor.
-It automatically:
+Use an Axios interceptor. It automatically:
 Detects 401
 Calls refresh
 Retries request
@@ -559,3 +568,4 @@ axios.interceptors.response.use(
   }
 );
 ```
+-------------------------------------------------------------------------------------------------------------------
