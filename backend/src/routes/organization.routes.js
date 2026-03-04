@@ -1,7 +1,7 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
-import { requireSuperAdmin } from "../middleware/role.middleware.js";
-import { approveOrganization, reactivateOrganization, rejectOrganization, revokeOrganization } from "../controllers/organization.controller.js";
+import { requireAdmin, requireSuperAdmin } from "../middleware/role.middleware.js";
+import { approveOrganization, reactivateOrganization, rejectOrganization, revokeOrganization, updateOrganizationController } from "../controllers/organization.controller.js";
 
 const router = express.Router();
 
@@ -16,5 +16,8 @@ router.patch("/revoke/:orgId", authMiddleware, requireSuperAdmin, revokeOrganiza
 
 /* PATCH /api/org/re-activate/:orgId */
 router.patch("/re-activate/:orgId", authMiddleware, requireSuperAdmin, reactivateOrganization);
+
+/* PATCH /api/org/update-organization/:orgId */
+router.patch("/update-organization/:orgId", authMiddleware, requireAdmin, updateOrganizationController);
 
 export default router;
