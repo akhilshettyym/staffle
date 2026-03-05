@@ -117,6 +117,7 @@ async function createOrganizationController(req, res) {
             user: newUser,
             token,
         });
+
     } catch (error) {
         await session.abortTransaction();
         return res.status(500).json({
@@ -125,6 +126,7 @@ async function createOrganizationController(req, res) {
             error:
                 process.env.NODE_ENV === "development" ? error.message : undefined,
         });
+
     } finally {
         session.endSession();
     }
@@ -142,10 +144,7 @@ async function userLoginController(req, res) {
         }
 
         const normalizedEmail = email.toLowerCase();
-
-        const user = await userModel
-            .findOne({ email: normalizedEmail })
-            .select("+password");
+        const user = await userModel.findOne({ email: normalizedEmail }).select("+password");
 
         if (!user) {
             return res.status(401).json({

@@ -13,7 +13,6 @@ const authMiddleware = async (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
         const user = await userModel.findById(decoded.userId);
 
         if (!user) {
@@ -25,6 +24,7 @@ const authMiddleware = async (req, res, next) => {
 
         req.user = user;
         next();
+
     } catch (err) {
         return res.status(401).json({
             success: false,

@@ -86,14 +86,14 @@ export const revokeOrganization = async (req, res) => {
             return res.status(404).json({
                 success: false,
                 message: "Organization not found",
-            })
+            });
         }
 
         if (organization.status !== "ACTIVE") {
             return res.status(400).json({
                 success: false,
                 message: "Organization is not in active state",
-            })
+            });
         }
 
         organization.status = "REVOKED";
@@ -103,7 +103,7 @@ export const revokeOrganization = async (req, res) => {
             success: true,
             message: "Organization revoked successfully",
             organization,
-        })
+        });
 
     } catch (error) {
         return res.status(500).json({
@@ -147,7 +147,7 @@ export const reactivateOrganization = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Error re-activating organization"
-        })
+        });
     }
 }
 

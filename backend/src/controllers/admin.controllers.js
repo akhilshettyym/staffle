@@ -91,11 +91,10 @@ export const updateAdminController = async (req, res) => {
     }
 };
 
-// ADD ROUTE
 export const reviewTaskRejectionController = async (req, res) => {
     try {
         const { taskId } = req.params;
-        const { decision, reviewReason, reassignTo } = req.body;
+        const { decision, adminReason, reassignTo } = req.body;
         const loggedInUser = req.user;
 
         if (loggedInUser.role !== "ADMIN") {
@@ -118,29 +117,33 @@ export const reviewTaskRejectionController = async (req, res) => {
         }
 
         if (decision === "APPROVED") {
-            task.status = "FAILED";
+
+            task.rejection.status = "APPROVED";
 
             if (reassignTo) {
                 task.assignedTo = reassignTo;
                 task.status = "NEW";
+            } else {
+                task.status = "FAILED";
             }
 
         } else if (decision === "REJECTED") {
 
-            if (!reviewReason) {
+            if (!adminReason) {
                 return res.status(400).json({
                     success: false,
-                    message: "Admin must provide reason for rejection denial"
+                    message: "Admin reason required"
                 });
             }
+
+            task.rejection.status = "REJECTED";
+            task.rejection.adminReason = adminReason;
 
             task.status = "NEW";
         }
 
         task.rejection.reviewedBy = loggedInUser._id;
-        task.rejection.reviewReason = reviewReason;
         task.rejection.reviewedAt = new Date();
-        task.rejection.decision = decision;
 
         await task.save();
 

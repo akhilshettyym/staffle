@@ -77,29 +77,6 @@ const taskSchema = new mongoose.Schema(
             uppercase: true,
         },
 
-        // rejection: {
-        //     requestedBy: {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: "User",
-        //     },
-        //     reason: {
-        //         type: String,
-        //         trim: true,
-        //     },
-        //     requestedAt: Date,
-
-        //     reviewedBy: {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: "User",
-        //     },
-        //     reviewReason: String,
-        //     reviewedAt: Date,
-        //     decision: {
-        //         type: String,
-        //         enum: ["APPROVED", "REJECTED"],
-        //     }
-        // },
-
         rejection: {
             reason: {
                 type: String
@@ -125,7 +102,23 @@ const taskSchema = new mongoose.Schema(
             adminReason: {
                 type: String
             }
-        }
+        },
+
+        taskLifeCycle: {
+            failure: {
+                reason: {
+                    type: String,
+                    trim: true
+                },
+                failedBy: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                },
+                failedAt: {
+                    type: Date
+                }
+            }
+        },
     },
     {
         timestamps: true,
@@ -134,9 +127,10 @@ const taskSchema = new mongoose.Schema(
     }
 );
 
-taskSchema.index({ organizationId: 1, status: 1 });
-taskSchema.index({ assignedTo: 1, dueDate: 1 });
 taskSchema.index({ dueDate: 1 });
+taskSchema.index({ dueDate: 1, status: 1 });
+taskSchema.index({ assignedTo: 1, dueDate: 1 });
+taskSchema.index({ organizationId: 1, status: 1 });
 
 taskSchema.virtual("isOverdue").get(function () {
     if (this.status !== "COMPLETED" && this.status !== "FAILED") {

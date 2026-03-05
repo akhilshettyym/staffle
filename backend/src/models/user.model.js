@@ -119,14 +119,11 @@ userSchema.pre("save", async function () {
 });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
-    // console.log(candidatePassword, this.password);
     return bcrypt.compare(candidatePassword, this.password);
 };
 
-// userSchema.index({ email: 1 });
 userSchema.index({ role: 1 });
 userSchema.index({ organizationId: 1, role: 1 });
-
 
 userSchema.methods.belongsToOrganization = function (orgId) {
     return this.organizationId?.equals(orgId);

@@ -3,6 +3,7 @@ import { PERMISSIONS } from "../constants/permissions.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import { requirePermission } from "../middleware/permission.middleware.js";
 import { addEmployeeController, updateEmployeeController, deactivateEmployeeController } from "../controllers/employee.controllers.js";
+import { requireAdmin } from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
@@ -13,6 +14,6 @@ router.post("/add-employee", authMiddleware, requirePermission(PERMISSIONS.CREAT
 router.patch("/update-employee/:employeeId", authMiddleware, requirePermission(PERMISSIONS.UPDATE_EMPLOYEE), updateEmployeeController);
 
 /* PATCH /api/employee/deactivate-employee/:employeeId */
-router.patch("/deactivate-employee/:employeeId", authMiddleware, requirePermission(PERMISSIONS.DEACTIVATE_EMPLOYEE), deactivateEmployeeController);
+router.patch("/deactivate-employee/:employeeId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.DEACTIVATE_EMPLOYEE), deactivateEmployeeController);
 
 export default router;

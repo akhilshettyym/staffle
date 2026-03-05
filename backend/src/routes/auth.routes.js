@@ -3,8 +3,8 @@ import { createOrganizationController, userLoginController, userLogoutController
 
 const router = express.Router();
 
-/* POST /api/auth/create-organization */
-router.post("/create-organization", createOrganizationController);
+/* POST /api/auth/create-org */
+router.post("/create-org", createOrganizationController);
 
 /* POST /api/auth/login */
 router.post("/login", userLoginController);
