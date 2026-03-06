@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, AuthContext, Navigate, Route, Routes, useNavigate, Landing, RegisterOrg, getOrganizationData, CreatedTasks, Dashboard, TaskStatus, EmployeeManagement, EmpTaskStatus, TaskLifeCycle, AdminDetails, EmployeeEmpDetails, EmployeeAdDetails, SignIn, NewTask, InProgress, Toaster, toast } from "./constants/imports";
+import CompleteOrganizationPage from "./pages/CompleteOrganizationPage";
 import CreateOrganizationPage from "./pages/CreateOrganizationPage";
 
 const App = () => {
@@ -87,10 +88,15 @@ const App = () => {
         <Route path="/signin" element={!user ? <SignIn handleLogin={handleLogin} /> : <Navigate to={getDashboardRoute(user)} />} />
 
 
-        <Route path="/create-organization" element={!user ? <CreateOrganizationPage /> : <Navigate to="/" />} />
+        {/* Create Organization / Admin */}
+        <Route path="/create-organization" element={<CreateOrganizationPage />} />
+
+        {/* Complete Organization / Add Employee */}
+        <Route path="/complete-organization" element={<CompleteOrganizationPage />} />
 
 
         <Route path="/register-org" element={<RegisterOrg />} />
+
 
         <Route path="/admin/dashboard" element={<AdminRoute> {loggedInUserData && (<Dashboard data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} </AdminRoute>} />
         <Route path="/admin/tasks" element={loggedInUserData && (<CreatedTasks data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />

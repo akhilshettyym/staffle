@@ -41,8 +41,6 @@ const useCreateOrganization = () => {
             const orgCountry = formData.get("orgCountry")?.trim() || null;
             const orgDomain = formData.get("orgDomain")?.trim() || orgName?.toLowerCase().replace(/\s+/g, "-");
 
-            console.log(formData)
-
             if (!firstName || !lastName || !email || !password || !confirmPassword || !dateOfBirth || !orgName || !orgDescription) {
                 throw new Error("Please fill all required fields");
             }
@@ -63,6 +61,7 @@ const useCreateOrganization = () => {
             const payload = { firstName, lastName, email, password, confirmPassword, dateOfBirth, designation, orgName, orgDomain, orgDescription, orgCountry };
 
             const response = await createOrganization(payload);
+            
             if (!response?.success) {
                 throw new Error(response?.message || "Could not create organization");
             }

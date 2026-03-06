@@ -35,7 +35,7 @@ const Login = ({ handleLogin }) => {
           <button className="mt-4 w-full bg-[#FFDAB3] text-[#1B211A] font-semibold py-3 rounded-full hover:brightness-110 active:scale-95 transition-all uppercase"> Sign In </button>
 
           <p className="text-sm text-gray-400 uppercase"> Not a registered user ?
-            <Link to="/signup" className="ml-2 mt-4 text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Sign Up </Link>
+            <Link to="/create-organization" className="ml-2 mt-4 text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Sign Up </Link>
           </p>
 
         </form>

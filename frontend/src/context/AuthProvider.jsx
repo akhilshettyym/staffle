@@ -50,21 +50,24 @@ export default function AuthProvider({ children }) {
     else localStorage.removeItem("tb_user");
   }, [auth]);
 
-  const logout = async () => {
-    // call backend logout endpoint to clear cookie
-    try {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL || "http://localhost:3000"}/api/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-    } catch (e) {
-      // ignore network errors on logout
-    }
-    setAuth({ token: null, user: null });
-  };
+  // localStorage.clear()
+
+  // const logout = async () => {
+  //   // call backend logout endpoint to clear cookie
+  //   try {
+  //     await fetch(`${process.env.REACT_APP_API_BASE_URL || "http://localhost:3000"}/api/auth/logout`, {
+  //       method: "POST",
+  //       credentials: "include",
+  //     });
+  //   } catch (e) {
+  //     // ignore network errors on logout
+  //   }
+  //   setAuth({ token: null, user: null });
+  // };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, logout }}>
+    // logout
+    <AuthContext.Provider value={{ auth, setAuth }}> 
       {children}
     </AuthContext.Provider>
   );
