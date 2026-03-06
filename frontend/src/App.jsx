@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, AuthContext, Navigate, Route, Routes, useNavigate, Landing, RegisterOrg, getOrganizationData, CreatedTasks, Dashboard, TaskStatus, EmployeeManagement, EmpTaskStatus, TaskLifeCycle, AdminDetails, EmployeeEmpDetails, EmployeeAdDetails, SignIn, NewTask, InProgress, Toaster, toast } from "./constants/imports";
 import CompleteOrganizationPage from "./pages/CompleteOrganizationPage";
 import CreateOrganizationPage from "./pages/CreateOrganizationPage";
+// import SuperAdminControl from "./utils/superAdminControl";
 
 const App = () => {
   const navigate = useNavigate();
@@ -93,6 +94,9 @@ const App = () => {
 
         {/* Complete Organization / Add Employee */}
         <Route path="/complete-organization" element={<CompleteOrganizationPage />} />
+
+        {/* Akhil Control */}
+        {/* <Route path="/akhil-setup" element={<SuperAdminControl />} /> */}
 
 
         <Route path="/register-org" element={<RegisterOrg />} />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addEmployee } from "../api/auth";
+import { addEmployee } from "../api/employee";
 import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
