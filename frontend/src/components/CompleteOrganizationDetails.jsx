@@ -40,18 +40,16 @@ const CompleteOrganizationDetails = () => {
         ? new Date(admin.dateOfBirth).toLocaleDateString()
         : "";
 
-    const countryMap = {
+    const orgCountry = {
         IN: "India",
         US: "United States",
         UK: "United Kingdom",
         CA: "Canada"
-    };
-
-    const orgCountry = countryMap[organization?.orgCountry] || "";
+    }[organization?.orgCountry];
 
     const handleRegisterOrg = () => {
         toast.success("Organization Registered Successfully..");
-        navigate("/signin");
+        navigate("/register-organization");
     };
 
     useEffect(() => {

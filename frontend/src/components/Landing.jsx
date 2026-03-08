@@ -4,7 +4,7 @@ const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-full p-10 bg-[#0F1412] overflow-auto flex items-center justify-center relative overflow-hidden">
+    <div className="h-screen w-full p-10 bg-[#0F1412] overflow-hidden flex items-center justify-center relative">
       <div className="absolute -top-32 -left-32 w-125 h-125 bg-[#FFDAB3]/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-32 -right-32 w-125 h-125 bg-[#FFDAB3]/5 rounded-full blur-3xl" />
 
@@ -24,7 +24,7 @@ const Landing = () => {
         </div>
 
         <div className="mt-14">
-          <button onClick={() => navigate("/signin")} className="bg-[#FFDAB3] text-[#1B211A] font-bold px-12 py-3 rounded-full hover:brightness-110 active:scale-95 transition-all uppercase px-10 py-3 tracking-widest"> Enter Workspace
+          <button onClick={() => navigate("/login")} className="bg-[#FFDAB3] text-[#1B211A] font-bold px-10 py-3 rounded-full hover:brightness-110 active:scale-95 transition-all uppercase tracking-widest"> Enter Workspace
           </button>
         </div>
 

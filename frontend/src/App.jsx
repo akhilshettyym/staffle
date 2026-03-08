@@ -1,6 +1,10 @@
-import { useState, useEffect, useContext, AuthContext, Navigate, Route, Routes, useNavigate, Landing, RegisterOrg, getOrganizationData, CreatedTasks, Dashboard, TaskStatus, EmployeeManagement, EmpTaskStatus, TaskLifeCycle, AdminDetails, EmployeeEmpDetails, EmployeeAdDetails, SignIn, NewTask, InProgress, Toaster, toast } from "./constants/imports";
+import Login from "./components/Auth/Login";
+import { useState, useEffect, useContext, AuthContext, Navigate, Route, Routes, useNavigate, Landing, RegisterOrg, getOrganizationData, CreatedTasks, Dashboard, TaskStatus, EmployeeManagement, EmpTaskStatus, TaskLifeCycle, AdminDetails, EmployeeEmpDetails, EmployeeAdDetails, NewTask, InProgress, Toaster, toast } from "./constants/imports";
 import CompleteOrganizationPage from "./pages/CompleteOrganizationPage";
 import CreateOrganizationPage from "./pages/CreateOrganizationPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterOrganizationPage from "./pages/RegisterOrganizationPage";
+import SuperAdminDashboard from "./pages/SuperAdminDashboard";
 // import SuperAdminControl from "./utils/superAdminControl";
 
 const App = () => {
@@ -86,7 +90,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={!user ? <Landing /> : <Navigate to={getDashboardRoute(user)} />} />
-        <Route path="/signin" element={!user ? <SignIn handleLogin={handleLogin} /> : <Navigate to={getDashboardRoute(user)} />} />
+        {/* <Route path="/signin" element={!user ? <SignIn handleLogin={handleLogin} /> : <Navigate to={getDashboardRoute(user)} />} /> */}
 
 
         {/* Create Organization / Admin */}
@@ -95,25 +99,33 @@ const App = () => {
         {/* Complete Organization / Add Employee */}
         <Route path="/complete-organization" element={<CompleteOrganizationPage />} />
 
-        {/* Akhil Control */}
-        {/* <Route path="/akhil-setup" element={<SuperAdminControl />} /> */}
+        {/* Register Organization / Static page with status */}
+        <Route path="/register-organization" element={<RegisterOrganizationPage />} />
+
+        <Route path="/login" element={<LoginPage />} />
 
 
-        <Route path="/register-org" element={<RegisterOrg />} />
+        {/* Super Admin Control */}
+        <Route path="/super-admin-dashboard" element={<SuperAdminDashboard />} />
 
 
-        <Route path="/admin/dashboard" element={<AdminRoute> {loggedInUserData && (<Dashboard data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} </AdminRoute>} />
+        {/* <Route path="/admin/dashboard" element={<AdminRoute> {loggedInUserData && (<Dashboard data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} </AdminRoute>} /> */}
+        <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/tasks" element={loggedInUserData && (<CreatedTasks data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
         <Route path="/admin/status" element={loggedInUserData && (<TaskStatus data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
         <Route path="/admin/employees" element={loggedInUserData && (<EmployeeAdDetails data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
         <Route path="/admin/management" element={loggedInUserData && (<EmployeeManagement data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
         <Route path="/admin/details" element={loggedInUserData && (<AdminDetails data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
-        <Route path="/employee/taskstatus" element={
+        
+        {/* <Route path="/employee/taskstatus" element={
           user?.role === "employee" && loggedInUserData ? (
             <EmpTaskStatus data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />
           ) : (
             <Navigate to="/" />
-          )} />
+          )} /> */}
+
+        <Route path="/employee/taskstatus" element={<EmpTaskStatus />} />
+
 
         <Route path="/employee/newtasks" element={loggedInUserData && (<NewTask data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />
         <Route path="/employee/inprogress" element={loggedInUserData && (<InProgress data={loggedInUserData} handleLogout={handleLogout} orgData={orgData} />)} />

@@ -230,7 +230,7 @@ export const getOrganizationUsers = async (req, res) => {
         const organizationId = req.user.organizationId;
         const users = await userModel.find({ organizationId })
             .select("firstName lastName email dateOfBirth designation role employmentStatus")
-            .sort({ createdAt: -1 });
+            .sort({ createdAt: 1 });
         res.status(200).json({
             success: true,
             count: users.length,

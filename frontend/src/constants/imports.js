@@ -11,7 +11,7 @@ import { FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart } from "react-ico
 import { AuthContext } from "../context/AuthProvider";
 
 import Landing from "../components/Landing";
-import SignIn from "../components/Auth/SignIn";
+// import SignIn from "../components/Auth/Login";
 // import SignUp from "../components/Auth/CreateOrganizationForm.jsx";
 import RegisterOrg from "../components/Auth/RegisterOrg";
 
@@ -53,7 +53,7 @@ import { getLocalStorage, setLocalStorage, generateSequentialId, getOrganization
 export {
     useRef, useState, useEffect, useContext,
 
-    Landing, SignIn, RegisterOrg, Toaster, toast,
+    Landing, RegisterOrg, Toaster, toast,
     
     Link, useNavigate, useLocation, Navigate, Route, Routes,
 

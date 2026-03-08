@@ -22,7 +22,7 @@ const CreateOrganizationForm = () => {
 
                     <div className="w-full flex justify-between items-center">
                         <h2 className="text-xl uppercase tracking-wide text-[#FFDAB3]"> Organization Admin Details </h2>
-                        <Link to="/signin" className="text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Already have an account ? </Link>
+                        <Link to="/login" className="text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Already have an account ? </Link>
                     </div>
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
@@ -111,7 +111,7 @@ const CreateOrganizationForm = () => {
                             {loading ? "Creating..." : "Create Organization"}
                         </button>
 
-                        <Link to="/signin" className="mt-4 text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Already registered ? Sign In </Link>
+                        <Link to="/login" className="mt-4 text-sm text-gray-400 hover:text-[#FFDAB3] hover:underline transition-colors uppercase"> Already registered ? Sign In </Link>
                     </div>
 
                 </form>
