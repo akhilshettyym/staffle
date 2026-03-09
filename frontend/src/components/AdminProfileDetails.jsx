@@ -1,4 +1,4 @@
-import { useState, useEffect, Header, AdminControl, toast } from "../../../constants/imports";
+import { useState, useEffect, Header, AdminControl, toast } from "../constants/imports";
 
 const MAX_ATTEMPTS = 3;
 const LOCK_TIME = 5 * 60 * 1000;
@@ -7,7 +7,7 @@ const inputClass = "mt-2 w-full appearance-none bg-[#0F1412] border border-[#FFD
 
 const disabledInput = `${inputClass} opacity-60 cursor-not-allowed`;
 
-const AdminDetails = ({ data, handleLogout, orgData }) => {
+const AdminProfileDetails = ({ data, handleLogout, orgData }) => {
     const [taskbridge, setTaskbridge] = useState(
         JSON.parse(localStorage.getItem("taskbridge"))
     );
@@ -143,10 +143,7 @@ const AdminDetails = ({ data, handleLogout, orgData }) => {
     };
 
     return (
-        <div className="h-screen w-full p-10 overflow-auto">
-            <Header data={admin} handleLogout={handleLogout} orgData={organization} />
-            <AdminControl />
-
+        <>
             <hr className="my-5 border border-[#FFDAB3]/40" />
             <h1 className="text-center font-bold text-[#FFDAB3] text-xl uppercase"> Admin Details </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
@@ -209,8 +206,8 @@ const AdminDetails = ({ data, handleLogout, orgData }) => {
                     <button type="submit" className="bg-[#FFDAB3] text-[#1B211A] font-bold px-12 py-3 rounded-full uppercase"> Update Details </button>
                 </div>
             </form>
-        </div>
+        </>
     );
 };
 
-export default AdminDetails;
+export default AdminProfileDetails;

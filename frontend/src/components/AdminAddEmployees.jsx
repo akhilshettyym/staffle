@@ -1,6 +1,6 @@
-import { useRef, useEffect, getLocalStorage, setLocalStorage, RemoveEmp, EditEmployeeDets, toast } from "../../../constants/imports";
+import { useRef, useEffect, getLocalStorage, setLocalStorage, RemoveEmp, EditEmployeeDets, toast } from "../constants/imports";
 
-const AddEmployees = ({ employees, setEmployees }) => {
+const AdminAddEmployees = ({ employees, setEmployees }) => {
 
   const prevLengthRef = useRef(0);
 
@@ -52,4 +52,4 @@ const AddEmployees = ({ employees, setEmployees }) => {
   );
 };
 
-export default AddEmployees;
+export default AdminAddEmployees;

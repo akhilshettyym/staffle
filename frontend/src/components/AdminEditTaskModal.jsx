@@ -1,6 +1,6 @@
-import { useState, useContext, AuthContext, getLocalStorage, toast } from "../../../constants/imports";
+import { useState, useContext, AuthContext, getLocalStorage, toast } from "../constants/imports";
 
-const EditTaskModal = ({ task, onClose }) => {
+const AdminEditTaskModal = ({ task, onClose }) => {
     const { updateAuthData, employees } = useContext(AuthContext);
 
     const adminTasks = location.pathname.startsWith("/admin/tasks");
@@ -183,4 +183,4 @@ const EditTaskModal = ({ task, onClose }) => {
     );
 };
 
-export default EditTaskModal;
+export default AdminEditTaskModal;

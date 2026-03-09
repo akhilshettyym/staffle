@@ -11,9 +11,6 @@ import { FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart } from "react-ico
 import { AuthContext } from "../context/AuthProvider";
 
 import Landing from "../components/Landing";
-// import SignIn from "../components/Auth/Login";
-// import SignUp from "../components/Auth/CreateOrganizationForm.jsx";
-import RegisterOrg from "../components/Auth/RegisterOrg";
 
 import Header from "../components/Basics/Header";
 import RemoveEmp from "../components/Basics/RemoveEmp";
@@ -25,42 +22,31 @@ import DateConversion from "../components/Basics/DateConversion";
 import PasswordToggle from "../components/Basics/PasswordToggle";
 import EditEmployeeDets from "../components/Basics/EditEmployeeDets";
 
-import Dashboard from "../components/Dashboard/Admin/Dashboard";
-import CreateTask from "../components/Dashboard/Admin/Createtask"
-import TaskStatus from "../components/Dashboard/Admin/TaskStatus";
-import AddEmployees from "../components/Dashboard/Admin/AddEmployees";
-import AdminDetails from "../components/Dashboard/Admin/AdminDetails";
-import CreatedTasks from "../components/Dashboard/Admin/CreatedTasks";
-import AdminControl from "../components/Dashboard/Admin/AdminControl";
-import EditTaskModal from "../components/Dashboard/Admin/EditTaskModal";
-import EmployeeAdDetails from "../components/Dashboard/Admin/EmployeeAdDetails";
-import EmployeeManagement from "../components/Dashboard/Admin/EmployeeManagement";
+// import Dashboard from "../components/AdminDashBoard";
+import CreateTask from "../components/AdminCreateTaskForm"
+import TaskStatus from "../components/AdminTaskStatusTable";
+import AdminDetails from "../components/AdminProfileDetails";
+import CreatedTasks from "../components/AdminTasksTable";
+import AdminControl from "../components/AdminControlPanel";
+import EmployeeAdDetails from "../components/AdminEmployeeDetailsCard";
+import EmployeeManagement from "../components/AdminEmployeeManager";
 
-import NewTask from "../components/Dashboard/Employee/NewTask";
-import TaskCard from "../components/Dashboard/Employee/TaskCard";
-import FailedTask from "../components/Dashboard/Employee/FailedTask";
-import InProgress from "../components/Dashboard/Employee/InProgress";
-import TaskListNo from "../components/Dashboard/Employee/TaskListNo";
-import EmpTaskStatus from "../components/Dashboard/Employee/EmpTaskStatus";
-import TaskLifeCycle from "../components/Dashboard/Employee/TaskLifeCycle";
-import CompletedTask from "../components/Dashboard/Employee/CompletedTask";
-import EmployeeControl from "../components/Dashboard/Employee/EmployeeControl";
-import FailedTaskModal from "../components/Dashboard/Employee/FailedTaskModal";
-import EmployeeEmpDetails from "../components/Dashboard/Employee/EmployeeEmpDetails";
+
+import EmpTaskStatus from "../components/EmployeeTaskStatus";
+import TaskLifeCycle from "../components/EmployeeComFailedTasks";
+import EmployeeEmpDetails from "../components/EmployeeProfileDetails";
 
 import { getLocalStorage, setLocalStorage, generateSequentialId, getOrganizationData } from "../utils/localStorage";
 
 export {
     useRef, useState, useEffect, useContext,
 
-    Landing, RegisterOrg, Toaster, toast,
+    Landing, Toaster, toast,
     
     Link, useNavigate, useLocation, Navigate, Route, Routes,
 
     Eye, EyeOff, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart, BiSolidError, DatePicker, uuidv4, AdminOutline, 
 
-    getLocalStorage, setLocalStorage, generateSequentialId, getOrganizationData, AuthContext,
-    Header, RemoveEmp,  TaskCount, RemoveTask, PriorityTag, ConfirmModal, DateConversion, PasswordToggle, EditEmployeeDets, 
-    Dashboard, CreateTask, TaskStatus, AddEmployees, AdminDetails, CreatedTasks, AdminControl, EditTaskModal, EmployeeAdDetails, EmployeeManagement, 
-    NewTask, TaskCard, FailedTask, InProgress, TaskListNo, EmpTaskStatus, TaskLifeCycle, CompletedTask, EmployeeControl, FailedTaskModal, EmployeeEmpDetails,
+    getLocalStorage, setLocalStorage, generateSequentialId, getOrganizationData, AuthContext, 
+    Header, RemoveEmp,  TaskCount, RemoveTask, PriorityTag, ConfirmModal, DateConversion, PasswordToggle, EditEmployeeDets, CreateTask, TaskStatus, AdminDetails, CreatedTasks, AdminControl, EmployeeAdDetails, EmployeeManagement, EmpTaskStatus, TaskLifeCycle, EmployeeEmpDetails,
 }

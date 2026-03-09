@@ -1,11 +1,12 @@
-import { useState, useEffect, Header, DatePicker, EmployeeControl, TaskListNo, toast } from "../../../constants/imports";
+import { useState, useEffect, DatePicker, toast } from "../constants/imports";
+import EmployeeTaskListNo from "./EmployeeTaskListNo";
 
 const MAX_ATTEMPTS = 3;
 const LOCK_TIME = 5 * 60 * 1000;
 
 const inputClass = "mt-2 w-full appearance-none bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition";
 
-const EmployeeEmpDetails = ({ data, handleLogout, orgData }) => {
+const EmployeeProfileDetails = ({ data, handleLogout, orgData }) => {
   const [taskbridge, setTaskbridge] = useState(JSON.parse(localStorage.getItem("taskbridge")));
 
   const [formData, setFormData] = useState({
@@ -121,15 +122,12 @@ const EmployeeEmpDetails = ({ data, handleLogout, orgData }) => {
   };
 
   return (
-    <div className="h-screen w-full p-10 overflow-auto">
-      <Header data={employee} handleLogout={handleLogout} orgData={orgData} />
-      <EmployeeControl />
-
+    <>
       <hr className="my-5 border border-[#FFDAB3]/40" />
       <h1 className="text-center font-bold text-[#FFDAB3] text-xl uppercase"> Employee Details </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
-      <TaskListNo data={employee} />
+      <EmployeeTaskListNo data={employee} />
 
       <div className="mt-5 bg-[#1B211A] p-4 rounded-2xl border border-[#FFDAB3]/30 shadow-sm">
         <div className="flex items-center justify-between gap-4 text-sm font-medium uppercase tracking-wide text-[#FFDAB3]">
@@ -177,8 +175,8 @@ const EmployeeEmpDetails = ({ data, handleLogout, orgData }) => {
           <button type="submit" className="bg-[#FFDAB3] text-[#1B211A] font-bold px-12 py-3 rounded-full uppercase"> Update Details </button>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 
-export default EmployeeEmpDetails;
+export default EmployeeProfileDetails;

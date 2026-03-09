@@ -1,15 +1,15 @@
-import { Link, useLocation, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart, AdminOutline } from "../../../constants/imports";
+import { Link, useLocation, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart, AdminOutline } from "../constants/imports";
 
-const AdminControl = () => {
+const AdminControlPanel = () => {
     const { pathname } = useLocation();
 
     const navItems = [
-        { label: "Dashboard", path: "/admin/dashboard", icon: <FiGrid size={18} /> },
-        { label: "Created Tasks", path: "/admin/tasks", icon: <FiClipboard size={18} /> },
-        { label: "Task Status", path: "/admin/status", icon: <FiBarChart2 size={18} /> },
-        { label: "Emp. Details", path: "/admin/employees", icon: <FiUsers size={18} /> },
-        { label: "Emp. Mgmt.", path: "/admin/management", icon: <FiBarChart size={18} /> },
-        { label: "Admin details", path: "/admin/details", icon: <AdminOutline size={18} /> }
+        { label: "Dashboard", path: "/admin/admin-dashboard", icon: <FiGrid size={18} /> },
+        { label: "Created Tasks", path: "/admin/created-tasks", icon: <FiClipboard size={18} /> },
+        { label: "Task Status", path: "/admin/task-status", icon: <FiBarChart2 size={18} /> },
+        { label: "Emp. Details", path: "/admin/employee-details", icon: <FiUsers size={18} /> },
+        { label: "Emp. Mgmt.", path: "/admin/employee-management", icon: <FiBarChart size={18} /> },
+        { label: "Admin details", path: "/admin/admin-details", icon: <AdminOutline size={18} /> }
     ];
 
     return (
@@ -36,4 +36,4 @@ const AdminControl = () => {
     );
 };
 
-export default AdminControl;
+export default AdminControlPanel;

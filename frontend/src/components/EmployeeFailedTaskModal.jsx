@@ -1,6 +1,6 @@
-import { useState } from "../../../constants/imports";
+import { useState } from "../constants/imports";
 
-const FailedTaskModal = ({ onClose, onSave }) => {
+const EmployeeFailedTaskModal = ({ onClose, onSave }) => {
     const [reason, setReason] = useState("");
 
     const wordCount = reason.trim().split(/\s+/).filter(Boolean).length;
@@ -36,4 +36,4 @@ const FailedTaskModal = ({ onClose, onSave }) => {
     );
 };
 
-export default FailedTaskModal;
+export default EmployeeFailedTaskModal;

@@ -1,6 +1,7 @@
-import { useState, AuthContext, useContext, Header, AdminControl, PriorityTag, DateConversion, RemoveTask, EditTaskModal, BiSolidError } from "../../../constants/imports";
+import { useState, AuthContext, useContext, PriorityTag, DateConversion, RemoveTask, BiSolidError } from "../constants/imports";
+import AdminEditTaskModal from "./AdminEditTaskModal";
 
-const TaskStatus = ({ data, handleLogout, orgData }) => {
+const AdminTaskStatusTable = () => {
   const authData = useContext(AuthContext);
 
   const admin = authData?.admin;
@@ -15,16 +16,15 @@ const TaskStatus = ({ data, handleLogout, orgData }) => {
   };
 
   return (
-    <div className="h-screen w-full p-10 overflow-auto">
-      <Header data={data} handleLogout={handleLogout} orgData={orgData} />
-      <AdminControl />
-
+    <>
       <hr className="my-5 border border-[#FFDAB3]/40" />
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase text-center"> Task Status </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
       {tasks.length === 0 ? (
-        <p className="mt-10 text-center text-[#F8F8F2]/60"> No tasks created yet. </p>
+        <div className="bg-[#1B211A] rounded-2xl p-10 mt-5 border border-[#FFDAB3]/30 shadow-inner">
+          <p className="text-center text-[#F8F8F2]/60"> No tasks created yet. </p>
+        </div>
       ) : (
         <div className="bg-[#1B211A] rounded-2xl p-4 border border-[#FFDAB3]/25">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -114,15 +114,15 @@ const TaskStatus = ({ data, handleLogout, orgData }) => {
                   </div>
                 </div>
 
-                {editingTask && (<EditTaskModal task={editingTask} onClose={() => setEditingTask(null)} />)}
+                {editingTask && (<AdminEditTaskModal task={editingTask} onClose={() => setEditingTask(null)} />)}
 
               </div>
             ))}
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default TaskStatus;
+export default AdminTaskStatusTable;

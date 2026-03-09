@@ -1,6 +1,7 @@
-import { useState, useContext, useLocation, AuthContext, getLocalStorage, DateConversion, PriorityTag, FailedTaskModal, toast } from "../../../constants/imports";
+import { useState, useContext, useLocation, AuthContext, getLocalStorage, DateConversion, PriorityTag, toast } from "../constants/imports";
+import EmployeeFailedTaskModal from "./EmployeeFailedTaskModal";
 
-const TaskCard = ({ task }) => {
+const EmployeeTaskCard = ({ task }) => {
   const location = useLocation();
   const { updateAuthData } = useContext(AuthContext);
   const [showFailModal, setShowFailModal] = useState(false);
@@ -219,10 +220,10 @@ const TaskCard = ({ task }) => {
       </div>
 
       {showFailModal && (
-        <FailedTaskModal onClose={() => setShowFailModal(false)} onSave={failTaskWithReason} />
+        <EmployeeFailedTaskModal onClose={() => setShowFailModal(false)} onSave={failTaskWithReason} />
       )}
     </>
   );
 };
 
-export default TaskCard;
+export default EmployeeTaskCard;

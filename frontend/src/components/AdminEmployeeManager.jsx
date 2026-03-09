@@ -1,6 +1,7 @@
-import { uuidv4, useState, useNavigate, Header, generateSequentialId, getLocalStorage, setLocalStorage, AddEmployees, AdminControl, DatePicker, PasswordToggle, toast } from "../../../constants/imports";
+import { uuidv4, useState, useNavigate, generateSequentialId, getLocalStorage, setLocalStorage, DatePicker, PasswordToggle, toast } from "../constants/imports";
+import AdminAddEmployees from "./AdminAddEmployees";
 
-const EmployeeManagement = ({ data, handleLogout, orgData }) => {
+const AdminEmployeeManager = () => {
     const navigate = useNavigate();
     const taskbridge = getLocalStorage();
     const [employees, setEmployees] = useState(taskbridge?.employees || []);
@@ -58,10 +59,7 @@ const EmployeeManagement = ({ data, handleLogout, orgData }) => {
     };
 
     return (
-        <div className="h-screen w-full p-10">
-            <Header data={data} handleLogout={handleLogout} orgData={orgData} />
-            <AdminControl />
-
+        <>
             <hr className="my-5 border border-[#FFDAB3]/40" />
             <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Employee Management </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
@@ -120,9 +118,9 @@ const EmployeeManagement = ({ data, handleLogout, orgData }) => {
             <hr className="mt-5 border border-[#FFDAB3]/40" />
             <h1 className="mt-5 font-bold text-[#FFDAB3] text-md uppercase flex"> Remove Employees from the Org. </h1>
 
-            <AddEmployees employees={employees} setEmployees={setEmployees} />
-        </div>
+            <AdminAddEmployees employees={employees} setEmployees={setEmployees} />
+        </>
     )
 }
 
-export default EmployeeManagement;
+export default AdminEmployeeManager;

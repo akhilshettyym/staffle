@@ -1,14 +1,14 @@
-import { Link, useLocation, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart } from "../../../constants/imports";
+import { Link, useLocation, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart } from "../constants/imports";
 
-const EmployeeControl = () => {
+const EmployeeControlPanel = () => {
     const { pathname } = useLocation();
 
     const navItems = [
-        { label: "Task Status", path: "/employee/taskstatus", icon: <FiGrid size={18} /> },
-        { label: "New Tasks", path: "/employee/newtasks", icon: <FiClipboard size={18} /> },
-        { label: "In Progress", path: "/employee/inprogress", icon: <FiBarChart size={18} /> },
-        { label: "Completed / Failed", path: "/employee/tasklifecycle", icon: <FiBarChart2 size={18} /> },
-        { label: "Employee Details", path: "/employee/details", icon: <FiUsers size={18} /> }
+        { label: "Task Status", path: "/employee/employee-dashboard", icon: <FiGrid size={18} /> },
+        { label: "New Tasks", path: "/employee/new-tasks", icon: <FiClipboard size={18} /> },
+        { label: "In Progress", path: "/employee/inprogress-tasks", icon: <FiBarChart size={18} /> },
+        { label: "Completed / Failed", path: "/employee/completed-failed-tasks", icon: <FiBarChart2 size={18} /> },
+        { label: "Employee Details", path: "/employee/employee-details", icon: <FiUsers size={18} /> }
     ];
 
     return (
@@ -35,4 +35,4 @@ const EmployeeControl = () => {
     );
 };
 
-export default EmployeeControl;
+export default EmployeeControlPanel;
