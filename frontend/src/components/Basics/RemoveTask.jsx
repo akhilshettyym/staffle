@@ -14,7 +14,7 @@ const RemoveTask = ({ taskId }) => {
         try {
 
             if (!taskId) {
-                throw new Error("Cannot delete task: missing task ID");
+                throw new Error("Cannot delete task: missing taskID");
             }
 
             const response = await deleteTask({ taskId });

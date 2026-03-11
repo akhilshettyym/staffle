@@ -5,11 +5,11 @@ export async function createTask(payload) {
     return res.data;
 }
 
-export async function updateTask({ taskId, ...data }) {
+export async function updateTask({ taskId, ...payload }) {
     if (!taskId) throw new Error("taskId is required");
 
     try {
-        const res = await api.patch(`/tasks/update-task/${taskId}`, data);
+        const res = await api.patch(`/tasks/update-task/${taskId}`, payload);
         return res.data;
     } catch (error) {
         if (error.response?.status === 404) {
@@ -48,6 +48,7 @@ export async function deleteTask({ taskId }) {
     try {
         const res = await api.delete(`/tasks/delete-task/${taskId}`);
         return res.data;
+        
     } catch (error) {
         if (error.response?.status === 404) {
             throw new Error("Task not found");

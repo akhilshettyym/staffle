@@ -78,14 +78,12 @@ const handleUpdateTask = async (e) => {
 
 
         const taskId = task?._id || task?.id;
+
         if (!taskId) {
             throw new Error("Cannot update task: missing task ID");
         }
 
-        const response = await updateTask({
-            taskId,
-            ...payload,
-        });
+        const response = await updateTask({ taskId, ...payload });
 
         if (!response?.success) {
             throw new Error(response?.message || "Failed to update task");
@@ -97,6 +95,7 @@ const handleUpdateTask = async (e) => {
         onTaskUpdated?.(updatedTask);
 
         onClose();
+
     } catch (error) {
         let msg = "Something went wrong while updating task";
 
@@ -108,6 +107,7 @@ const handleUpdateTask = async (e) => {
 
         console.error("Task update failed:", error);
         toast.error(msg);
+        
     } finally {
         setLoading(false);
     }

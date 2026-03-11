@@ -13,7 +13,6 @@ const CustomTooltip = ({ message, place = "left", id = "tooltip", iconSize = 18 
                 style={{
                     backgroundColor: "#1B211A",
                     color: "rgba(255, 218, 179, 1.9)",
-                    border: "3px solid rgba(255, 218, 179, 0.55)",
                     borderRadius: "10px",
                     padding: "8px 12px",
                     boxShadow: "0 6px 18px rgba(0,0,0,0.5)",

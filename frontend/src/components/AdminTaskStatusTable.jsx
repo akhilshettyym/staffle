@@ -253,7 +253,7 @@ const AdminTaskStatusTable = () => {
                   <span className="text-xs text-[#F8F8F2]/60"> Task ID : {index + 1 || ""} </span>
 
                   <div className="flex items-center gap-3">
-                    <RemoveTask taskId={task.id} />
+                    <RemoveTask taskId={task.id || task._id} />
                   </div>
 
                 </div>
