@@ -1,40 +1,43 @@
-import api from "./axios";
+import api from "./instance/axios";
+import { validateId, validatePayload, handleApiError } from "./helpers/apiHelpers";
 
-export async function approveOrganization() {
-    const res = await api.patch("/org/approve-org/:orgID");
+export async function approveOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`/org/approve-org/${orgId}`);
     return res.data;
 }
 
-export async function rejectOrganization() {
-    const res = await api.patch("/org/reject-org/:orgID");
+export async function rejectOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`/org/reject-org/${orgId}`);
     return res.data;
 }
 
-export async function revokeOrganization() {
-    const res = await api.patch("/org/revoke-org/:orgID");
+export async function revokeOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`/org/revoke-org/${orgId}`);
     return res.data;
 }
 
-export async function reActivateOrganization() {
-    const res = await api.patch("/org/re-activate-org/:orgID");
+export async function reActivateOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`/org/re-activate-org/${orgId}`);
     return res.data;
 }
 
 export async function updateOrganization({ orgId, ...payload }) {
-    if (!orgId) throw new Error("orgId is required");
+    validateId(orgId, "Organization ID");
+    validatePayload(payload);
 
     try {
         const res = await api.patch(`/org/update-organization/${orgId}`, payload);
         return res.data;
-
     } catch (error) {
-        if (error.response?.status === 404) {
-            throw new Error("Organization not found");
-        }
-        if (error.response?.status === 403) {
-            throw new Error("You don't have permission to update organization details");
-        }
-        throw error;
+        handleApiError(error);
     }
 }
 

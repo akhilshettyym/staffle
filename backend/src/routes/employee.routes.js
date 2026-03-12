@@ -2,7 +2,7 @@ import express from "express";
 import { PERMISSIONS } from "../constants/permissions.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import { requirePermission } from "../middleware/permission.middleware.js";
-import { addEmployeeController, updateEmployeeController, deactivateEmployeeController, getOrganizationUsers } from "../controllers/employee.controllers.js";
+import { addEmployeeController, updateEmployeeController, deactivateEmployeeController, getOrganizationUsers, getOrganizationInactiveUsers } from "../controllers/employee.controllers.js";
 import { requireAdmin } from "../middleware/role.middleware.js";
 
 const router = express.Router();
@@ -20,5 +20,8 @@ router.patch("/deactivate-employee/:employeeId", authMiddleware, requireAdmin, r
 
 /* GET /api/employee/get-employees */
 router.get("/get-employees", authMiddleware, requirePermission(PERMISSIONS.VIEW_EMPLOYEES), getOrganizationUsers);
+
+/* GET /api/employee/get-inactive-employees */
+router.get("/get-inactive-employees", authMiddleware, requirePermission(PERMISSIONS.VIEW_EMPLOYEES), getOrganizationInactiveUsers);
 
 export default router;

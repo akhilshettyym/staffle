@@ -1,16 +1,33 @@
-import api from "./axios";
+import api from "./instance/axios";
+import { validatePayload, handleAuthError } from "./helpers/apiHelpers";
 
 export async function createOrganization(payload) {
-    const res = await api.post("/auth/create-org", payload);
-    return res.data;
+    validatePayload(payload);
+
+    try {
+        const res = await api.post("/auth/create-org", payload);
+        return res.data;
+    } catch (error) {
+        handleAuthError(error);
+    }
 }
 
-export async function logIn(payload) {
-    const res = await api.post("/auth/login", payload);
-    return res.data;
+export async function login(payload) {
+    validatePayload(payload);
+
+    try {
+        const res = await api.post("/auth/login", payload);
+        return res.data;
+    } catch (error) {
+        handleAuthError(error);
+    }
 }
 
 export async function logout() {
-    const res = await api.post("/auth/logout");
-    return res.data;
+    try {
+        const res = await api.post("/auth/logout");
+        return res.data;
+    } catch (error) {
+        handleAuthError(error);
+    }
 }

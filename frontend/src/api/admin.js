@@ -1,24 +1,26 @@
-import api from "./axios";
+import api from "./instance/axios";
+import { validateId, validatePayload, handleAdminError } from "./helpers/apiHelpers";
 
 export async function updateAdmin({ empId, ...payload }) {
-    if (!empId) throw new Error("empId is required");
+    validateId(empId, "Admin ID (empId)");
+    validatePayload(payload);
 
     try {
         const res = await api.patch(`/admin/update-admin/${empId}`, payload);
         return res.data;
-
     } catch (error) {
-        if (error.response?.status === 404) {
-            throw new Error("Admin not found");
-        }
-        if (error.response?.status === 403) {
-            throw new Error("You don't have permission to update admin details");
-        }
-        throw error;
+        handleAdminError(error);
     }
 }
 
-export async function reviewRejection(payload) {
-    const res = await api.patch("/admin/review-task-rejection/:taskId", payload);
-    return res.data;
+export async function reviewRejection({ taskId, ...payload }) {
+    validateId(taskId, "Task ID (taskId)");
+    validatePayload(payload);
+
+    try {
+        const res = await api.patch(`/admin/review-task-rejection/${taskId}`, payload);
+        return res.data;
+    } catch (error) {
+        handleAdminError(error);
+    }
 }

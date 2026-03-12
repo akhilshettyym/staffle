@@ -12,6 +12,8 @@ const AdminEmployeeDetailsCard = () => {
         fetchTasksDetails();
     }, []);
 
+    const activeEmployees = employees.filter((emp) => emp.employmentStatus === "ACTIVE" || "");
+        
     return (
         <div className="pb-10">
 
@@ -36,7 +38,7 @@ const AdminEmployeeDetailsCard = () => {
                 </div>
             ) : (
 
-                employees.map((emp, index) => {
+                activeEmployees.map((emp, index) => {
 
                     const employeeTasks = tasks.filter((task) => (task.assignedTo === emp._id || task.assignedTo === emp.id));
 

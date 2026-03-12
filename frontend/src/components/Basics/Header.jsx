@@ -1,4 +1,9 @@
+import { useSelector } from "react-redux";
+
 const Header = ({ data, handleLogout, orgData }) => {
+
+    const test = useSelector((state) => state.auth);
+    console.log(test)
 
     const firstName = data?.firstName ?? "Akhil";
     const lastName = data?.lastName ?? "Shetty";

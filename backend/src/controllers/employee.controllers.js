@@ -228,7 +228,26 @@ export const deactivateEmployeeController = async (req, res) => {
 export const getOrganizationUsers = async (req, res) => {
     try {
         const organizationId = req.user.organizationId;
-        const users = await userModel.find({ organizationId })
+        const users = await userModel.find({ organizationId, employmentStatus: "ACTIVE" })
+            .select("firstName lastName email dateOfBirth designation role employmentStatus")
+            .sort({ createdAt: 1 });
+        res.status(200).json({
+            success: true,
+            count: users.length,
+            users
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch organization users"
+        });
+    }
+};
+
+export const getOrganizationInactiveUsers = async (req, res) => {
+    try {
+        const organizationId = req.user.organizationId;
+        const users = await userModel.find({ organizationId, employmentStatus: "IN-ACTIVE" })
             .select("firstName lastName email dateOfBirth designation role employmentStatus")
             .sort({ createdAt: 1 });
         res.status(200).json({

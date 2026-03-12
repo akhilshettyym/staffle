@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { logIn } from "../api/auth";
+import { login } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { setCredentials } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const useLoginForm = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +32,8 @@ const useLoginForm = () => {
         email: email.trim(),
         password
       };
-      const response = await logIn(payload);
+
+      const response = await login(payload);
       console.log("Login success:", response);
       const role = response?.user?.role;
 
@@ -40,6 +44,11 @@ const useLoginForm = () => {
       } else {
         navigate("/superadmin/superadmin-dashboard")
       }
+
+      // const token = response?.token;
+      // const user = response?.user;
+
+      // dispatch(setCredentials({ token, user }));
 
       setEmail("");
       setPassword("");

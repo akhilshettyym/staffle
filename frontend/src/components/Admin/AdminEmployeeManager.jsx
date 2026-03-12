@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import AdminAddEmployeeForm from "./AdminAddEmployeeForm";
-import AdminAddEmployees from "./AdminAddEmployees";
+import AdminAddedEmployees from "./AdminAddedEmployees";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useAdminEmployeeManager from "../../hooks/useAdminEmployeeManager";
+import AdminInactiveEmployees from "./AdminInactiveEmployees";
 
 const AdminEmployeeManager = () => {
 
-    const { employees, setEmployees, fetchEmployees } = useAdminEmployeeManager();
+    const { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees } = useAdminEmployeeManager();
 
     useEffect(() => {
         fetchEmployees();
+        fetchInactiveEmployees();
     }, []);
 
     return (
@@ -26,11 +28,21 @@ const AdminEmployeeManager = () => {
             <AdminAddEmployeeForm refreshEmployees={fetchEmployees} />
 
             <div className="flex items-center gap-2">
-                <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Remove Employees from the Org. </h1>
+                <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Update / Remove Employees from the Org. </h1>
                 <CustomTooltip id="remove-employees-tooltip" message="Employees may be deactivated and later reactivated, but accounts remaining inactive for more than 30 days will be permanently deleted." place="right" />
             </div>
 
-            <AdminAddEmployees employees={employees} setEmployees={setEmployees} />
+            <AdminAddedEmployees employees={employees} setEmployees={setEmployees} />
+
+            <hr className="my-5 border border-[#FFDAB3]/40" />
+
+            <div className="flex items-center gap-2 mb-5">
+                <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Deactivated Employees </h1>
+                <CustomTooltip id="deactivated-employees-tooltip" message="Employees who were deactivated can be reactivated, but accounts remaining inactive for more than 30 days will be permanently deleted." place="right" />
+            </div>
+
+            <AdminInactiveEmployees inactiveEmp={inactiveEmp} setInactiveEmp={setInactiveEmp} />
+
         </>
     )
 }
