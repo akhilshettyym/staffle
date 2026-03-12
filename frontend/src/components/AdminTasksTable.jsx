@@ -37,7 +37,7 @@ const AdminTasksTable = () => {
 
             <div className="flex items-center gap-2">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Tasks Created </h1>
-                <CustomTooltip id="task-status-failed-tooltip" message="Review the draft tasks below for accuracy and completeness." place="right" />
+                <CustomTooltip id="created-tasks-tooltip" message="Review the draft tasks below for accuracy and completeness." place="right" />
             </div>
 
             <div className="bg-[#1B211A] rounded-2xl p-4 mt-5 border border-[#FFDAB3]/30 shadow-inner">

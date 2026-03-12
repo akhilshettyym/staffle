@@ -177,7 +177,7 @@ const AdminTaskStatusTable = () => {
 
       <div className="flex items-center gap-2 mb-5">
         <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> All Tasks </h1>
-        <CustomTooltip id="task-status-failed-tooltip" message="You can delete any task, regardless of status. The task will be permanently deleted and cannot be recovered." place="right" />
+        <CustomTooltip id="task-status-alltasks-tooltip" message="You can delete any task, regardless of status. The task will be permanently deleted and cannot be recovered." place="right" />
       </div>
 
       {nonFailedTasks.length === 0 ? (

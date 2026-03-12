@@ -20,7 +20,7 @@ const AdminCreateTaskForm = () => {
 
             <div className="flex items-center gap-2 mb-5">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Create new task </h1>
-                <CustomTooltip id="task-status-failed-tooltip" message="Triage and assign the new task based on severity." place="right" />
+                <CustomTooltip id="create-new-task-tooltip" message="Triage and assign the new task based on severity." place="right" />
             </div>
 
             <div className="w-full flex justify-center">

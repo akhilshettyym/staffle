@@ -20,7 +20,7 @@ import PriorityTag from "../components/Basics/PriorityTag";
 import ConfirmModal from "../components/Basics/ConfirmModal";
 import DateConversion from "../components/Basics/DateConversion";
 import PasswordToggle from "../components/Basics/PasswordToggle";
-import EditEmployeeDets from "../components/Basics/EditEmployeeDets";
+import EditEmployeeDets from "../components/Basics/UpdateEmployeeDetails";
 
 // import Dashboard from "../components/AdminDashBoard";
 import CreateTask from "../components/AdminCreateTaskForm"

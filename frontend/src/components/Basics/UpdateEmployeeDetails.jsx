@@ -1,7 +1,7 @@
 import { updateEmployee } from "../../api/employee";
 import { useState, toast, DatePicker } from "../../constants/imports";
 
-const EditEmployeeDets = ({ emp, setEmployees }) => {
+const UpdateEmployeeDetails = ({ emp, setEmployees }) => {
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -169,4 +169,4 @@ const EditEmployeeDets = ({ emp, setEmployees }) => {
     );
 };
 
-export default EditEmployeeDets;
+export default UpdateEmployeeDetails;

@@ -51,7 +51,7 @@ const AdminEmployeeDetailsCard = () => {
 
             <div className="flex items-center gap-2">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Employees / assigned tasks</h1>
-                <CustomTooltip id="task-status-failed-tooltip" message="View employee profiles and their assigned tasks." place="right" />
+                <CustomTooltip id="employee-details-tooltip" message="View employee profiles and their assigned tasks." place="right" />
 
                 <h1 className="flex items-center text-xs uppercase text-[#FFDAB3] font-medium ml-5">
                     <span className="truncate">Total number of employees : </span>

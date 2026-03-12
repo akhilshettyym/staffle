@@ -22,7 +22,7 @@ const AddEmployeeForm = ({ refreshEmployees }) => {
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email Address </label>
+                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email </label>
                             <input name="email" type="email" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#F8F8F2] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your email" />
                         </div>
 

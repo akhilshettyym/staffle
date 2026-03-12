@@ -5,7 +5,7 @@ import { Header } from "../constants/imports";
 const AdminProfilePage = ({ data, handleLogout, orgData }) => {
 
     return (
-        <div className="h-screen w-full p-10 overflow-visible">
+        <div className="h-screen w-full p-10">
             <Header data={data} handleLogout={handleLogout} orgData={orgData} />
             <AdminControlPanel />
             <AdminProfileDetails />

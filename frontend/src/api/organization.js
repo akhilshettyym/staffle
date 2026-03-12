@@ -20,9 +20,22 @@ export async function reActivateOrganization() {
     return res.data;
 }
 
-export async function updateOrganization() {
-    const res = await api.patch("/org/update-organization/:orgID");
-    return res.data;
+export async function updateOrganization({ orgId, ...payload }) {
+    if (!orgId) throw new Error("orgId is required");
+
+    try {
+        const res = await api.patch(`/org/update-organization/${orgId}`, payload);
+        return res.data;
+
+    } catch (error) {
+        if (error.response?.status === 404) {
+            throw new Error("Organization not found");
+        }
+        if (error.response?.status === 403) {
+            throw new Error("You don't have permission to update organization details");
+        }
+        throw error;
+    }
 }
 
 export async function getOrganizationDetails() {

@@ -21,7 +21,7 @@ const AdminControlPanel = () => {
                         const isActive = pathname === item.path;
 
                         return (
-                            <Link key={item.path} to={item.path} className={`flex items-center gap-2 px-3 py-2 rounded-2xl text-sm uppercase tracking-wide transition-all duration-200 ${isActive
+                            <Link key={item.path} to={item.path} className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm uppercase tracking-wide transition-all duration-200 ${isActive
                                 ? "bg-[#FFDAB3] text-[#1B211A] shadow-md"
                                 : "text-[#FFDAB3] hover:bg-[#FFDAB3]/10 hover:shadow"
                                 } `}>

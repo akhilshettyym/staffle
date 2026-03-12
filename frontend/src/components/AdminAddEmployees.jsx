@@ -1,4 +1,5 @@
-import { useRef, useEffect, getLocalStorage, setLocalStorage, RemoveEmp, EditEmployeeDets, toast } from "../constants/imports";
+import { useRef, useEffect, RemoveEmp } from "../constants/imports";
+import UpdateEmployeeDetails from "./Basics/UpdateEmployeeDetails";
 
 const AdminAddEmployees = ({ employees, setEmployees }) => {
 
@@ -31,7 +32,7 @@ const AdminAddEmployees = ({ employees, setEmployees }) => {
                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{renderName}</h2>
                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.designation}</h2>
                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.email}</h2>
-                <EditEmployeeDets emp={emp} setEmployees={setEmployees} />
+                <UpdateEmployeeDetails emp={emp} setEmployees={setEmployees} />
                 <RemoveEmp empId={emp.id || emp._id} />
               </div>
             </div>
