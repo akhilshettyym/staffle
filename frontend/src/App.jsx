@@ -1,29 +1,34 @@
-import { useState, useEffect, useContext, AuthContext, Navigate, Route, Routes, useNavigate, getOrganizationData, EmpTaskStatus, TaskLifeCycle, EmployeeEmpDetails, Toaster, toast } from "./constants/imports";
-import AdminEmployeeDetailsPage from "./pages/AdminEmployeeDetailsPage";
-import AdminEmployeeManagementPage from "./pages/AdminEmployeeManagementPage";
-import AdminTaskStatusPage from "./pages/AdminTaskStatusPage";
-import CompleteOrganizationPage from "./pages/CompleteOrganizationPage";
-import CreateOrganizationPage from "./pages/CreateOrganizationPage";
-import EmployeeDashBoardPage from "./pages/EmployeeDashBoardPage";
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterOrganizationPage from "./pages/RegisterOrganizationPage";
-import AdminProfilePage from "./pages/AdminProfilePage";
-import AdminTasksPage from "./pages/AdminTasksPage";
-import AdminDashboardPage from "./pages/AdminDashboardPage";
-import EmployeeNewTasksPage from "./pages/EmployeeNewTasksPage";
-import EmployeeCompFailedTasksPage from "./pages/EmployeeCompFailedTasksPage";
-import EmployeeProfilePage from "./pages/EmployeeProfilePage";
-import EmployeeInProgressTasksPage from "./pages/EmployeeInprogressTasksPage";
-import SuperAdminDashboardPage from "./pages/SuperAdmin/SuperAdminDashboardPage";
+import { useState, useEffect, Navigate, Route, Routes, useNavigate, getOrganizationData, Toaster, toast } from "./constants/imports";
 import { useSelector } from "react-redux";
+
+import AdminTasksPage from "./pages/AdminPages/AdminTasksPage";
+import AdminProfilePage from "./pages/AdminPages/AdminProfilePage";
+import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage";
+import AdminTaskStatusPage from "./pages/AdminPages/AdminTaskStatusPage";
+import AdminEmployeeDetailsPage from "./pages/AdminPages/AdminEmployeeDetailsPage";
+import AdminEmployeeManagementPage from "./pages/AdminPages/AdminEmployeeManagementPage";
+
+import LoginPage from "./pages/AuthPages/LoginPage";
+import LandingPage from "./pages/AuthPages/LandingPage";
+import CreateOrganizationPage from "./pages/AuthPages/CreateOrganizationPage";
+import RegisterOrganizationPage from "./pages/AuthPages/RegisterOrganizationPage";
+import CompleteOrganizationPage from "./pages/AuthPages/CompleteOrganizationPage";
+
+
+import EmployeeProfilePage from "./pages/EmployeePages/EmployeeProfilePage";
+import EmployeeNewTasksPage from "./pages/EmployeePages/EmployeeNewTasksPage";
+import EmployeeDashBoardPage from "./pages/EmployeePages/EmployeeDashBoardPage";
+import EmployeeCompFailedTasksPage from "./pages/EmployeePages/EmployeeCompFailedTasksPage";
+import EmployeeInProgressTasksPage from "./pages/EmployeePages/EmployeeInprogressTasksPage";
+
+// import SuperAdminDashboardPage from "./pages/SuperAdmin/SuperAdminDashboardPage";
 
 const App = () => {
   const navigate = useNavigate();
 
   // const authData = useContext(AuthContext);
   const authData = useSelector((state) => state.auth);
-  
+
   const orgData = getOrganizationData();
 
   const [user, setUser] = useState(null);
@@ -165,7 +170,7 @@ const App = () => {
         {/* SUPER ADMIN CONTROl */}
 
         {/* /superadmin/superadmin-dashboard */}
-        <Route path="/superadmin/superadmin-dashboard" element={<SuperAdminDashboardPage />} />
+        {/* <Route path="/superadmin/superadmin-dashboard" element={<SuperAdminDashboardPage />} /> */}
 
         {/* ----------------------------------------------------------------------------------------------------------------------- */}
 
