@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "../../constants/imports";
-import AdminRemoveEmployee from "./AdminRemoveEmployee";
+import AdminDeactivateEmployee from "./AdminDeactivateEmployee";
 import UpdateEmployeeDetails from "../Basics/UpdateEmployeeDetails";
 
 const AdminAddedEmployees = ({ employees, setEmployees }) => {
@@ -33,7 +33,7 @@ const AdminAddedEmployees = ({ employees, setEmployees }) => {
               <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.designation}</h2>
               <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.email}</h2>
               <UpdateEmployeeDetails emp={emp} setEmployees={setEmployees} />
-              <AdminRemoveEmployee empId={emp.id || emp._id} />
+              <AdminDeactivateEmployee empId={emp.id || emp._id} />
             </div>
           </div>
         );

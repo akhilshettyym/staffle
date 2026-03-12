@@ -2,7 +2,7 @@ import express from "express";
 import { PERMISSIONS } from "../constants/permissions.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import { requirePermission } from "../middleware/permission.middleware.js";
-import { addEmployeeController, updateEmployeeController, deactivateEmployeeController, getOrganizationUsers, getOrganizationInactiveUsers } from "../controllers/employee.controllers.js";
+import { addEmployeeController, updateEmployeeController, deactivateEmployeeController, getOrganizationUsers, getOrganizationInactiveUsers, reactivateEmployeeController } from "../controllers/employee.controllers.js";
 import { requireAdmin } from "../middleware/role.middleware.js";
 
 const router = express.Router();
@@ -13,9 +13,11 @@ router.post("/add-employee", authMiddleware, requirePermission(PERMISSIONS.CREAT
 /* PATCH /api/employee/update-employee/:employeeId */
 router.patch("/update-employee/:employeeId", authMiddleware, requirePermission(PERMISSIONS.UPDATE_EMPLOYEE), updateEmployeeController);
 
-/* PATCH /api/employee/deactivate-employee/:employeeId */
-router.patch("/deactivate-employee/:employeeId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.DEACTIVATE_EMPLOYEE), deactivateEmployeeController);
+/* PATCH /api/employee/deactivate-employee/:empId */
+router.patch("/deactivate-employee/:empId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.DEACTIVATE_EMPLOYEE), deactivateEmployeeController);
 
+/* PATCH /api/employee/reactivate-employee/:empId */
+router.patch("/reactivate-employee/:empId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.REACTIVATE_EMPLOYEE), reactivateEmployeeController);
 
 
 /* GET /api/employee/get-employees */

@@ -23,7 +23,7 @@ const AdminTaskStatusTable = () => {
 
       <div className="mb-5">
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-5">
           <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Failed Tasks </h1>
           <CustomTooltip id="task-status-failed-tooltip" message="Review failed tasks below to delete or edit for reassignment." place="right" />
         </div>
@@ -61,7 +61,7 @@ const AdminTaskStatusTable = () => {
                         }[status] || "bg-gray-100 text-gray-600 border-gray-200"}`}> {task.status} </span>
                       </div>
 
-                      <div className="flex justify-between">
+                      <div>
                         <span className="font-medium"> Category : </span>
                         <span className="text-[#FFDAB3]">{task.category}</span>
                       </div>

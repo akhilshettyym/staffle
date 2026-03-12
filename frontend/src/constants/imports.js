@@ -13,7 +13,7 @@ import { AuthContext } from "../context/AuthProvider";
 import Landing from "../components/Auth/Landing";
 
 import Header from "../components/Basics/Header";
-import RemoveEmp from "../components/Admin/AdminRemoveEmployee";
+import RemoveEmp from "../components/Admin/AdminDeactivateEmployee";
 import TaskCount from "../components/Basics/TaskCount";
 import RemoveTask from "../components/Admin/AdminRemoveTask";
 import PriorityTag from "../components/Basics/PriorityTag";

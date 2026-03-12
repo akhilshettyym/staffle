@@ -20,7 +20,7 @@ router.patch("/revoke-org/:orgId", authMiddleware, requireSuperAdmin, requirePer
 router.patch("/re-activate-org/:orgId", authMiddleware, requireSuperAdmin, requirePermission(PERMISSIONS.RE_ACTIVATE_ORGANIZATION), reactivateOrganization);
 
 /* PATCH /api/org/update-organization/:orgId */
-router.patch("/update-org/:orgId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.UPDATE_ORGANIZATION), updateOrganizationController);
+router.patch("/update-organization/:orgId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.UPDATE_ORGANIZATION), updateOrganizationController);
 
 
 /* GET /api/org/get-organization-details */

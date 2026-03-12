@@ -35,6 +35,17 @@ export async function deactivateEmployee({ empId }) {
     }
 }
 
+export async function reactivateEmployee({ empId }) {
+    validateId(empId, "Employee ID (empId)");
+
+    try {
+        const res = await api.patch(`/employee/reactivate-employee/${empId}`);
+        return res.data;
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+
 export async function getOrganizationUsers() {
     try {
         const res = await api.get("/employee/get-employees");
@@ -48,7 +59,7 @@ export async function getOrganizationInactiveUsers() {
     try {
         const res = await api.get("/employee/get-inactive-employees");
         return res.data;
-        
+
     } catch (error) {
         handleApiError(error);
     }

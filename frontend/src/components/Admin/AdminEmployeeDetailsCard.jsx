@@ -13,7 +13,7 @@ const AdminEmployeeDetailsCard = () => {
     }, []);
 
     const activeEmployees = employees.filter((emp) => emp.employmentStatus === "ACTIVE" || "");
-        
+
     return (
         <div className="pb-10">
 
@@ -62,9 +62,9 @@ const AdminEmployeeDetailsCard = () => {
                         <div key={emp._id || emp.id}>
                             <div className="bg-[#1B211A] rounded-2xl p-4 mt-5 border border-[#FFDAB3]/30 shadow-inner transition-all duration-300 ease-in-out hover:border-[#FFDAB3]/70 hover:shadow-md hover:-translate-y-1">
 
-                                <div className="bg-[#2C3930]/40 py-3 px-5 flex items-center rounded-2xl mb-3 hidden md:flex">
+                                <div className="bg-[#2C3930]/40 py-3 px-5 flex items-center rounded-2xl mb-3 md:flex">
 
-                                    <h2 className="min-w-[140px] w-1/6 text-[#A7C1A8] text-xl font-bold"> {emp.firstName} {emp.lastName} </h2>
+                                    <h2 className="min-w-35 w-1/6 text-[#A7C1A8] text-xl font-bold"> {emp.firstName} {emp.lastName} </h2>
 
                                     <h2 className="w-1/6 text-[#FFDAB3] text-sm font-medium flex items-center"> New Tasks :
                                         <TaskCount taskCount={taskCounts.NEW ?? 0} />
@@ -91,7 +91,7 @@ const AdminEmployeeDetailsCard = () => {
 
                                 <hr className="my-4 border border-[#FFDAB3]/30" />
 
-                                <div className="bg-[#FFDAB3]/20 py-3 px-5 flex items-center rounded-2xl mb-3 border border-[#FFDAB3]/10 hidden md:flex">
+                                <div className="bg-[#FFDAB3]/20 py-3 px-5 flex items-center rounded-2xl mb-3 border border-[#FFDAB3]/10 md:flex">
                                     <span className="w-1/6 text-[#FFDAB3] text-sm font-medium uppercase"> Title </span>
                                     <span className="w-1/6 text-[#FFDAB3] text-sm font-medium uppercase"> Category </span>
                                     <span className="w-1/6 text-[#FFDAB3] text-sm font-medium uppercase"> Status </span>

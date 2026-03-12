@@ -177,13 +177,51 @@ export const updateEmployeeController = async (req, res) => {
     }
 };
 
+export const getOrganizationUsers = async (req, res) => {
+    try {
+        const organizationId = req.user.organizationId;
+        const users = await userModel.find({ organizationId, employmentStatus: "ACTIVE" })
+            .select("firstName lastName email dateOfBirth designation role employmentStatus")
+            .sort({ createdAt: 1 });
+        res.status(200).json({
+            success: true,
+            count: users.length,
+            users
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch organization users"
+        });
+    }
+};
+
+export const getOrganizationInactiveUsers = async (req, res) => {
+    try {
+        const organizationId = req.user.organizationId;
+        const users = await userModel.find({ organizationId, employmentStatus: "IN-ACTIVE" })
+            .select("firstName lastName email dateOfBirth designation role employmentStatus")
+            .sort({ createdAt: 1 });
+        res.status(200).json({
+            success: true,
+            count: users.length,
+            users
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch organization users"
+        });
+    }
+};
+
 export const deactivateEmployeeController = async (req, res) => {
     try {
-        const { employeeId } = req.params;
+        const { empId } = req.params;
         const loggedInUser = req.user;
 
         const employee = await userModel.findOne({
-            _id: employeeId,
+            _id: empId,
             organizationId: loggedInUser.organizationId,
         });
 
@@ -225,40 +263,55 @@ export const deactivateEmployeeController = async (req, res) => {
     }
 };
 
-export const getOrganizationUsers = async (req, res) => {
+export const reactivateEmployeeController = async (req, res) => {
     try {
-        const organizationId = req.user.organizationId;
-        const users = await userModel.find({ organizationId, employmentStatus: "ACTIVE" })
-            .select("firstName lastName email dateOfBirth designation role employmentStatus")
-            .sort({ createdAt: 1 });
-        res.status(200).json({
-            success: true,
-            count: users.length,
-            users
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch organization users"
-        });
-    }
-};
+        const { empId } = req.params;
+        const { organizationId } = req.user;
 
-export const getOrganizationInactiveUsers = async (req, res) => {
-    try {
-        const organizationId = req.user.organizationId;
-        const users = await userModel.find({ organizationId, employmentStatus: "IN-ACTIVE" })
-            .select("firstName lastName email dateOfBirth designation role employmentStatus")
-            .sort({ createdAt: 1 });
-        res.status(200).json({
-            success: true,
-            count: users.length,
-            users
+        if (!empId) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid employee ID"
+            });
+        }
+
+        const employee = await userModel.findOne({
+            _id: empId,
+            organizationId
         });
+
+        if (!employee)
+            return res.status(404).json({
+                success: false,
+                message: "Employee not found or not authorized"
+            });
+
+        if (employee.role === "ADMIN")
+            return res.status(400).json({
+                success: false,
+                message: "Cannot reactivate organization admin"
+            });
+
+        if (employee.employmentStatus === "ACTIVE")
+            return res.status(400).json({
+                success: false,
+                message: "Employee is already active"
+            });
+
+        employee.employmentStatus = "ACTIVE";
+        await employee.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Employee reactivated successfully"
+        });
+
     } catch (error) {
-        res.status(500).json({
+        console.error("Reactivate employee error:", error);
+
+        return res.status(500).json({
             success: false,
-            message: "Failed to fetch organization users"
+            message: "Error reactivating employee"
         });
     }
 };

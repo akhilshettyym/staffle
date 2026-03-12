@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "../../constants/imports";
+import AdminReactivateEmployee from "./AdminReactivateEmployee";
 
-const AdminInactiveEmployees = ({ inactiveEmp, setInactiveEmp }) => {
+const AdminInactiveEmployees = ({ inactiveEmp = [], setInactiveEmp }) => {
 
     const prevLengthRef = useRef(0);
 
@@ -21,7 +22,13 @@ const AdminInactiveEmployees = ({ inactiveEmp, setInactiveEmp }) => {
                     <h2 className="text-[#FFDAB3] text-xl font-bold"> {inactiveEmp.length} </h2>
                 </div>
 
-                {inactiveEmp.map((emp, index) => {
+                {inactiveEmp.length === 0 && (
+                    <div className="bg-[#1B211A] rounded-2xl p-10 mt-5 border border-[#FFDAB3]/30 shadow-inner">
+                        <p className="text-center text-[#F8F8F2]/60">No In-active employees found.</p>
+                    </div>
+                )}
+
+                {inactiveEmp.length > 0 && inactiveEmp.map((emp, index) => {
                     const renderName = `${emp.firstName} ${emp.lastName}`;
 
                     return (
@@ -31,6 +38,7 @@ const AdminInactiveEmployees = ({ inactiveEmp, setInactiveEmp }) => {
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{renderName}</h2>
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.designation}</h2>
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.email}</h2>
+                                <AdminReactivateEmployee empId={emp.id || emp._id} />
                             </div>
                         </div>
                     );
