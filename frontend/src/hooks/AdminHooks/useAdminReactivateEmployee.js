@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { reactivateEmployee } from "../api/employee";
+import { reactivateEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
 
 const useAdminReactivateEmployee = ({ empId }) => {

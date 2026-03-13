@@ -8,7 +8,15 @@ const ConfirmModal = ({ isOpen, title = "Are you sure?", message = "This action 
       <div className="absolute inset-0 bg-black/60" onClick={!disabled ? onCancel : undefined} />
       <div className="relative z-10 w-[105] rounded-2xl bg-[#1B211A] border-2 border-[#FFDAB3]/40 p-6 shadow-xl">
 
-        <h2 className="text-xl font-bold text-[#FFDAB3] mb-3">{title}</h2>
+        <div className="flex justify-between items-start py-1 mb-4 border-b border-[#FFDAB3]/25">
+
+          <h2 className="text-xl font-bold text-[#FFDAB3] mb-2"> {title} </h2>
+
+          <div className="flex items-center gap-4">
+            <button onClick={onCancel} className="text-[#FFDAB3] ml-3 hover:text-red-400 text-xl font-bold transition"> ✕ </button>
+          </div>
+        </div>
+
         <p className="text-[#A7C1A8] mb-6">{message}</p>
 
         <div className="flex justify-end gap-3">

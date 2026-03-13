@@ -1,5 +1,5 @@
 import { PasswordToggle, Link } from "../../constants/imports";
-import useLoginForm from "../../hooks/useLoginForm";
+import useLoginForm from "../../hooks/AuthHooks/useLoginForm";
 
 const LoginForm = () => {
 

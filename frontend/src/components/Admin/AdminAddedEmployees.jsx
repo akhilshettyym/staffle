@@ -1,10 +1,13 @@
 import { useRef, useEffect } from "../../constants/imports";
-import AdminDeactivateEmployee from "./AdminDeactivateEmployee";
-import UpdateEmployeeDetails from "../Basics/UpdateEmployeeDetails";
+import AdminUpdateEmployeeDetails from "./AdminUpdateEmployeeDetails";
+import { useState } from "react";
+import AdminEmployeeDetailsModal from "./AdminEmployeeDetailsModal";
 
 const AdminAddedEmployees = ({ employees, setEmployees }) => {
 
   const prevLengthRef = useRef(0);
+
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
     if (!employees) return;
@@ -32,13 +35,20 @@ const AdminAddedEmployees = ({ employees, setEmployees }) => {
               <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{renderName}</h2>
               <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.designation}</h2>
               <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold">{emp.email}</h2>
-              <UpdateEmployeeDetails emp={emp} setEmployees={setEmployees} />
-              <AdminDeactivateEmployee empId={emp.id || emp._id} />
+
+              <AdminUpdateEmployeeDetails emp={emp} setEmployees={setEmployees} />
+
+              <button onClick={() => setSelectedEmployee(emp)} className="mr-3 py-1 px-5 text-sm rounded-md border font-semibold transition border-[#957C62] bg-[#FFDAB3] text-[#2C3930] hover:bg-[#957C62] hover:text-white"> View </button>
+
             </div>
           </div>
         );
       })}
-      
+
+      {selectedEmployee && (
+        <AdminEmployeeDetailsModal emp={selectedEmployee} onClose={() => setSelectedEmployee(null)} />
+      )}
+
     </div>
   );
 };

@@ -25,16 +25,17 @@ const AdminTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
                         <h2 className="text-2xl font-bold text-[#FFDAB3] uppercase tracking-wide"> {task.title} </h2>
                         <p className="text-xs text-[#F8F8F2]/50 mt-1"> Task ID : {task._id || task.id} </p>
                     </div>
-                    <button onClick={onClose} className="text-[#FFDAB3] hover:text-red-400 text-xl font-bold transition"> ✕ </button>
+
+                    <div className="flex items-center gap-4">
+                        <div className="flex justify-between items-center">
+                            <span className={`mr-4 px-4 py-1 rounded-full border text-xs font-bold uppercase ${statusStyles[status] || "bg-gray-100 text-gray-600 border-gray-200"}`}> {task.status} </span>
+                            <PriorityTag priorityMsg={task.priority} />
+                        </div>
+                        <button onClick={onClose} className="text-[#FFDAB3] ml-3 hover:text-red-400 text-xl font-bold transition"> ✕ </button>
+                    </div>
                 </div>
 
                 <div className="p-6 space-y-6">
-
-                    <div className="flex justify-between items-center">
-                        <span className={`px-4 py-1 rounded-full border text-xs font-bold uppercase ${statusStyles[status] || "bg-gray-100 text-gray-600 border-gray-200"}`}> {task.status} </span>
-                        <PriorityTag priorityMsg={task.priority} />
-                    </div>
-
                     <div className="grid grid-cols-2 gap-6 text-md">
                         <div>
                             <p className="text-[#F8F8F2]/60 text-sm uppercase mb-1"> Category </p>

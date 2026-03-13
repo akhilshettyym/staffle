@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { getOrganizationUsers } from "../api/employee";
+import { getOrganizationUsers } from "../../api/employee";
 import toast from "react-hot-toast";
-import { getTaskDetails } from "../api/tasks";
+import { getTaskDetails } from "../../api/tasks";
 
 const useAdminEmployeeDetailsCard = () => {
 

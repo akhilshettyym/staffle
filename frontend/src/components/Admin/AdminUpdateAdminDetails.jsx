@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import useUpdateAdminDetails from '../../hooks/useUpdateAdminDetails';
+import useAdminUpdateAdminDetails from '../../hooks/AdminHooks/useAdminUpdateAdminDetails';
 
-const UpdateAdminDetails = () => {
+const AdminUpdateAdminDetails = () => {
 
-    const { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees } = useUpdateAdminDetails();
+    const { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees } = useAdminUpdateAdminDetails();
 
     useEffect(() => {
         fetchEmployees();
@@ -61,4 +61,4 @@ const UpdateAdminDetails = () => {
     )
 }
 
-export default UpdateAdminDetails;
+export default AdminUpdateAdminDetails;

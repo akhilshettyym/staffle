@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrganizationUsers } from "../api/employee";
+import { getOrganizationUsers } from "../../api/employee";
 import toast from "react-hot-toast";
-import { getOrganizationDetails } from "../api/organization";
+import { getOrganizationDetails } from "../../api/organization";
 import { useMemo } from "react";
 
 const useCompleteOrganizationDetails = () => {

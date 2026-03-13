@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getOrganizationUsers } from "../api/employee";
+import { getOrganizationUsers } from "../../api/employee";
 import toast from "react-hot-toast";
 
 const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {

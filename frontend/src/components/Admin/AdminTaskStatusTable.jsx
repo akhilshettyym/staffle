@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
 import AdminEditTaskModal from "./AdminEditTaskModal";
 import CustomTooltip from "../Basics/CustomTooltip";
-import useTaskStatusTable from "../../hooks/useTaskStatusTable";
+import useAdminTaskStatusTable from "../../hooks/AdminHooks/useAdminTaskStatusTable";
 import AdminRemoveTask from "./AdminRemoveTask";
 import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
 const AdminTaskStatusTable = () => {
 
-  const { status, failedTasks, nonFailedTasks, editingTask, selectedTask, setSelectedTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName } = useTaskStatusTable();
+  const { status, failedTasks, nonFailedTasks, editingTask, selectedTask, setSelectedTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName } = useAdminTaskStatusTable();
 
   useEffect(() => {
     fetchTasksDetails();

@@ -2,8 +2,9 @@ import { useState, useContext, useLocation, AuthContext, getLocalStorage, DateCo
 import EmployeeFailedTaskModal from "./EmployeeFailedTaskModal";
 
 const EmployeeTaskCard = ({ task }) => {
+  
   const location = useLocation();
-  const { updateAuthData } = useContext(AuthContext);
+
   const [showFailModal, setShowFailModal] = useState(false);
 
   const { id, status, title, category, description, priority, createdAt, dueDate, assignedTo } = task;

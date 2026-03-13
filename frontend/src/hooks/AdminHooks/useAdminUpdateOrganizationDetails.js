@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getOrganizationDetails, updateOrganization } from "../api/organization";
+import { getOrganizationDetails, updateOrganization } from "../../api/organization";
 import toast from "react-hot-toast";
 
-const useUpdateOrganizationDetails = () => {
+const useAdminUpdateOrganizationDetails = () => {
 
     const [loading, setLoading] = useState(false);
     const [organization, setOrganization] = useState({});
@@ -113,4 +113,4 @@ const useUpdateOrganizationDetails = () => {
     return { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization };
 }
 
-export default useUpdateOrganizationDetails;
+export default useAdminUpdateOrganizationDetails;

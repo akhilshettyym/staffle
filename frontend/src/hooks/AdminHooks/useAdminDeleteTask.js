@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteTask } from "../api/tasks";
+import { deleteTask } from "../../api/tasks";
 import toast from "react-hot-toast";
 
 const useAdminDeleteTask = () => {

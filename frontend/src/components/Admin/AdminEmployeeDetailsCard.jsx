@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { DateConversion, TaskCount, PriorityTag } from "../../constants/imports";
 import CustomTooltip from "../Basics/CustomTooltip";
-import useAdminEmployeeDetailsCard from "../../hooks/useAdminEmployeeDetailsCard";
+import useAdminEmployeeDetailsCard from "../../hooks/AdminHooks/useAdminEmployeeDetailsCard";
 
 const AdminEmployeeDetailsCard = () => {
 

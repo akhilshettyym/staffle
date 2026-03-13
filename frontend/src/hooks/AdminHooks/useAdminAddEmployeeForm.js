@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { addEmployee } from "../api/employee";
+import { addEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
 
-const useAddEmployee = (refreshEmployees) => {
+const useAdminAddEmployeeForm = (refreshEmployees) => {
 
     const [dob, setDob] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -46,4 +46,4 @@ const useAddEmployee = (refreshEmployees) => {
     return { dob, setDob, loading, handleAddEmployee };
 };
 
-export default useAddEmployee;
+export default useAdminAddEmployeeForm;

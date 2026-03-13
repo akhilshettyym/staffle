@@ -5,7 +5,7 @@ export const getOrganizationUsers = async (req, res) => {
     try {
         const organizationId = req.user.organizationId;
         const users = await userModel.find({ organizationId, employmentStatus: "ACTIVE" })
-            .select("firstName lastName email dateOfBirth designation role employmentStatus")
+            .select("firstName lastName email dateOfBirth designation role employmentStatus organizationId")
             .sort({ createdAt: 1 });
         res.status(200).json({
             success: true,

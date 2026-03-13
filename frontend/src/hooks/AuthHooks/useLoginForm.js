@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { login } from "../api/auth";
+import { login } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { setCredentials } from "../slices/authSlice";
+import { setCredentials } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const useLoginForm = () => {
@@ -48,7 +48,7 @@ const useLoginForm = () => {
       // const token = response?.token;
       // const user = response?.user;
 
-      // dispatch(setCredentials({ token, user }));
+      dispatch(setCredentials({ token, user }));
 
       setEmail("");
       setPassword("");

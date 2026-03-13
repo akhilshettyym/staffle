@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { getTaskDetails } from "../api/tasks";
+import { getTaskDetails } from "../../api/tasks";
 import toast from "react-hot-toast";
 
-const useTasksTable = () => {
+const useAdminTasksTable = () => {
 
     const [tasks, setTasks] = useState([]);
     const [editingTask, setEditingTask] = useState(null);
@@ -24,4 +24,4 @@ const useTasksTable = () => {
     return { fetchTasksDetails, tasks, editingTask, setEditingTask };
 };
 
-export default useTasksTable;
+export default useAdminTasksTable;

@@ -2,11 +2,11 @@ import { DateConversion, PriorityTag } from "../../constants/imports";
 import AdminEditTaskModal from "./AdminEditTaskModal";
 import { useEffect } from "react";
 import CustomTooltip from "../Basics/CustomTooltip";
-import useTasksTable from "../../hooks/useTasksTable";
+import useAdminTasksTable from "../../hooks/AdminHooks/useAdminTasksTable";
 
 const AdminTasksTable = () => {
 
-    const { fetchTasksDetails, tasks, editingTask, setEditingTask } = useTasksTable();
+    const { fetchTasksDetails, tasks, editingTask, setEditingTask } = useAdminTasksTable();
 
     useEffect(() => {
         fetchTasksDetails();
@@ -68,7 +68,7 @@ const AdminTasksTable = () => {
                             {editingTask && (
                                 <AdminEditTaskModal task={editingTask} onClose={() => setEditingTask(null)} />
                             )}
-                            
+
                         </div>
                     ))
                 )}

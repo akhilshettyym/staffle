@@ -1,6 +1,6 @@
 import { Link, PasswordToggle, DatePicker } from "../../constants/imports";
 import "react-datepicker/dist/react-datepicker.css";
-import useCreateOrganizationForm from "../../hooks/useCreateOrganizationForm";
+import useCreateOrganizationForm from "../../hooks/AuthHooks/useCreateOrganizationForm";
 
 const CreateOrganizationForm = () => {
 

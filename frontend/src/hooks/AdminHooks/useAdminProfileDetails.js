@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { getOrganizationUsers } from "../api/employee";
+import { getOrganizationUsers } from "../../api/employee";
 import toast from "react-hot-toast";
-import { getOrganizationDetails } from "../api/organization";
+import { getOrganizationDetails } from "../../api/organization";
 
 const useAdminProfileDetails = () => {
 

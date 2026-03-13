@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { updateAdmin } from "../api/admin";
-import { getOrganizationUsers } from "../api/employee";
+import { updateAdmin } from "../../api/admin";
+import { getOrganizationUsers } from "../../api/employee";
 
-const useUpdateAdminDetails = () => {
+const useAdminUpdateAdminDetails = () => {
     const [loading, setLoading] = useState(false);
     const [employees, setEmployees] = useState([]);
 
@@ -129,4 +129,4 @@ const useUpdateAdminDetails = () => {
     return { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees };
 }
 
-export default useUpdateAdminDetails;
+export default useAdminUpdateAdminDetails;

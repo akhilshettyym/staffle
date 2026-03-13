@@ -1,8 +1,8 @@
 import { useEffect } from "../../constants/imports";
 import CustomTooltip from "../Basics/CustomTooltip";
-import UpdateAdminDetails from "../Basics/UpdateAdminDetails";
-import UpdateOrganizationDetails from "../Basics/UpdateOrganizationDetails";
-import useAdminProfileDetails from "../../hooks/useAdminProfileDetails";
+import AdminUpdateAdminDetails from "./AdminUpdateAdminDetails";
+import AdminUpdateOrganizationDetails from "./AdminUpdateOrganizationDetails";
+import useAdminProfileDetails from "../../hooks/AdminHooks/useAdminProfileDetails";
 
 const AdminProfileDetails = () => {
 
@@ -93,8 +93,8 @@ const AdminProfileDetails = () => {
 
             </div>
 
-            {activeTab === "organization" && <UpdateOrganizationDetails />}
-            {activeTab === "admin" && <UpdateAdminDetails />}
+            {activeTab === "organization" && <AdminUpdateOrganizationDetails />}
+            {activeTab === "admin" && <AdminUpdateAdminDetails />}
 
         </>
     );

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import useUpdateOrganizationDetails from "../../hooks/useUpdateOrganizationDetails";
+import useAdminUpdateOrganizationDetails from "../../hooks/AdminHooks/useAdminUpdateOrganizationDetails";
 
-const UpdateOrganizationDetails = () => {
+const AdminUpdateOrganizationDetails = () => {
 
-    const { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization } = useUpdateOrganizationDetails();
+    const { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization } = useAdminUpdateOrganizationDetails();
 
     useEffect(() => {
         fetchOrganization();
@@ -67,4 +67,4 @@ const UpdateOrganizationDetails = () => {
     );
 };
 
-export default UpdateOrganizationDetails;
+export default AdminUpdateOrganizationDetails;

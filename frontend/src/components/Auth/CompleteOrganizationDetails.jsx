@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import AdminAddEmployeeForm from "../Admin/AdminAddEmployeeForm";
 import { renderEmployeeDetails } from "../Basics/AddedEmployees";
-import useCompleteOrganizationDetails from "../../hooks/useCompleteOrganizationDetails";
+import useCompleteOrganizationDetails from "../../hooks/AuthHooks/useCompleteOrganizationDetails";
 
 const CompleteOrganizationDetails = () => {
 

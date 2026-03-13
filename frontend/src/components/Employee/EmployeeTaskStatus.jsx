@@ -1,10 +1,48 @@
 
 import EmployeeTaskListNo from "./EmployeeTaskListNo";
 import EmployeeTaskCard from "./EmployeeTaskCard";
+import { useEffect, useState } from "react";
+import { getTaskDetails } from "../../api/tasks";
+import toast from "react-hot-toast";
+import { getOrganizationUsers } from "../../api/employee";
 
-const EmployeeTaskStatus = ({ data }) => {
+const EmployeeTaskStatus = () => {
 
-  const tasks = data?.tasks.length || [];
+    const [tasks, setTasks] = useState([]);
+    const [employees, setEmployees] = useState([]);
+
+    const fetchEmployees = async () => {
+        try {
+            const response = await getOrganizationUsers();
+            if (response?.success) {
+                setEmployees(response.users || []);
+            } else {
+                toast.error(response?.message || "Failed to load employees");
+            }
+        } catch (error) {
+            console.error("Failed to fetch employees:", error);
+            toast.error("Could not fetch employees");
+        }
+    };
+
+    const fetchTasksDetails = async () => {
+        try {
+            const response = await getTaskDetails();
+            if (response?.success) {
+                setTasks(response.tasks || []);
+            } else {
+                toast.error(response?.message || "Failed to load tasks");
+            }
+        } catch (error) {
+            console.error("Failed to fetch tasks", error);
+            toast.error("Could not fetch tasks");
+        }
+    };
+
+    useEffect(() => {
+      fetchTasksDetails();
+      fetchEmployees();
+    }, []);
 
   return (
     <>
@@ -14,17 +52,17 @@ const EmployeeTaskStatus = ({ data }) => {
 
       <EmployeeTaskListNo />
 
-      {/* <div className="mt-5 bg-[#1B211A] rounded-2xl p-4 border border-[#FFDAB3]/25">
+      <div className="mt-5 bg-[#1B211A] rounded-2xl p-4 border border-[#FFDAB3]/25">
         {tasks === 0 ? (
           <div className="text-center py-12 text-[#F8F8F2]/60 text-lg"> No tasks found at the moment. </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {data.tasks.map((task) => {
+            {tasks.map((task) => {
               return <EmployeeTaskCard key={task.id || task._id || Math.random()} task={task} />
             })}
           </div>
         )}
-      </div> */}
+      </div>
     </>
   );
 

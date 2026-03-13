@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import AdminAddEmployeeForm from "./AdminAddEmployeeForm";
 import AdminAddedEmployees from "./AdminAddedEmployees";
 import CustomTooltip from "../Basics/CustomTooltip";
-import useAdminEmployeeManager from "../../hooks/useAdminEmployeeManager";
+import useAdminEmployeeManager from "../../hooks/AdminHooks/useAdminEmployeeManager";
 import AdminInactiveEmployees from "./AdminInactiveEmployees";
 
 const AdminEmployeeManager = () => {
@@ -24,6 +24,8 @@ const AdminEmployeeManager = () => {
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Add more employees to the Org. </h1>
                 <CustomTooltip id="add-employees-tooltip" message="You can update the organization roster by adding more employees." place="right" />
             </div>
+
+            {console.log(employees)}
 
             <AdminAddEmployeeForm refreshEmployees={fetchEmployees} />
 
