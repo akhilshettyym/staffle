@@ -5,7 +5,7 @@ import { BiSolidError } from "react-icons/bi";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
 import { acceptTask, markAsCompleted } from "../../api/tasks";
 
-const EmployeeTaskCard = ({ task, index }) => {
+const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
 
   const user = useSelector((state) => state.auth.user);
 
@@ -25,25 +25,29 @@ const EmployeeTaskCard = ({ task, index }) => {
 
   const handleAcceptTask = async () => {
     if (loading) return;
-
     setLoading(true);
 
     try {
-      const taskId = task?._id || task?.id;
+      const taskId = task?._id ?? task?.id;
+      if (!taskId) throw new Error("No task ID");
 
-      const response = await acceptTask({ taskId });
+      const response = await acceptTask(taskId);
 
       if (!response?.success) {
-        throw new Error(response?.message || "Failed to accept task");
+        throw new Error(response?.message || "Accept failed");
       }
 
-      toast.success("Task accepted successfully");
+      toast.success("Task accepted");
+
+      onTaskAccepted?.(taskId);
 
     } catch (error) {
+      const msg =
+        error?.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
 
-      const msg = error?.response?.data?.message || error.message || "Something went wrong while accepting task";
       toast.error(msg);
-
     } finally {
       setLoading(false);
     }
@@ -78,7 +82,7 @@ const EmployeeTaskCard = ({ task, index }) => {
   };
 
   const handleMarkAsFailed = async () => {
-    
+
   };
 
   const renderButtons = () => {

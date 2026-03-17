@@ -66,6 +66,16 @@ const EmployeeNewTask = () => {
     () => getMyTasks("NEW"),
     [getMyTasks]);
 
+    const handleTaskAccepted = useCallback((acceptedTaskId) => {
+    setTasks(prevTasks =>
+      prevTasks.map(t =>
+        (t._id ?? t.id) === acceptedTaskId
+          ? { ...t, status: "IN_PROGRESS" }
+          : t
+      )
+    );
+  }, []);
+
   return (
     <div className="pb-10">
       <hr className="my-5 border border-[#FFDAB3]/40" />
@@ -87,7 +97,7 @@ const EmployeeNewTask = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
             {employeeNewTasks.map((task, index) => (
-              <EmployeeTaskCard key={task._id || task.id} index={index + 1} task={task} />
+              <EmployeeTaskCard key={task._id || task.id} index={index + 1} task={task} onTaskAccepted={handleTaskAccepted} />
             ))}
           </div>
         )}

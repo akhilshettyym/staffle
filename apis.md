@@ -241,18 +241,5 @@ axios.interceptors.response.use(
 
 
 
-
-{
- "reason": "I already have 6 high priority tasks and cannot deliver this on time."
-}
-
-
-{
- "action": "APPROVE"
-}
-
-
-{
- "action": "REJECT",
- "adminReason": "Workload is manageable. Please prioritize properly."
-}
+I have several functions namely - handleAcceptTask, handleRejectTask, handleMarkAsCompleted, handleMarkAsFailed.
+So now I have API's ready for all these functions. I just need to define them properly. 
