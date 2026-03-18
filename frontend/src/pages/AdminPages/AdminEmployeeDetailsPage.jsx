@@ -1,12 +1,12 @@
 import AdminControlPanel from "../../components/Admin/AdminControlPanel";
 import AdminEmployeeDetailsCard from "../../components/Admin/AdminEmployeeDetailsCard";
-import { Header } from "../../constants/imports";
+import Header from "../../components/Basics/Header";
 
-const AdminEmployeeDetailsPage = ({ data, handleLogout, orgData }) => {
+const AdminEmployeeDetailsPage = () => {
 
     return (
         <div className="h-screen w-full p-10">
-            <Header data={data} handleLogout={handleLogout} orgData={orgData} />
+            <Header />
             <AdminControlPanel />
             <AdminEmployeeDetailsCard />
         </div>

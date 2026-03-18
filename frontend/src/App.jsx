@@ -1,4 +1,6 @@
-import { useState, useEffect, Navigate, Route, Routes, useNavigate, getOrganizationData, Toaster, toast } from "./constants/imports";
+import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import AdminTasksPage from "./pages/AdminPages/AdminTasksPage";
@@ -14,7 +16,6 @@ import CreateOrganizationPage from "./pages/AuthPages/CreateOrganizationPage";
 import RegisterOrganizationPage from "./pages/AuthPages/RegisterOrganizationPage";
 import CompleteOrganizationPage from "./pages/AuthPages/CompleteOrganizationPage";
 
-
 import EmployeeProfilePage from "./pages/EmployeePages/EmployeeProfilePage";
 import EmployeeNewTasksPage from "./pages/EmployeePages/EmployeeNewTasksPage";
 import EmployeeDashBoardPage from "./pages/EmployeePages/EmployeeDashBoardPage";
@@ -22,6 +23,7 @@ import EmployeeCompFailedTasksPage from "./pages/EmployeePages/EmployeeCompFaile
 import EmployeeInProgressTasksPage from "./pages/EmployeePages/EmployeeInprogressTasksPage";
 
 import SuperAdminDashboardPage from "./pages/SuperAdminPages/SuperAdminDashboardPage";
+
 import { fetchOrganization } from "./slices/organizationSlice";
 
 const App = () => {
@@ -34,7 +36,6 @@ const App = () => {
       dispatch(fetchOrganization());
     }
   }, [loaded, dispatch]);
-  
 
   return (
     <>

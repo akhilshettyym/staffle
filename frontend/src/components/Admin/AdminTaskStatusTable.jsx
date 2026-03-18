@@ -119,7 +119,7 @@ const AdminTaskStatusTable = () => {
 
                             <button onClick={() => setSelectedTask(task)} className="mr-3 py-2 px-5 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
 
-                            <button onClick={() => setEditingTask(task)} className="py-1 px-4 text-sm rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> Edit </button>
+                            <button onClick={() => setEditingTask(task)} className="py-2 px-5 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> Edit </button>
                           </div>
                         </div>
 

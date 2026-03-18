@@ -1,12 +1,12 @@
 import AdminControlPanel from "../../components/Admin/AdminControlPanel";
 import AdminTasksTable from "../../components/Admin/AdminTasksTable";
-import { Header } from "../../constants/imports";
+import Header from "../../components/Basics/Header";
 
-const AdminTasksPage = ({ data, handleLogout, orgData }) => {
+const AdminTasksPage = () => {
 
     return (
         <div className="h-screen w-full p-10">
-            <Header data={data} handleLogout={handleLogout} orgData={orgData} />
+            <Header />
             <AdminControlPanel />
             <AdminTasksTable />
         </div>

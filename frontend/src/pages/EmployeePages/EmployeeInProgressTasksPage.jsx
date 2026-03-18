@@ -1,13 +1,13 @@
 
 import EmployeeControlPanel from "../../components/Employee/EmployeeControlPanel";
 import EmployeeInProgressTask from "../../components/Employee/EmployeeInProgressTask";
-import { Header } from "../../constants/imports";
+import Header from "../../components/Basics/Header";
 
-const EmployeeInProgressTasksPage = ({ data, handleLogout, orgData }) => {
+const EmployeeInProgressTasksPage = () => {
 
     return (
         <div className="h-screen w-full p-10 overflow-visible">
-            <Header data={data} handleLogout={handleLogout} orgData={orgData} />
+            <Header />
             <EmployeeControlPanel />
             <EmployeeInProgressTask />
         </div>

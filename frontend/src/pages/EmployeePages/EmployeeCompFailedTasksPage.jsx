@@ -1,12 +1,12 @@
 import EmployeeComFailedTasks from "../../components/Employee/EmployeeComFailedTasks";
 import EmployeeControlPanel from "../../components/Employee/EmployeeControlPanel";
-import { Header } from "../../constants/imports";
+import Header from "../../components/Basics/Header";
 
-const EmployeeCompFailedTasksPage = ({ data, handleLogout, orgData }) => {
+const EmployeeCompFailedTasksPage = () => {
 
     return (
         <div className="h-screen w-full p-10 overflow-visible">
-            <Header data={data} handleLogout={handleLogout} orgData={orgData} />
+            <Header />
             <EmployeeControlPanel />
             <EmployeeComFailedTasks />
         </div>
