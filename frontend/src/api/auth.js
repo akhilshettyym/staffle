@@ -23,7 +23,7 @@ export async function login(payload) {
     }
 }
 
-export async function logout() {
+export async function logoutUser() {
     try {
         const res = await api.post("/auth/logout");
         return res.data;

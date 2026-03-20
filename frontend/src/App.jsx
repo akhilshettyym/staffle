@@ -29,10 +29,14 @@ import { fetchOrganization } from "./slices/organizationSlice";
 const App = () => {
 
   const dispatch = useDispatch();
+
   const { loaded } = useSelector((state) => state.organization);
 
+  const loggedOutUser = useSelector((state) => state.auth?.token);
+  // console.log("TEST", test)
+
   useEffect(() => {
-    if (!loaded) {
+    if (!loaded && loggedOutUser) {
       dispatch(fetchOrganization());
     }
   }, [loaded, dispatch]);

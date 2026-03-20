@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { setCredentials } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
+import { fetchOrganization } from "../../slices/organizationSlice";
 
 const useLoginForm = () => {
 
@@ -45,6 +46,7 @@ const useLoginForm = () => {
       }
 
       dispatch(setCredentials({ token, user, role }));
+      dispatch(fetchOrganization());
 
       setEmail("");
       setPassword("");
