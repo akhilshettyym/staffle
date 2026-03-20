@@ -9,7 +9,7 @@ const CustomTooltip = ({ message, place = "left", id = "tooltip", iconSize = 18 
                 <InfoIcon size={iconSize} />
             </span>
 
-            <Tooltip id={id} className="!normal-case text-sm max-w-xs"
+            <Tooltip id={id} className="normal-case! text-sm max-w-xs"
                 style={{
                     backgroundColor: "#1B211A",
                     color: "rgba(255, 218, 179, 1.9)",

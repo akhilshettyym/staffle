@@ -1,7 +1,7 @@
 import { Link, useLocation, FiGrid, FiClipboard, FiUsers, FiBarChart2, FiBarChart } from "../../constants/imports";
 
 const EmployeeControlPanel = () => {
-    
+
     const { pathname } = useLocation();
 
     const navItems = [

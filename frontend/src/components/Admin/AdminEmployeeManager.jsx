@@ -11,7 +11,7 @@ import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
 const AdminEmployeeManager = () => {
 
     const [tasks, setTasks] = useState([]);
-    
+
     const { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees } = useAdminEmployeeManager();
     const fetchTasksDetails = async () => {
         try {
@@ -26,7 +26,7 @@ const AdminEmployeeManager = () => {
             toast.error("Could not fetch tasks");
         }
     };
-    
+
     useEffect(() => {
         fetchEmployees();
         fetchTasksDetails();

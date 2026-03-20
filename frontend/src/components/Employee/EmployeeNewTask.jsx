@@ -66,7 +66,7 @@ const EmployeeNewTask = () => {
     () => getMyTasks("NEW"),
     [getMyTasks]);
 
-    const handleTaskAccepted = useCallback((acceptedTaskId) => {
+  const handleTaskAccepted = useCallback((acceptedTaskId) => {
     setTasks(prevTasks =>
       prevTasks.map(t =>
         (t._id ?? t.id) === acceptedTaskId

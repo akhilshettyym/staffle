@@ -125,7 +125,7 @@ const useAdminUpdateAdminDetails = () => {
             toast.error("Could not fetch employees");
         }
     };
-    
+
     return { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees };
 }
 

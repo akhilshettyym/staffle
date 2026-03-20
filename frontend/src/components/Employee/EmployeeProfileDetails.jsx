@@ -200,24 +200,24 @@ const EmployeeProfileDetails = () => {
           <div className="w-full md:w-[48%] flex flex-col gap-6">
             <div>
               <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> First Name </label>
-              <input required name="firstName" value={formData.firstName} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#F8F8F2] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+              <input required name="firstName" value={formData.firstName} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
             </div>
 
             <div>
               <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email </label>
-              <input required name="email" value={formData.email} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#F8F8F2] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+              <input required name="email" value={formData.email} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
             </div>
           </div>
 
           <div className="w-full md:w-[48%] flex flex-col gap-6">
             <div>
               <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Last Name </label>
-              <input required name="lastName" value={formData.lastName} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#F8F8F2] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+              <input required name="lastName" value={formData.lastName} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
             </div>
 
             <div>
               <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Designation </label>
-              <input required name="designation" value={formData.designation} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#F8F8F2] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+              <input required name="designation" value={formData.designation} onChange={handleChange} className="mt-2 text-[#FFDAB3] w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
             </div>
           </div>
 

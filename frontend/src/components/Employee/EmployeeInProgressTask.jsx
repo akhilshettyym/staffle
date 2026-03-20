@@ -85,7 +85,7 @@ const EmployeeInProgressTask = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
             {employeeInProgressTasks.map((task, index) => {
-              return <EmployeeTaskCard key={task.id || task._id} index={index+1} task={task} />
+              return <EmployeeTaskCard key={task.id || task._id} index={index + 1} task={task} />
             })}
           </div>
         )}
