@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "../../constants/imports";
 import AdminReactivateEmployee from "./AdminReactivateEmployee";
 
-const AdminInactiveEmployees = ({ inactiveEmp = [], setInactiveEmp }) => {
+const AdminInactiveEmployees = ({ inactiveEmp = [], setInactiveEmp, refreshEmployees }) => {
 
     const prevLengthRef = useRef(0);
 
@@ -38,7 +38,7 @@ const AdminInactiveEmployees = ({ inactiveEmp = [], setInactiveEmp }) => {
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold"> {renderName} </h2>
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold"> {emp.designation} </h2>
                                 <h2 className="w-1/4 text-[#A7C1A8] text-xl font-bold"> {emp.email} </h2>
-                                <AdminReactivateEmployee empId={emp.id || emp._id} />
+                                <AdminReactivateEmployee refreshEmployees={refreshEmployees} empId={emp.id || emp._id} />
                             </div>
                         </div>
                     );

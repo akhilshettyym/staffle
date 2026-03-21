@@ -27,7 +27,15 @@ const useAdminEmployeeManager = () => {
         }
     };
 
-    return { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees };
+    const refreshEmployeesData = async () => {
+        await Promise.all([
+            fetchEmployees(),
+            fetchInactiveEmployees()
+        ]);
+    };
+
+    return { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees, refreshEmployeesData };
+
 }
 
 export default useAdminEmployeeManager;

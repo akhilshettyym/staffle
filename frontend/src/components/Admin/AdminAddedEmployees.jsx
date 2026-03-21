@@ -3,7 +3,7 @@ import AdminUpdateEmployeeDetails from "./AdminUpdateEmployeeDetails";
 import { useState } from "react";
 import AdminEmployeeDetailsModal from "./AdminEmployeeDetailsModal";
 
-const AdminAddedEmployees = ({ employees, setEmployees }) => {
+const AdminAddedEmployees = ({ employees, setEmployees, refreshEmployees }) => {
 
   const prevLengthRef = useRef(0);
 
@@ -46,7 +46,7 @@ const AdminAddedEmployees = ({ employees, setEmployees }) => {
       })}
 
       {selectedEmployee && (
-        <AdminEmployeeDetailsModal emp={selectedEmployee} onClose={() => setSelectedEmployee(null)} />
+        <AdminEmployeeDetailsModal refreshEmployees={refreshEmployees} emp={selectedEmployee} onClose={() => setSelectedEmployee(null)} />
       )}
 
     </div>

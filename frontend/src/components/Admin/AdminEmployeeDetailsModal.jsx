@@ -1,7 +1,7 @@
 import { DateConversion } from "../../constants/imports";
 import AdminDeactivateEmployee from "./AdminDeactivateEmployee";
 
-const AdminEmployeeDetailsModal = ({ emp, onClose }) => {
+const AdminEmployeeDetailsModal = ({ emp, onClose, refreshEmployees }) => {
 
     if (!emp) return null;
 
@@ -73,7 +73,7 @@ const AdminEmployeeDetailsModal = ({ emp, onClose }) => {
 
                     <div className="flex justify-end gap-3">
                         <button onClick={onClose} className="px-6 py-2 text-sm border border-[#FFDAB3]/40 rounded-md text-[#FFDAB3] hover:bg-[#FFDAB3]/10 transition"> Close </button>
-                        <AdminDeactivateEmployee empId={emp.id || emp._id} />
+                        <AdminDeactivateEmployee refreshEmployees={refreshEmployees} onClose={onClose} empId={emp.id || emp._id} />
                     </div>
 
                 </div>

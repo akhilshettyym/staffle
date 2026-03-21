@@ -2,7 +2,7 @@ import { useState } from "react";
 import { reactivateEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
 
-const useAdminReactivateEmployee = ({ empId }) => {
+const useAdminReactivateEmployee = ({ empId, refreshEmployees }) => {
 
     const [loading, setLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -24,6 +24,7 @@ const useAdminReactivateEmployee = ({ empId }) => {
             }
 
             toast.success("Employee reactivated successfully");
+            await refreshEmployees();
             setShowConfirm(false);
 
         } catch (error) {

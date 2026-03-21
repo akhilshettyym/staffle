@@ -2,7 +2,7 @@ import { useState } from "react";
 import { deactivateEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
 
-const useAdminDeactivateEmployee = ({ empId }) => {
+const useAdminDeactivateEmployee = ({ empId, onClose, refreshEmployees }) => {
 
     const [loading, setLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -24,6 +24,8 @@ const useAdminDeactivateEmployee = ({ empId }) => {
             }
 
             toast.success("Employee deactivated successfully");
+            await refreshEmployees();
+            onClose();
             setShowConfirm(false);
 
         } catch (error) {

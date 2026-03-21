@@ -12,7 +12,8 @@ const AdminEmployeeManager = () => {
 
     const [tasks, setTasks] = useState([]);
 
-    const { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees } = useAdminEmployeeManager();
+    const { employees, inactiveEmp, setInactiveEmp, setEmployees, fetchEmployees, fetchInactiveEmployees, refreshEmployeesData } = useAdminEmployeeManager();
+    
     const fetchTasksDetails = async () => {
         try {
             const response = await getTaskDetails();
@@ -53,7 +54,7 @@ const AdminEmployeeManager = () => {
                 <CustomTooltip id="remove-employees-tooltip" message="Employees may be deactivated and later reactivated, but accounts remaining inactive for more than 30 days will be permanently deleted." place="right" />
             </div>
 
-            <AdminAddedEmployees employees={employees} setEmployees={setEmployees} />
+            <AdminAddedEmployees refreshEmployees={refreshEmployeesData} employees={employees} setEmployees={setEmployees} />
 
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
@@ -62,7 +63,7 @@ const AdminEmployeeManager = () => {
                 <CustomTooltip id="deactivated-employees-tooltip" message="Employees who were deactivated can be reactivated, but accounts remaining inactive for more than 30 days will be permanently deleted." place="right" />
             </div>
 
-            <AdminInactiveEmployees inactiveEmp={inactiveEmp} setInactiveEmp={setInactiveEmp} />
+            <AdminInactiveEmployees refreshEmployees={refreshEmployeesData} inactiveEmp={inactiveEmp} setInactiveEmp={setInactiveEmp} />
 
         </>
     )

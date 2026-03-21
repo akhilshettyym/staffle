@@ -1,9 +1,9 @@
 import { ConfirmModal } from "../../constants/imports";
 import useAdminDeactivateEmployee from "../../hooks/adminHooks/useAdminDeactivateEmployee";
 
-const AdminDeactivateEmployee = ({ empId }) => {
+const AdminDeactivateEmployee = ({ empId, onClose, refreshEmployees }) => {
 
-    const { loading, showConfirm, setShowConfirm, onHandleRemove } = useAdminDeactivateEmployee({ empId });
+    const { loading, showConfirm, setShowConfirm, onHandleRemove } = useAdminDeactivateEmployee({ empId, refreshEmployees, onClose });
 
     return (
         <>
@@ -13,4 +13,5 @@ const AdminDeactivateEmployee = ({ empId }) => {
         </>
     );
 };
+
 export default AdminDeactivateEmployee;
