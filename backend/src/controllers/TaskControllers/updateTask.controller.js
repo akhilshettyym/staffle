@@ -21,17 +21,20 @@ export const updateTaskController = async (req, res) => {
             });
         }
 
-        if (task.organizationId.toString() !== loggedInUser.organizationId.toString()) {
+        if (
+            task.organizationId.toString() !==
+            loggedInUser.organizationId.toString()
+        ) {
             return res.status(403).json({
                 success: false,
                 message: "You cannot update tasks from another organization",
             });
         }
 
-        if (task.status !== "NEW") {
+        if (task.status !== "NEW" && task.status !== "FAILED") {
             return res.status(400).json({
                 success: false,
-                message: "Only tasks with NEW status can be updated",
+                message: "Only tasks with NEW and FAILED status can be updated",
             });
         }
 
@@ -45,15 +48,18 @@ export const updateTaskController = async (req, res) => {
                 });
             }
 
-            if (assignedUser.organizationId.toString() !== loggedInUser.organizationId.toString()) {
+            if (
+                assignedUser.organizationId.toString() !==
+                loggedInUser.organizationId.toString()
+            ) {
                 return res.status(400).json({
                     success: false,
                     message: "Assigned user does not belong to your organization",
                 });
             }
+
             task.assignedTo = assignedTo;
         }
-
 
         if (title !== undefined) task.title = title;
         if (category !== undefined) task.category = category;
@@ -62,13 +68,20 @@ export const updateTaskController = async (req, res) => {
 
         if (dueDate !== undefined) {
             const parsedDate = new Date(dueDate);
+
             if (isNaN(parsedDate.getTime())) {
                 return res.status(400).json({
                     success: false,
                     message: "Invalid due date format",
                 });
             }
+
             task.dueDate = parsedDate;
+        }
+
+        if (task.status === "FAILED") {
+            task.status = "NEW";
+            task.failureReason = "";
         }
 
         await task.save();

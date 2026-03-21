@@ -42,9 +42,14 @@ const useAdminTaskStatusTable = () => {
     };
 
     const getEmployeeName = (id) => {
-        const emp = employees.find(e => e.id === id);
-        return emp ? `${emp.firstName} ${emp.lastName}` : "Unassigned";
-    };
+    const emp = employees.find(
+        e => (e._id || e.id) === id
+    );
+
+    return emp
+        ? `${emp.firstName} ${emp.lastName}`
+        : "Unassigned";
+};
 
     return { tasks, status, failedTasks, nonFailedTasks, editingTask, selectedTask, setSelectedTask, setEditingTask, setTasks, fetchTasksDetails, fetchEmployees, getEmployeeName };
 }
