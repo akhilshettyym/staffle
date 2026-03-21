@@ -28,6 +28,18 @@ const AdminProfileDetails = () => {
         }
     };
 
+    const refreshOrgData = async () => {
+        await Promise.all([
+            fetchOrganization()
+        ]);
+    };
+
+    const refreshAdminData = async () => {
+        await Promise.all([
+            fetchEmployees()
+        ]);
+    };
+
     useEffect(() => {
         fetchEmployees();
         fetchTasksDetails();
@@ -116,8 +128,8 @@ const AdminProfileDetails = () => {
 
             </div>
 
-            {activeTab === "organization" && <AdminUpdateOrganizationDetails />}
-            {activeTab === "admin" && <AdminUpdateAdminDetails />}
+            {activeTab === "organization" && <AdminUpdateOrganizationDetails refreshOrgData={refreshOrgData} />}
+            {activeTab === "admin" && <AdminUpdateAdminDetails refreshAdminData={refreshAdminData} />}
 
         </>
     );

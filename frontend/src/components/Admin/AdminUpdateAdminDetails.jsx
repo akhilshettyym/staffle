@@ -3,9 +3,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import useAdminUpdateAdminDetails from '../../hooks/AdminHooks/useAdminUpdateAdminDetails';
 
-const AdminUpdateAdminDetails = () => {
+const AdminUpdateAdminDetails = ({ refreshAdminData }) => {
 
-    const { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees } = useAdminUpdateAdminDetails();
+    const { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees } = useAdminUpdateAdminDetails({ refreshAdminData });
 
     useEffect(() => {
         fetchEmployees();

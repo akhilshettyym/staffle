@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import useAdminUpdateOrganizationDetails from "../../hooks/AdminHooks/useAdminUpdateOrganizationDetails";
 
-const AdminUpdateOrganizationDetails = () => {
+const AdminUpdateOrganizationDetails = ({ refreshOrgData }) => {
 
-    const { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization } = useAdminUpdateOrganizationDetails();
+    const { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization } = useAdminUpdateOrganizationDetails({ refreshOrgData });
 
     useEffect(() => {
         fetchOrganization();

@@ -3,7 +3,8 @@ import toast from "react-hot-toast";
 import { updateAdmin } from "../../api/admin";
 import { getOrganizationUsers } from "../../api/employee";
 
-const useAdminUpdateAdminDetails = () => {
+const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
+
     const [loading, setLoading] = useState(false);
     const [employees, setEmployees] = useState([]);
 
@@ -92,6 +93,7 @@ const useAdminUpdateAdminDetails = () => {
             }
 
             toast.success("Admin details updated successfully");
+            refreshAdminData();
 
             setEmployees((prev) =>
                 prev.map((e) =>
