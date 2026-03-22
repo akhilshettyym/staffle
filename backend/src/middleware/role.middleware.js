@@ -30,4 +30,5 @@ export const requireEmployee = (req, res, next) => {
             message: "Only Employees can perform this action",
         })
     }
+    next();
 }

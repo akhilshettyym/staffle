@@ -56,12 +56,19 @@ const EmployeeTaskStatus = () => {
 
 
   const employeeTasks = useMemo(() => {
-    if (!user?._id) return [];
+    if (!tasks || !user?._id) return [];
 
-    return tasks.filter(
-      (task) => task.assignedTo === user._id
-    );
-  }, [tasks, user]);
+    return tasks
+      .filter(task => task.assignedTo === user._id)
+      .sort((a, b) => {
+
+        if (a.status === "NEW" && b.status !== "NEW") return -1;
+        if (a.status !== "NEW" && b.status === "NEW") return 1;
+
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+
+  }, [tasks, user?._id]);
 
 
   return (

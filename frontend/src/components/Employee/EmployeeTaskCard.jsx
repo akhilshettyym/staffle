@@ -59,19 +59,20 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
 
   const handleMarkAsCompleted = async () => {
     if (loading) return;
-
     setLoading(true);
 
     try {
       const taskId = task?._id || task?.id;
+      if (!taskId) throw new Error("No task ID");
 
-      const response = await markAsCompleted({ taskId });
+      const response = await markAsCompleted(taskId);
 
       if (!response?.success) {
-        throw new Error(response?.message || "Failed to update task");
+        throw new Error(response?.message || "Complete failed");
       }
 
       toast.success("Task marked as completed");
+      
     } catch (error) {
       const msg = error?.response?.data?.message || error.message || "Something went wrong while marking task as completed";
       toast.error(msg);
