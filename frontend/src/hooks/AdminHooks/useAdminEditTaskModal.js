@@ -63,17 +63,12 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
         setLoading(true);
 
         try {
+            if (!formData.title?.trim()) throw new Error("Task title is required");
+            if (!formData.category?.trim()) throw new Error("Category is required");
+            if (!formData.priority) throw new Error("Priority is required");
 
-            if (!formData.title?.trim()) {
-                throw new Error("Task title is required");
-            }
-
-            if (!formData.category?.trim()) {
-                throw new Error("Category is required");
-            }
-
-            if (!formData.priority) {
-                throw new Error("Priority is required");
+            if (formData.dueDate && formData.dueDate < new Date()) {
+                throw new Error("Please select a valid date.");
             }
 
             const payload = {
@@ -88,10 +83,7 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
             };
 
             const taskId = task?._id || task?.id;
-
-            if (!taskId) {
-                throw new Error("Cannot update task: missing task ID");
-            }
+            if (!taskId) throw new Error("Cannot update task: missing task ID");
 
             const response = await updateTask({ taskId, ...payload });
 
@@ -99,10 +91,7 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
                 throw new Error(response?.message || "Failed to update task");
             }
 
-            const updatedTask =
-                response.task ||
-                response.updatedTask ||
-                { ...task, ...payload };
+            const updatedTask = response.task || response.updatedTask || { ...task, ...payload };
 
             dispatch(updateTaskSuccess(updatedTask));
 
@@ -112,10 +101,9 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
             onClose();
 
         } catch (error) {
-
             const msg = error?.response?.data?.message || error.message || "Something went wrong while updating task";
             toast.error(msg);
-
+            
         } finally {
             setLoading(false);
         }
