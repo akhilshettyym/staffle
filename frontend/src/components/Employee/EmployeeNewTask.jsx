@@ -10,11 +10,10 @@ import CustomTooltip from "../Basics/CustomTooltip";
 const EmployeeNewTask = () => {
 
   const [activeTab, setActiveTab] = useState("new");
-
-  const user = useSelector((state) => state.auth.user);
-
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
+
+  const user = useSelector((state) => state.auth.user);
 
   const fetchEmployees = async () => {
     try {
@@ -75,6 +74,18 @@ const EmployeeNewTask = () => {
     [getMyTasks]
   );
 
+  const employeeRejectedRequests = useMemo(() => {
+    if (!user?._id) return [];
+
+    return tasks.filter(task => {
+      return (
+        task.assignedTo === user._id &&
+        task.status === "NEW" &&
+        task?.rejection?.status === "REJECTED"
+      );
+    });
+  }, [tasks, user?._id]);
+
   const handleTaskStatusChange = useCallback((taskId, status, reason) => {
     setTasks(prev =>
       prev.map(t =>
@@ -94,23 +105,29 @@ const EmployeeNewTask = () => {
 
       <EmployeeTaskListNo tasks={employeeTasks} />
 
-      <div className="flex gap-4 mb-8 mt-10">
-        <button
-          onClick={() => setActiveTab("new")}
-          className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
-            ${activeTab === "new"
-              ? "bg-[#FFDAB3] text-[#1B211A]"
-              : "text-[#FFDAB3] border border-[#FFDAB3]/40 hover:bg-[#FFDAB3]/10"
-            }`}> 
-            New Tasks
+      <div className="flex gap-4 mb-8 mt-10 flex-wrap">
+        <button onClick={() => setActiveTab("new")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
+          ${activeTab === "new"
+            ? "bg-[#FFDAB3] text-[#1B211A]"
+            : "text-[#FFDAB3] border border-[#FFDAB3]/40 hover:bg-[#FFDAB3]/10"
+          }`}>
+          New Tasks
         </button>
 
         <button onClick={() => setActiveTab("request-rejection")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
-            ${activeTab === "request-rejection"
+          ${activeTab === "request-rejection"
             ? "bg-[#FFDAB3] text-[#1B211A]"
             : "text-[#FFDAB3] border border-[#FFDAB3]/40 hover:bg-[#FFDAB3]/10"
-          }`}> 
+          }`}>
           Rejection Requested
+        </button>
+
+        <button onClick={() => setActiveTab("request-rejected")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
+          ${activeTab === "request-rejected"
+            ? "bg-[#FFDAB3] text-[#1B211A]"
+            : "text-[#FFDAB3] border border-[#FFDAB3]/40 hover:bg-[#FFDAB3]/10"
+          }`}>
+          Request Rejected
         </button>
       </div>
 
@@ -152,6 +169,29 @@ const EmployeeNewTask = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                 {employeeRequestedRejectionTasks.map((task, index) => (
+                  <EmployeeTaskCard key={task._id || task.id} index={index + 1} task={task} onTaskStatusChange={handleTaskStatusChange} />
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {activeTab === "request-rejected" && (
+        <>
+          <div className="flex items-center gap-2 mt-5">
+            <h1 className="text-lg uppercase text-[#FFDAB3] font-medium"> Request Rejected By Admin </h1>
+            <CustomTooltip id="request-rejected-tooltip" message="Tasks where admin rejected your rejection request." place="right" />
+          </div>
+
+          <div className="mt-5 bg-[#1B211A] rounded-2xl p-4 border border-[#FFDAB3]/25">
+            {employeeRejectedRequests.length === 0 ? (
+              <div className="text-center py-12 text-[#F8F8F2]/60 text-lg">
+                No rejected requests.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                {employeeRejectedRequests.map((task, index) => (
                   <EmployeeTaskCard key={task._id || task.id} index={index + 1} task={task} onTaskStatusChange={handleTaskStatusChange} />
                 ))}
               </div>
