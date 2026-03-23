@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { deleteTaskSuccess } from "../../slices/taskSlice";
 
-const useAdminDeleteTask = ({ taskId }) => {
+const useAdminDeleteTask = ({ taskId, refreshEmployeesData }) => {
 
     const dispatch = useDispatch();
 
@@ -29,6 +29,7 @@ const useAdminDeleteTask = ({ taskId }) => {
             }
 
             dispatch(deleteTaskSuccess(taskId));
+            refreshEmployeesData();
 
             toast.success("Task deleted successfully");
             setShowConfirm(false);

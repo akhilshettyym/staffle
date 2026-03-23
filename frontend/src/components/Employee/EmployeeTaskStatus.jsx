@@ -15,7 +15,6 @@ const EmployeeTaskStatus = () => {
   const user = useSelector((state) => state.auth.user);
 
   const [selectedTask, setSelectedTask] = useState(null);
-
   const [tasks, setTasks] = useState([]);
   const [employees, setEmployees] = useState([]);
 
@@ -156,7 +155,7 @@ const EmployeeTaskStatus = () => {
                   <span className="text-xs text-[#F8F8F2]/60"> Task ID : {index + 1 || ""} </span>
 
                   <div className="flex items-center gap-3">
-                    <button onClick={() => setSelectedTask(task)} className="py-1 px-4 text-sm rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
+                    <button onClick={() => setSelectedTask(task)} className="py-2 px-6 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
                   </div>
 
                 </div>

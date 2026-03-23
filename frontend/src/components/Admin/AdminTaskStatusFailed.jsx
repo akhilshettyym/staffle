@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
 import AdminEditTaskModal from "./AdminEditTaskModal";
 import CustomTooltip from "../Basics/CustomTooltip";
 import AdminRemoveTask from "./AdminRemoveTask";
 import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
-const AdminTaskStatusFailed = ({ failedTasks, editingTask, selectedTask, setSelectedTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName }) => {
+const AdminTaskStatusFailed = ({ failedTasks, editingTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
+
+    const [selectedTask, setSelectedTask] = useState(null);
 
     useEffect(() => {
         fetchTasksDetails();
@@ -111,7 +113,7 @@ const AdminTaskStatusFailed = ({ failedTasks, editingTask, selectedTask, setSele
                                                 </div>
                                             </div>
 
-                                            <AdminRemoveTask taskId={taskKey} />
+                                            <AdminRemoveTask refreshEmployeesData={refreshEmployeesData} taskId={taskKey} />
                                         </div>
                                     </div>
 

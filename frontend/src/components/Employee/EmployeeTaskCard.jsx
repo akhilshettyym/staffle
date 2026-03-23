@@ -5,7 +5,7 @@ import { BiSolidError } from "react-icons/bi";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
 import { acceptTask, markAsCompleted } from "../../api/tasks";
 
-const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
+const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
 
   const user = useSelector((state) => state.auth.user);
 
@@ -13,8 +13,9 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
   const assignedToUser = `${user.firstName} ${user.lastName}`;
 
   const [showFailModal, setShowFailModal] = useState(false);
-
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const taskId = task?._id ?? task?.id;
 
   const statusStyles = {
     NEW: "bg-amber-100 text-amber-700 border-amber-200",
@@ -28,7 +29,6 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
     setLoading(true);
 
     try {
-      const taskId = task?._id ?? task?.id;
       if (!taskId) throw new Error("No task ID");
 
       const response = await acceptTask(taskId);
@@ -39,7 +39,7 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
 
       toast.success("Task accepted");
 
-      onTaskAccepted?.(taskId);
+      onTaskStatusChange?.(taskId, "IN_PROGRESS");
 
     } catch (error) {
       const msg =
@@ -53,16 +53,11 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
     }
   };
 
-  const handleRejectTask = async () => {
-
-  };
-
   const handleMarkAsCompleted = async () => {
     if (loading) return;
     setLoading(true);
 
     try {
-      const taskId = task?._id || task?.id;
       if (!taskId) throw new Error("No task ID");
 
       const response = await markAsCompleted(taskId);
@@ -72,7 +67,9 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
       }
 
       toast.success("Task marked as completed");
-      
+
+      onTaskStatusChange?.(taskId, "COMPLETED");
+
     } catch (error) {
       const msg = error?.response?.data?.message || error.message || "Something went wrong while marking task as completed";
       toast.error(msg);
@@ -82,8 +79,9 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
     }
   };
 
-  const handleMarkAsFailed = async () => {
-
+  const handleRejectTask = (reason) => {
+    onTaskStatusChange?.(taskId, "FAILED", reason);
+    setShowFailModal(false);
   };
 
   const renderButtons = () => {
@@ -101,17 +99,28 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
 
       case "IN_PROGRESS":
         return (
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="flex justify-end w-full">
             <button onClick={handleMarkAsCompleted} className="py-2 px-5 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition"> Complete </button>
+          </div>
+        );
 
-            <button onClick={() => setShowFailModal(true)} className="py-2 px-5 rounded-md text-xs font-semibold bg-red-500 text-white border border-red-500 uppercase hover:bg-red-700 transition"> Fail </button>
+      case "REJECTION_REQUESTED":
+        return (
+          <div className="flex items-center gap-3">
+            <button disabled className="py-2 px-5 rounded-md text-xs font-semibold text-amber-500 border border-amber-500 uppercase" > Rejection Requested </button>
+
+            <button onClick={() => setSelectedTask(task)} className="py-2 px-5 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
+
+            {selectedTask && (
+              <EmployeeTaskDetailsModal task={selectedTask} onClose={() => setSelectedTask(null)} getEmployeeName={assignedToUser} />
+            )}
           </div>
         );
 
       case "COMPLETED":
         return (
           <>
-            <button disabled className="py-2 px-5 rounded-md text-xs font-semibold text-green-500 border border-green-500 uppercase"> Completed </button>
+            <button disabled className="py-2 px-5 rounded-md text-xs font-semibold text-green-500 border border-green-500 uppercase" > Completed </button>
 
             <div className="flex items-center gap-3">
               <button onClick={() => setSelectedTask(task)} className="py-2 px-5 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
@@ -137,7 +146,6 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
             )}
           </>
         );
-
       default:
         return null;
     }
@@ -160,9 +168,7 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
           <div className="flex justify-between items-center">
             <span className="uppercase font-medium"> Status </span>
 
-            <span className={`px-4 py-1 rounded-full font-bold uppercase border text-xs ${statusStyles[task?.status] ||
-              "bg-gray-100 text-gray-600 border-gray-200"
-              }`}>
+            <span className={`px-4 py-1 rounded-full font-bold uppercase border text-xs ${statusStyles[task?.status] || "bg-gray-100 text-gray-600 border-gray-200"}`}>
               {task?.status?.replace("_", " ")}
             </span>
           </div>
@@ -224,7 +230,7 @@ const EmployeeTaskCard = ({ task, index, onTaskAccepted }) => {
       </div>
 
       {showFailModal && (
-        <EmployeeFailedTaskModal task={task} handleRejectTask={handleRejectTask} onClose={() => setShowFailModal(false)} />
+        <EmployeeFailedTaskModal taskId={taskId} onSuccess={(reason) => handleRejectTask(reason)} onClose={() => setShowFailModal(false)} />
       )}
     </>
   );

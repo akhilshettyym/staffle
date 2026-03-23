@@ -66,8 +66,19 @@ const EmployeeInProgressTask = () => {
     () => getMyTasks("IN_PROGRESS"),
     [getMyTasks]);
 
+  const handleTaskStatusChange = useCallback((taskId, status, reason) => {
+    setTasks(prev =>
+      prev.map(t =>
+        (t._id ?? t.id) === taskId
+          ? { ...t, status, failureReason: reason || t.failureReason }
+          : t
+      )
+    );
+  }, []);
+
   return (
     <div className="pb-10">
+      
       <hr className="my-5 border border-[#FFDAB3]/40" />
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> In Progress Tasks </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
@@ -85,7 +96,7 @@ const EmployeeInProgressTask = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
             {employeeInProgressTasks.map((task, index) => {
-              return <EmployeeTaskCard key={task.id || task._id} index={index + 1} task={task} />
+              return <EmployeeTaskCard key={task.id || task._id} index={index + 1} task={task} onTaskStatusChange={handleTaskStatusChange} />
             })}
           </div>
         )}

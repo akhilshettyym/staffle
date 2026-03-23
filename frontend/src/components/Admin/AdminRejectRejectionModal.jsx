@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { reviewRejection } from "../../api/admin";
 
 const AdminRejectRejectionModal = ({ task, onClose, onSuccess }) => {
 
@@ -10,17 +11,23 @@ const AdminRejectRejectionModal = ({ task, onClose, onSuccess }) => {
     const lineCount = reason.split("\n").filter(Boolean).length;
     const isValid = /^[a-zA-Z\s\n.,'-]+$/.test(reason) && (wordCount >= 15 || lineCount >= 2);
 
-    const handleSubmit = async () => {
+    const taskId = task._id || task.id;
 
+    const handleSubmit = async () => {
         if (!isValid) return;
+
         try {
             setLoading(true);
-            await axios.patch(`/api/admin/review-task-rejection/${task.id}`, {
+
+            await reviewRejection({
+                taskId: taskId,
                 decision: "REJECTED",
-                adminReason: reason,
+                adminReason: reason
             });
+
             onSuccess();
             onClose();
+
         } catch (err) {
             console.error(err);
             alert(err?.response?.data?.message || "Error rejecting request");

@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
 import CustomTooltip from "../Basics/CustomTooltip";
 import AdminRemoveTask from "./AdminRemoveTask";
 import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
-const AdminTaskStatusAllTasks = ({ status, allCreatedTasks, selectedTask, setSelectedTask, fetchTasksDetails, fetchEmployees, getEmployeeName }) => {
+const AdminTaskStatusAllTasks = ({ status, allCreatedTasks, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
+
+    const [selectedTask, setSelectedTask] = useState(null);
 
     useEffect(() => {
         fetchTasksDetails();
@@ -93,7 +95,7 @@ const AdminTaskStatusAllTasks = ({ status, allCreatedTasks, selectedTask, setSel
                                     <div className="flex items-center gap-3">
                                         <button onClick={() => setSelectedTask(task)} className="py-2 px-5 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white"> View </button>
 
-                                        <AdminRemoveTask taskId={task.id || task._id} />
+                                        <AdminRemoveTask refreshEmployeesData={refreshEmployeesData} taskId={task.id || task._id} />
                                     </div>
 
                                 </div>

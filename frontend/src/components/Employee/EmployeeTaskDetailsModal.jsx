@@ -7,13 +7,18 @@ const EmployeeTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
     const failureReason = task?.taskLifeCycle?.failure?.reason;
     const failedAt = task?.taskLifeCycle?.failure?.failedAt;
 
+    const rejectionReason = task?.rejection?.reason;
+    const rejectionRequestedAt = task?.rejection?.requestedAt;
+    const rejectionStatus = task?.rejection?.status;
+
     const status = task?.status?.toLowerCase();
 
     const statusStyles = {
         new: "bg-amber-100 text-amber-700 border-amber-200",
-        inprogress: "bg-blue-100 text-blue-700 border-blue-200",
+        in_progress: "bg-blue-100 text-blue-700 border-blue-200",
         completed: "bg-emerald-100 text-emerald-700 border-emerald-200",
         failed: "bg-red-100 text-red-700 border-red-200",
+        rejection_requested: "bg-orange-100 text-orange-700 border-orange-200",
     };
 
     return (
@@ -27,10 +32,14 @@ const EmployeeTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
 
                     <div className="flex items-center gap-4">
                         <div className="flex justify-between items-center">
-                            <span className={`mr-4 px-4 py-1 rounded-full border text-xs font-bold uppercase ${statusStyles[status] || "bg-gray-100 text-gray-600 border-gray-200"}`}> {task.status} </span>
+                            <span className={`mr-4 px-4 py-1 rounded-full border text-xs font-bold uppercase 
+                            ${statusStyles[status] || "bg-gray-100 text-gray-600 border-gray-200"}`}>
+                                {task.status?.replace("_", " ")}
+                            </span>
                             <PriorityTag priorityMsg={task.priority} />
                         </div>
-                        <button onClick={onClose} className="text-[#FFDAB3] ml-3 hover:text-red-400 text-xl font-bold transition"> ✕ </button>
+
+                        <button onClick={onClose} className="text-[#FFDAB3] ml-3 hover:text-red-400 text-xl font-bold transition" > ✕ </button>
                     </div>
                 </div>
 
@@ -38,7 +47,9 @@ const EmployeeTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
                     <div className="grid grid-cols-2 gap-6 text-md">
                         <div>
                             <p className="text-[#F8F8F2]/60 text-sm uppercase mb-1"> Category </p>
-                            <p className="text-[#FFDAB3] font-medium"> {task.category} </p>
+                            <p className="text-[#FFDAB3] font-medium">
+                                {task.category}
+                            </p>
                         </div>
 
                         <div>
@@ -50,13 +61,16 @@ const EmployeeTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
 
                         <div>
                             <p className="text-[#F8F8F2]/60 text-sm uppercase mb-1"> Created </p>
-                            <p className="text-[#FFDAB3] font-medium"> <DateConversion convertDate={task.createdAt} />
+                            <p className="text-[#FFDAB3] font-medium">
+                                <DateConversion convertDate={task.createdAt} />
                             </p>
                         </div>
 
                         <div>
                             <p className="text-[#F8F8F2]/60 text-sm uppercase mb-1"> Due Date </p>
-                            <p className="text-[#FFDAB3] font-medium"> <DateConversion convertDate={task.dueDate} /> </p>
+                            <p className="text-[#FFDAB3] font-medium">
+                                <DateConversion convertDate={task.dueDate} />
+                            </p>
                         </div>
                     </div>
 
@@ -74,13 +88,37 @@ const EmployeeTaskDetailsModal = ({ task, onClose, getEmployeeName }) => {
 
                             {failedAt && (
                                 <p className="text-xs text-red-300"> Failed At :
-                                    <span className="ml-1"> <DateConversion convertDate={failedAt} /> </span>
+                                    <span className="ml-1">
+                                        <DateConversion convertDate={failedAt} />
+                                    </span>
                                 </p>
                             )}
                         </div>
                     )}
-                </div>
 
+                    {rejectionReason && (
+                        <div className="bg-orange-500/10 border border-orange-500/40 rounded-lg p-4 space-y-2">
+                            <p className="text-orange-400 font-semibold uppercase text-sm"> Rejection Requested </p>
+                            <p className="text-[#FFDAB3] text-sm"> {rejectionReason} </p>
+
+                            <div className="flex justify-between items-center">
+                                {rejectionRequestedAt && (
+                                    <p className="text-xs text-orange-300"> Requested At :
+                                        <span className="ml-1">
+                                            <DateConversion convertDate={rejectionRequestedAt} />
+                                        </span>
+                                    </p>
+                                )}
+
+                                {rejectionStatus && (
+                                    <span className="text-xs px-3 py-1 rounded-full border border-orange-400 text-orange-300 uppercase">
+                                        {rejectionStatus}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

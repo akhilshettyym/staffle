@@ -9,13 +9,11 @@ import { getTaskDetails } from "../../api/tasks";
 const AdminCreateTaskForm = () => {
 
 
-    const [tasks, setTasks] = useState([]);
-
-    const { employees, dueDate, loading, creationDate, fetchEmployees, handleOnChange, handleCreateTask } = useAdminCreateTaskForm();
+    const { tasks, employees, dueDate, loading, creationDate, fetchTasksDetails, fetchEmployees, handleOnChange, handleCreateTask } = useAdminCreateTaskForm();
 
     const renderEmployeeOptions = () => {
         if (!employees?.length) {
-            return <option disabled value=""> No employees available </option>;
+            return <option disabled value=""> No employees available </option>
         }
 
         return employees.map((emp) => (
@@ -23,20 +21,6 @@ const AdminCreateTaskForm = () => {
                 {emp.firstName} {emp.lastName}
             </option>
         ));
-    };
-
-    const fetchTasksDetails = async () => {
-        try {
-            const response = await getTaskDetails();
-            if (response?.success) {
-                setTasks(response.tasks || []);
-            } else {
-                toast.error(response?.message || "Failed to load tasks");
-            }
-        } catch (error) {
-            console.error("Failed to fetch tasks", error);
-            toast.error("Could not fetch tasks");
-        }
     };
 
     useEffect(() => {

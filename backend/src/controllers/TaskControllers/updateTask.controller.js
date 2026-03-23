@@ -69,7 +69,12 @@ export const updateTaskController = async (req, res) => {
 
         if (task.status === "FAILED") {
             task.status = "NEW";
-            task.failureReason = "";
+
+            if (task.taskLifeCycle?.failure) {
+                task.taskLifeCycle.failure.reason = undefined;
+                task.taskLifeCycle.failure.failedBy = undefined;
+                task.taskLifeCycle.failure.failedAt = undefined;
+            }
         }
 
         await task.save();

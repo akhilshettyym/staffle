@@ -43,16 +43,25 @@ const useAdminTaskStatusTable = () => {
     };
 
     const getEmployeeName = (id) => {
-    const emp = employees.find(
-        e => (e._id || e.id) === id
-    );
+        const emp = employees.find(
+            e => (e._id || e.id) === id
+        );
 
-    return emp
-        ? `${emp.firstName} ${emp.lastName}`
-        : "Unassigned";
-};
+        return emp
+            ? `${emp.firstName} ${emp.lastName}`
+            : "Unassigned";
+    };
 
-    return { tasks, status, failedTasks, editingTask, allCreatedTasks, selectedTask, requestedRejectionTasks, setSelectedTask, setEditingTask, setTasks, fetchTasksDetails, fetchEmployees, getEmployeeName };
+
+    const refreshEmployeesData = async () => {
+        await Promise.all([
+            fetchTasksDetails(),
+            fetchEmployees(),
+            getEmployeeName()
+        ]);
+    };
+
+    return { tasks, status, failedTasks, editingTask, allCreatedTasks, selectedTask, requestedRejectionTasks, setSelectedTask, setEditingTask, setTasks, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData };
 }
 
 export default useAdminTaskStatusTable;

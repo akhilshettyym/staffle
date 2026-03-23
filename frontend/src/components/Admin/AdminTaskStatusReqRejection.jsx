@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
 import CustomTooltip from "../Basics/CustomTooltip";
 import AdminRemoveTask from "./AdminRemoveTask";
 import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
-const AdminTaskStatusReqRejection = ({ status, requestedRejectionTasks, selectedTask, setSelectedTask, fetchTasksDetails, fetchEmployees, getEmployeeName }) => {
+const AdminTaskStatusReqRejection = ({ status, requestedRejectionTasks, fetchTasksDetails, fetchEmployees, getEmployeeName }) => {
+
+    const [selectedTask, setSelectedTask] = useState(null);
 
     useEffect(() => {
         fetchTasksDetails();

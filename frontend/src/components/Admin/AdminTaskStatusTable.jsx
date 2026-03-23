@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import useAdminTaskStatusTable from "../../hooks/AdminHooks/useAdminTaskStatusTable";
 import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
 import AdminTaskStatusFailed from "./AdminTaskStatusFailed";
-import AdminTaskStatusAllTasks from "./AdminTaskStatusCreatedTasks";
+import AdminTaskStatusCreatedTasks from "./AdminTaskStatusCreatedTasks";
 import AdminTaskStatusReqRejection from "./AdminTaskStatusReqRejection";
 
 const AdminTaskStatusTable = () => {
-  const { tasks, status, failedTasks, editingTask, allCreatedTasks, selectedTask, requestedRejectionTasks, setSelectedTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName } = useAdminTaskStatusTable();
+  const { tasks, status, failedTasks, editingTask, allCreatedTasks, selectedTask, requestedRejectionTasks, setSelectedTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData } = useAdminTaskStatusTable();
 
   const [activeTab, setActiveTab] = useState("created-tasks");
 
@@ -48,11 +48,11 @@ const AdminTaskStatusTable = () => {
       </div>
 
       {activeTab === "created-tasks" && (
-        <AdminTaskStatusAllTasks status={status} allCreatedTasks={allCreatedTasks} selectedTask={selectedTask} setSelectedTask={setSelectedTask} fetchTasksDetails={fetchTasksDetails} fetchEmployees={fetchEmployees} getEmployeeName={getEmployeeName} />
+        <AdminTaskStatusCreatedTasks refreshEmployeesData={refreshEmployeesData} status={status} allCreatedTasks={allCreatedTasks} selectedTask={selectedTask} setSelectedTask={setSelectedTask} fetchTasksDetails={fetchTasksDetails} fetchEmployees={fetchEmployees} getEmployeeName={getEmployeeName} />
       )}
 
       {activeTab === "failed-tasks" && (
-        <AdminTaskStatusFailed editingTask={editingTask} failedTasks={failedTasks} setSelectedTask={setSelectedTask} setTasks={setTasks} setEditingTask={setEditingTask} fetchTasksDetails={fetchTasksDetails} fetchEmployees={fetchEmployees} getEmployeeName={getEmployeeName} />
+        <AdminTaskStatusFailed refreshEmployeesData={refreshEmployeesData} editingTask={editingTask} failedTasks={failedTasks} setSelectedTask={setSelectedTask} setTasks={setTasks} setEditingTask={setEditingTask} fetchTasksDetails={fetchTasksDetails} fetchEmployees={fetchEmployees} getEmployeeName={getEmployeeName} />
       )}
 
       {activeTab === "request-rejection" && (
