@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { PriorityTag, DateConversion, BiSolidError } from "../../../constants/imports";
-import CustomTooltip from "../../Basics/CustomTooltip";
-import AdminRemoveTask from "../AdminRemoveTask";
-import AdminTaskDetailsModal from "../AdminTaskDetailsModal";
+import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
+import CustomTooltip from "../Basics/CustomTooltip";
+import AdminRemoveTask from "./AdminRemoveTask";
+import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
 const AdminTaskStatusAllTasks = ({ status, allCreatedTasks, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
 

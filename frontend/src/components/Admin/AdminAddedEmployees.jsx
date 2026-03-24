@@ -17,6 +17,7 @@ const AdminAddedEmployees = ({ employees, setEmployees, refreshEmployees }) => {
 
   return (
     <div className="pb-10">
+      
       <div className="flex items-center gap-2">
         <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Update / Remove Employees from the Org. </h1>
         <CustomTooltip id="remove-employees-tooltip" message="Employees may be deactivated and later reactivated, but accounts remaining inactive for more than 30 days will be permanently deleted." place="right" />

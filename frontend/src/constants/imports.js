@@ -24,7 +24,7 @@ import EditEmployeeDets from "../components/Admin/AdminUpdateEmployeeDetails";
 
 // import Dashboard from "../components/AdminDashBoard";
 import CreateTask from "../components/Admin/AdminCreateTaskForm"
-import TaskStatus from "../components/Admin/AdminTaskStatusTable/AdminTaskStatusTable";
+import TaskStatus from "../components/Admin/AdminTaskStatusTable";
 import AdminDetails from "../components/Admin/AdminProfileDetails";
 import CreatedTasks from "../components/Admin/AdminTasksTable";
 import AdminControl from "../components/Admin/AdminControlPanel";

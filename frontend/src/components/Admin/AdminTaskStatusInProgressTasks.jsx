@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { PriorityTag, DateConversion, BiSolidError } from "../../../constants/imports";
-import CustomTooltip from "../../Basics/CustomTooltip";
-import AdminRemoveTask from "../AdminRemoveTask";
-import AdminTaskDetailsModal from "../AdminTaskDetailsModal";
+import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
+import CustomTooltip from "../Basics/CustomTooltip";
+import AdminRemoveTask from "./AdminRemoveTask";
+import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
 const AdminTaskStatusInProgress = ({ status, inProgressTasks, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
 
     const [selectedTask, setSelectedTask] = useState(null);
 
-    // useEffect(() => {
-    //     fetchTasksDetails();
-    //     fetchEmployees();
-    // }, []);
+    useEffect(() => {
+        fetchTasksDetails();
+        fetchEmployees();
+    }, []);
 
     return (
         <div>

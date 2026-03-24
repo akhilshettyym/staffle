@@ -1,5 +1,5 @@
 import AdminControlPanel from '../../components/Admin/AdminControlPanel';
-import AdminTaskStatusTable from '../../components/Admin/AdminTaskStatusTable/AdminTaskStatusTable';
+import AdminTaskStatusTable from '../../components/Admin/AdminTaskStatusTable';
 import Header from "../../components/Basics/Header";
 
 const AdminTaskStatusPage = () => {

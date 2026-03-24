@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { PriorityTag, DateConversion, BiSolidError } from "../../../constants/imports";
-import CustomTooltip from "../../Basics/CustomTooltip";
-import AdminRemoveTask from "../AdminRemoveTask";
-import AdminTaskDetailsModal from "../AdminTaskDetailsModal";
+import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
+import CustomTooltip from "../Basics/CustomTooltip";
+import AdminRemoveTask from "./AdminRemoveTask";
+import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
 const AdminTaskStatusCompletedTasks = ({ status, completedTasks, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
 
     const [selectedTask, setSelectedTask] = useState(null);
 
-    // useEffect(() => {
-    //     fetchTasksDetails();
-    //     fetchEmployees();
-    // }, []);
+    useEffect(() => {
+        fetchTasksDetails();
+        fetchEmployees();
+    }, []);
 
     return (
         <div>
@@ -41,11 +41,11 @@ const AdminTaskStatusCompletedTasks = ({ status, completedTasks, fetchTasksDetai
                                         <span className="uppercase font-medium">Status</span>
                                         <span
                                             className={`px-4 py-1 rounded-full font-bold uppercase border text-xs ${{
-                                                    new: "bg-amber-100 text-amber-700 border-amber-200",
-                                                    in_progress: "bg-blue-100 text-blue-700 border-blue-200",
-                                                    completed: "bg-emerald-100 text-emerald-700 border-emerald-200",
-                                                    failed: "bg-red-100 text-red-700 border-red-200",
-                                                }[task.status?.toLowerCase()] ||
+                                                new: "bg-amber-100 text-amber-700 border-amber-200",
+                                                in_progress: "bg-blue-100 text-blue-700 border-blue-200",
+                                                completed: "bg-emerald-100 text-emerald-700 border-emerald-200",
+                                                failed: "bg-red-100 text-red-700 border-red-200",
+                                            }[task.status?.toLowerCase()] ||
                                                 "bg-gray-100 text-gray-600 border-gray-200"
                                                 }`}
                                         >{task.status}

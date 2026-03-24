@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState, DateConversion, PriorityTag, toast } from "../../constants/imports";
+import { useState, DateConversion, PriorityTag, toast, ConfirmModal } from "../../constants/imports";
 import EmployeeFailedTaskModal from "./EmployeeFailedTaskModal";
 import { BiSolidError } from "react-icons/bi";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
@@ -14,6 +14,10 @@ const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
 
   const [showFailModal, setShowFailModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
+
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [showAcceptModal, setShowAcceptModal] = useState(false);
 
   const taskId = task?._id ?? task?.id;
 
@@ -92,7 +96,7 @@ const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
               <button disabled className="py-2 px-4 rounded-md text-xs font-semibold text-red-500 border border-red-500 uppercase whitespace-nowrap"> Rejected
               </button>
 
-              <button onClick={handleAcceptTask} className="py-2 px-4 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition whitespace-nowrap"> Accept </button>
+              <button onClick={() => setShowAcceptModal(true)} className="py-2 px-4 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition whitespace-nowrap"> Accept </button>
 
               <button onClick={() => setSelectedTask(task)} className="py-2 px-4 text-xs rounded-md border font-semibold transition border-[#957C62] text-[#FFDAB3] hover:bg-[#957C62] hover:text-white whitespace-nowrap"> View </button>
 
@@ -105,7 +109,7 @@ const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
 
         return (
           <div className="grid grid-cols-2 gap-3 w-full">
-            <button onClick={handleAcceptTask} className="py-2 px-5 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition"> Accept </button>
+            <button onClick={() => setShowAcceptModal(true)} className="py-2 px-5 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition"> Accept </button>
 
             <button onClick={() => setShowFailModal(true)} className="py-2 px-5 rounded-md text-xs font-semibold bg-red-500 text-white border border-red-500 uppercase hover:bg-red-700 transition"> Reject </button>
           </div>
@@ -114,7 +118,7 @@ const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
       case "IN_PROGRESS":
         return (
           <div className="flex justify-end w-full">
-            <button onClick={handleMarkAsCompleted} className="py-2 px-5 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition"> Complete </button>
+            <button onClick={() => setShowCompleteModal(true)} className="py-2 px-5 rounded-md text-xs font-semibold bg-green-500 text-white border border-green-500 uppercase hover:bg-green-700 transition"> Complete </button>
           </div>
         );
 
@@ -248,6 +252,22 @@ const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
 
       {showFailModal && (
         <EmployeeFailedTaskModal taskId={taskId} onSuccess={(reason) => handleRejectTask(reason)} onClose={() => setShowFailModal(false)} />
+      )}
+
+      {showCompleteModal && (
+        <ConfirmModal isOpen={showCompleteModal} title="Mark task as completed ?" message="Confirming will mark this task as completed. Once completed, this action cannot be reversed" btnTitle="Complete" confirmBtnClass="bg-green-500 border-green-600 hover:bg-green-600" onCancel={() => setShowCompleteModal(false)}
+          onConfirm={() => {
+            handleMarkAsCompleted();
+            setShowCompleteModal(false);
+          }} />
+      )}
+
+      {showAcceptModal && (
+        <ConfirmModal isOpen={showAcceptModal} title="Accept this task ?" message="By accepting this task, its status will be updated to In-Progress" btnTitle="Accept" confirmBtnClass="bg-green-500 border-green-600 hover:bg-green-600" onCancel={() => setShowAcceptModal(false)}
+          onConfirm={() => {
+            handleAcceptTask();
+            setShowAcceptModal(false);
+          }} />
       )}
     </>
   );

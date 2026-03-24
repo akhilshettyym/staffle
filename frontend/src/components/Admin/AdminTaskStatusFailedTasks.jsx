@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { PriorityTag, DateConversion, BiSolidError } from "../../../constants/imports";
-import AdminEditTaskModal from "../AdminEditTaskModal";
-import CustomTooltip from "../../Basics/CustomTooltip";
-import AdminRemoveTask from "../AdminRemoveTask";
-import AdminTaskDetailsModal from "../AdminTaskDetailsModal";
+import { PriorityTag, DateConversion, BiSolidError } from "../../constants/imports";
+import AdminEditTaskModal from "./AdminEditTaskModal";
+import CustomTooltip from "../Basics/CustomTooltip";
+import AdminRemoveTask from "./AdminRemoveTask";
+import AdminTaskDetailsModal from "./AdminTaskDetailsModal";
 
 const AdminTaskStatusFailed = ({ failedTasks, editingTask, setTasks, setEditingTask, fetchTasksDetails, fetchEmployees, getEmployeeName, refreshEmployeesData }) => {
 
