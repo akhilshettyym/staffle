@@ -1,17 +1,18 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { getOrganizationUsers, updateEmployee } from "../../api/employee";
+import { updateEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
-import { getTaskDetails } from "../../api/tasks";
+import useTasksDetails from "../../utils/useTasksDetails";
+import useEmployeesDetails from "../../utils/useEmployeesDetails";
 
 const useEmployeeProfileDetails = () => {
 
-    const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [employees, setEmployees] = useState([]);
+
+    const { tasks, fetchTasksDetails } = useTasksDetails();
+    const { employees, fetchEmployees } = useEmployeesDetails();
 
     const employee = useSelector((state) => state.auth?.user || "");
-
     const loggedInUser = employees.find((e) => e._id === employee._id || e.id === employee._id);
 
     const [formData, setFormData] = useState({
@@ -35,30 +36,6 @@ const useEmployeeProfileDetails = () => {
             ...prev,
             dateOfBirth: date
         }));
-    };
-
-    const fetchEmployees = async () => {
-        try {
-            const response = await getOrganizationUsers();
-            setEmployees(response?.users || []);
-        } catch (error) {
-            console.error("Failed to fetch employees", error);
-            toast.error("Could not fetch employees");
-        }
-    };
-
-    const fetchTasksDetails = async () => {
-        try {
-            const response = await getTaskDetails();
-            if (response?.success) {
-                setTasks(response.tasks || []);
-            } else {
-                toast.error(response?.message || "Failed to load tasks");
-            }
-        } catch (error) {
-            console.error("Failed to fetch tasks", error);
-            toast.error("Could not fetch tasks");
-        }
     };
 
     const handleUpdateEmployee = async (e) => {
@@ -140,7 +117,6 @@ const useEmployeeProfileDetails = () => {
             (task) => task.assignedTo === employee._id
         );
     }, [tasks, employee]);
-
 
     return { loading, loggedInUser, formData, setFormData, handleChange, handleDateChange, handleUpdateEmployee, fetchEmployees, fetchTasksDetails, employeeTasks };
 }

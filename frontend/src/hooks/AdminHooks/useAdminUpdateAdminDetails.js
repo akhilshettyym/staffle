@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { updateAdmin } from "../../api/admin";
-import { getOrganizationUsers } from "../../api/employee";
+import useEmployeesDetails from "../../utils/useEmployeesDetails";
 
 const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
 
     const [loading, setLoading] = useState(false);
-    const [employees, setEmployees] = useState([]);
+
+    const { employees, setEmployees, fetchEmployees } = useEmployeesDetails();
 
     const admin = useMemo(() => employees.find((emp) => emp.role === "ADMIN"), [employees]);
 
@@ -115,16 +116,6 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
 
         } finally {
             setLoading(false);
-        }
-    };
-
-    const fetchEmployees = async () => {
-        try {
-            const response = await getOrganizationUsers();
-            setEmployees(response?.users || []);
-        } catch (error) {
-            console.error("Failed to fetch employees", error);
-            toast.error("Could not fetch employees");
         }
     };
 

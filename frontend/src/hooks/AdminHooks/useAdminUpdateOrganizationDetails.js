@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { getOrganizationDetails, updateOrganization } from "../../api/organization";
+import { updateOrganization } from "../../api/organization";
 import toast from "react-hot-toast";
+import useOrganizationDetails from "../../utils/useOrganizationDetails";
 
 const useAdminUpdateOrganizationDetails = ({ refreshOrgData }) => {
 
     const [loading, setLoading] = useState(false);
-    const [organization, setOrganization] = useState({});
+
+    const { organization, setOrganization, fetchOrganization } = useOrganizationDetails();
 
     const [formData, setFormData] = useState({
         orgName: "",
@@ -96,18 +98,6 @@ const useAdminUpdateOrganizationDetails = ({ refreshOrgData }) => {
 
         } finally {
             setLoading(false);
-        }
-    };
-
-    const fetchOrganization = async () => {
-        try {
-            const orgResponse = await getOrganizationDetails();
-            if (!orgResponse?.organization) return;
-            setOrganization(orgResponse.organization);
-
-        } catch (error) {
-            console.error("Failed to fetch Organization details", error);
-            toast.error("Could not fetch organization");
         }
     };
 

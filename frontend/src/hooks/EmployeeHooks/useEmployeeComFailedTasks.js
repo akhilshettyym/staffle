@@ -1,30 +1,14 @@
-import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { getTaskDetails } from "../../api/tasks";
 import { useCallback, useMemo, useState } from "react";
+import useTasksDetails from "../../utils/useTasksDetails";
 
 const useEmployeeComFailedTasks = () => {
 
-    const [tasks, setTasks] = useState([]);
-    const [activeTab, setActiveTab] = useState("completed-tasks");
-
     const user = useSelector((state) => state.auth.user);
 
-    const fetchTasksDetails = async () => {
-        try {
-            const response = await getTaskDetails();
+    const [activeTab, setActiveTab] = useState("completed-tasks");
 
-            if (response?.success) {
-                setTasks(response.tasks || []);
-            } else {
-                toast.error(response?.message || "Failed to load tasks");
-            }
-
-        } catch (error) {
-            console.error("Failed to fetch tasks", error);
-            toast.error("Could not fetch tasks");
-        }
-    };
+    const { tasks, fetchTasksDetails } = useTasksDetails();
 
     const getMyTasks = useCallback((status) => {
         if (!user?._id) return [];

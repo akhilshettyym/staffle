@@ -1,44 +1,15 @@
 import { useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { getOrganizationUsers } from "../../api/employee";
-import toast from "react-hot-toast";
-import { getTaskDetails } from "../../api/tasks";
+import useTasksDetails from "../../utils/useTasksDetails";
+import useEmployeesDetails from "../../utils/useEmployeesDetails";
 
 const useEmployeeNewTask = () => {
 
     const [activeTab, setActiveTab] = useState("new");
-    const [tasks, setTasks] = useState([]);
-    const [employees, setEmployees] = useState([]);
-
     const user = useSelector((state) => state.auth.user);
 
-    const fetchEmployees = async () => {
-        try {
-            const response = await getOrganizationUsers();
-            if (response?.success) {
-                setEmployees(response.users || []);
-            } else {
-                toast.error(response?.message || "Failed to load employees");
-            }
-        } catch (error) {
-            console.error("Failed to fetch employees:", error);
-            toast.error("Could not fetch employees");
-        }
-    };
-
-    const fetchTasksDetails = async () => {
-        try {
-            const response = await getTaskDetails();
-            if (response?.success) {
-                setTasks(response.tasks || []);
-            } else {
-                toast.error(response?.message || "Failed to load tasks");
-            }
-        } catch (error) {
-            console.error("Failed to fetch tasks", error);
-            toast.error("Could not fetch tasks");
-        }
-    };
+    const { tasks, setTasks, fetchTasksDetails } = useTasksDetails();
+    const { fetchEmployees } = useEmployeesDetails();
 
     const getMyTasks = useCallback((status) => {
         if (!user?._id) return [];

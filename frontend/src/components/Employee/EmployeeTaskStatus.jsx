@@ -8,11 +8,10 @@ import useEmployeeTaskStatus from "../../hooks/EmployeeHooks/useEmployeeTaskStat
 
 const EmployeeTaskStatus = () => {
 
-  const { selectedTask, setSelectedTask, assignedToUser, fetchEmployees, fetchTasksDetails, employeeTasks } = useEmployeeTaskStatus();
+  const { selectedTask, setSelectedTask, assignedToUser, fetchTasksDetails, employeeTasks } = useEmployeeTaskStatus();
 
   useEffect(() => {
     fetchTasksDetails();
-    fetchEmployees();
   }, []);
 
   return (

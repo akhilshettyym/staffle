@@ -4,28 +4,28 @@ import { validateId, validatePayload, handleApiError } from "./helpers/apiHelper
 export async function approveOrganization(orgId) {
     validateId(orgId, "Organization ID");
 
-    const res = await api.patch(`/org/approve-org/${orgId}`);
+    const res = await api.patch(`${import.meta.env.VITE_API_APPROVE_ORGANIZATION}/${orgId}`);
     return res.data;
 }
 
 export async function rejectOrganization(orgId) {
     validateId(orgId, "Organization ID");
 
-    const res = await api.patch(`/org/reject-org/${orgId}`);
+    const res = await api.patch(`${import.meta.env.VITE_API_REJECT_ORGANIZATION}/${orgId}`);
     return res.data;
 }
 
 export async function revokeOrganization(orgId) {
     validateId(orgId, "Organization ID");
 
-    const res = await api.patch(`/org/revoke-org/${orgId}`);
+    const res = await api.patch(`${import.meta.env.VITE_API_REVOKE_ORGANIZATION}/${orgId}`);
     return res.data;
 }
 
 export async function reActivateOrganization(orgId) {
     validateId(orgId, "Organization ID");
 
-    const res = await api.patch(`/org/re-activate-org/${orgId}`);
+    const res = await api.patch(`${import.meta.env.VITE_API_RE_ACTIVATE_ORGANIZATION}/${orgId}`);
     return res.data;
 }
 
@@ -34,7 +34,7 @@ export async function updateOrganization({ orgId, ...payload }) {
     validatePayload(payload);
 
     try {
-        const res = await api.patch(`/org/update-organization/${orgId}`, payload);
+        const res = await api.patch(`${import.meta.env.VITE_API_UPDATE_ORGANIZATION}/${orgId}`, payload);
         return res.data;
     } catch (error) {
         handleApiError(error);
@@ -42,6 +42,6 @@ export async function updateOrganization({ orgId, ...payload }) {
 }
 
 export async function getOrganizationDetails() {
-    const res = await api.get("/org/get-organization-details");
+    const res = await api.get(`${import.meta.env.VITE_API_GET_ORGANIZATION_DETAILS}`);
     return res.data;
 }

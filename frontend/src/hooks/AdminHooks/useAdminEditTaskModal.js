@@ -4,12 +4,14 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../../api/tasks";
 import { updateTaskSuccess } from "../../slices/taskSlice";
+import useEmployeesDetails from "../../utils/useEmployeesDetails";
 
 const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
 
-    const [employees, setEmployees] = useState([]);
-    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+
+    const { employees, fetchEmployees } = useEmployeesDetails();
 
     const [formData, setFormData] = useState({
         title: "",
@@ -32,20 +34,6 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
             dueDate: task?.dueDate ? new Date(task.dueDate) : null,
         });
     }, [task]);
-
-    const fetchEmployees = async () => {
-        try {
-            const response = await getOrganizationUsers();
-            if (response?.success) {
-                setEmployees(response.users || []);
-            } else {
-                toast.error(response?.message || "Failed to load employees");
-            }
-        } catch (error) {
-            console.error("Failed to fetch employees:", error);
-            toast.error("Could not fetch employees");
-        }
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -103,7 +91,7 @@ const useAdminEditTaskModal = ({ task, onClose, onTaskUpdated }) => {
         } catch (error) {
             const msg = error?.response?.data?.message || error.message || "Something went wrong while updating task";
             toast.error(msg);
-            
+
         } finally {
             setLoading(false);
         }
