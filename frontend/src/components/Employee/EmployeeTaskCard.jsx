@@ -4,89 +4,13 @@ import EmployeeFailedTaskModal from "./EmployeeFailedTaskModal";
 import { BiSolidError } from "react-icons/bi";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
 import { acceptTask, markAsCompleted } from "../../api/tasks";
+import useEmployeeTaskCard from "../../hooks/EmployeeHooks/useEmployeeTaskCard";
 
 const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {
 
-  const user = useSelector((state) => state.auth.user);
-
-  const [loading, setLoading] = useState(null);
-  const assignedToUser = `${user.firstName} ${user.lastName}`;
-
-  const [showFailModal, setShowFailModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
-
-
-  const [showCompleteModal, setShowCompleteModal] = useState(false);
-  const [showAcceptModal, setShowAcceptModal] = useState(false);
-
-  const taskId = task?._id ?? task?.id;
-
-  const statusStyles = {
-    NEW: "bg-amber-100 text-amber-700 border-amber-200",
-    IN_PROGRESS: "bg-blue-100 text-blue-700 border-blue-200",
-    COMPLETED: "bg-emerald-100 text-emerald-700 border-emerald-200",
-    FAILED: "bg-red-100 text-red-700 border-red-200"
-  };
-
-  const handleAcceptTask = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      if (!taskId) throw new Error("No task ID");
-
-      const response = await acceptTask(taskId);
-
-      if (!response?.success) {
-        throw new Error(response?.message || "Accept failed");
-      }
-
-      toast.success("Task accepted");
-
-      onTaskStatusChange?.(taskId, "IN_PROGRESS");
-
-    } catch (error) {
-      const msg = error?.response?.data?.message || error.message || "Something went wrong";
-      toast.error(msg);
-
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleMarkAsCompleted = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      if (!taskId) throw new Error("No task ID");
-
-      const response = await markAsCompleted(taskId);
-
-      if (!response?.success) {
-        throw new Error(response?.message || "Complete failed");
-      }
-
-      toast.success("Task marked as completed");
-
-      onTaskStatusChange?.(taskId, "COMPLETED");
-
-    } catch (error) {
-      const msg = error?.response?.data?.message || error.message || "Something went wrong while marking task as completed";
-      toast.error(msg);
-
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRejectTask = (reason) => {
-    onTaskStatusChange?.(taskId, "FAILED", reason);
-    setShowFailModal(false);
-  };
+  const { assignedToUser, showFailModal, setShowFailModal, selectedTask, setSelectedTask, showCompleteModal, setShowCompleteModal, showAcceptModal, setShowAcceptModal, taskId, statusStyles, handleAcceptTask, handleMarkAsCompleted, handleRejectTask } = useEmployeeTaskCard({ task, onTaskStatusChange });
 
   const renderButtons = () => {
-
     switch (task?.status) {
 
       case "NEW":

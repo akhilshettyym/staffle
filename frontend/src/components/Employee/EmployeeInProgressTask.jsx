@@ -1,84 +1,21 @@
-import { useSelector } from "react-redux";
 import EmployeeTaskCard from "./EmployeeTaskCard";
 import EmployeeTaskListNo from "./EmployeeTaskListNo";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { getOrganizationUsers } from "../../api/employee";
-import { getTaskDetails } from "../../api/tasks";
-import toast from "react-hot-toast";
+import { useEffect } from "react";
 import CustomTooltip from "../Basics/CustomTooltip";
+import useEmployeeInProgressTask from "../../hooks/EmployeeHooks/useEmployeeInProgressTask";
 
 const EmployeeInProgressTask = () => {
 
-  const user = useSelector((state) => state.auth.user);
-
-  const [tasks, setTasks] = useState([]);
-  const [employees, setEmployees] = useState([]);
-
-  const fetchEmployees = async () => {
-    try {
-      const response = await getOrganizationUsers();
-      if (response?.success) {
-        setEmployees(response.users || []);
-      } else {
-        toast.error(response?.message || "Failed to load employees");
-      }
-    } catch (error) {
-      console.error("Failed to fetch employees:", error);
-      toast.error("Could not fetch employees");
-    }
-  };
-
-  const fetchTasksDetails = async () => {
-    try {
-      const response = await getTaskDetails();
-      if (response?.success) {
-        setTasks(response.tasks || []);
-      } else {
-        toast.error(response?.message || "Failed to load tasks");
-      }
-    } catch (error) {
-      console.error("Failed to fetch tasks", error);
-      toast.error("Could not fetch tasks");
-    }
-  };
+  const { fetchEmployees, fetchTasksDetails, employeeTasks, employeeInProgressTasks, handleTaskStatusChange } = useEmployeeInProgressTask();
 
   useEffect(() => {
     fetchTasksDetails();
     fetchEmployees();
   }, []);
 
-  const getMyTasks = useCallback((status) => {
-    if (!user?._id) return [];
-
-    const myId = user._id;
-
-    return tasks.filter(task => {
-      const isMine = task.assignedTo === myId;
-      return status ? isMine && task.status === status : isMine;
-    });
-  }, [tasks, user?._id]);
-
-  const employeeTasks = useMemo(
-    () => getMyTasks(),
-    [getMyTasks]);
-
-  const employeeInProgressTasks = useMemo(
-    () => getMyTasks("IN_PROGRESS"),
-    [getMyTasks]);
-
-  const handleTaskStatusChange = useCallback((taskId, status, reason) => {
-    setTasks(prev =>
-      prev.map(t =>
-        (t._id ?? t.id) === taskId
-          ? { ...t, status, failureReason: reason || t.failureReason }
-          : t
-      )
-    );
-  }, []);
-
   return (
     <div className="pb-10">
-      
+
       <hr className="my-5 border border-[#FFDAB3]/40" />
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> In Progress Tasks </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />

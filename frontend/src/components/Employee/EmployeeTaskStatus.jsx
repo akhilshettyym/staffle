@@ -1,74 +1,19 @@
-import EmployeeTaskListNo from "./EmployeeTaskListNo";
-import EmployeeTaskCard from "./EmployeeTaskCard";
-import { useEffect, useState, useMemo } from "react";
-import { getTaskDetails } from "../../api/tasks";
-import toast from "react-hot-toast";
-import { getOrganizationUsers } from "../../api/employee";
-import { useSelector } from "react-redux";
-import DateConversion from "../Basics/DateConversion";
+import { useEffect } from "react";
 import PriorityTag from "../Basics/PriorityTag";
-import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
 import CustomTooltip from "../Basics/CustomTooltip";
+import EmployeeTaskListNo from "./EmployeeTaskListNo";
+import DateConversion from "../Basics/DateConversion";
+import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
+import useEmployeeTaskStatus from "../../hooks/EmployeeHooks/useEmployeeTaskStatus";
 
 const EmployeeTaskStatus = () => {
 
-  const user = useSelector((state) => state.auth.user);
-
-  const [selectedTask, setSelectedTask] = useState(null);
-  const [tasks, setTasks] = useState([]);
-  const [employees, setEmployees] = useState([]);
-
-  const assignedToUser = `${user?.firstName} ${user?.lastName}`
-
-  const fetchEmployees = async () => {
-    try {
-      const response = await getOrganizationUsers();
-      if (response?.success) {
-        setEmployees(response.users || []);
-      } else {
-        toast.error(response?.message || "Failed to load employees");
-      }
-    } catch (error) {
-      console.error("Failed to fetch employees:", error);
-      toast.error("Could not fetch employees");
-    }
-  };
-
-  const fetchTasksDetails = async () => {
-    try {
-      const response = await getTaskDetails();
-      if (response?.success) {
-        setTasks(response.tasks || []);
-      } else {
-        toast.error(response?.message || "Failed to load tasks");
-      }
-    } catch (error) {
-      console.error("Failed to fetch tasks", error);
-      toast.error("Could not fetch tasks");
-    }
-  };
+  const { selectedTask, setSelectedTask, assignedToUser, fetchEmployees, fetchTasksDetails, employeeTasks } = useEmployeeTaskStatus();
 
   useEffect(() => {
     fetchTasksDetails();
     fetchEmployees();
   }, []);
-
-
-  const employeeTasks = useMemo(() => {
-    if (!tasks || !user?._id) return [];
-
-    return tasks
-      .filter(task => task.assignedTo === user._id)
-      .sort((a, b) => {
-
-        if (a.status === "NEW" && b.status !== "NEW") return -1;
-        if (a.status !== "NEW" && b.status === "NEW") return 1;
-
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
-
-  }, [tasks, user?._id]);
-
 
   return (
     <div className="pb-10">

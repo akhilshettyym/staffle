@@ -1,28 +1,16 @@
-import { useMemo, useState } from "react";
-import { useEffect, DatePicker, toast } from "../../constants/imports";
+import { useEffect, DatePicker } from "../../constants/imports";
 import EmployeeTaskListNo from "./EmployeeTaskListNo";
-import { getOrganizationUsers, updateEmployee } from "../../api/employee";
-import { useSelector } from "react-redux";
-import { getTaskDetails } from "../../api/tasks";
 import CustomTooltip from "../Basics/CustomTooltip";
+import useEmployeeProfileDetails from "../../hooks/EmployeeHooks/useEmployeeProfileDetails";
 
 const EmployeeProfileDetails = () => {
 
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [employees, setEmployees] = useState([]);
+  const { loading, loggedInUser, formData, setFormData, handleChange, handleDateChange, handleUpdateEmployee, fetchEmployees, fetchTasksDetails, employeeTasks } = useEmployeeProfileDetails();
 
-  const employee = useSelector((state) => state.auth?.user || "");
-
-  const loggedInUser = employees.find((e) => e._id === employee._id || e.id === employee._id);
-
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    dateOfBirth: null,
-    designation: ""
-  });
+  useEffect(() => {
+    fetchEmployees();
+    fetchTasksDetails();
+  }, []);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -35,130 +23,6 @@ const EmployeeProfileDetails = () => {
       });
     }
   }, [loggedInUser]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleDateChange = (date) => {
-    setFormData((prev) => ({
-      ...prev,
-      dateOfBirth: date
-    }));
-  };
-
-  const handleUpdateEmployee = async (e) => {
-
-    e.preventDefault();
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      if (!formData.firstName?.trim()) {
-        throw new Error("First Name is required");
-      }
-
-      if (!formData.lastName?.trim()) {
-        throw new Error("Last Name is required");
-      }
-
-      if (!formData.email?.trim()) {
-        throw new Error("Email is required");
-      }
-
-      if (!formData.dateOfBirth) {
-        throw new Error("Date of birth is required");
-      }
-
-      if (!formData.designation?.trim()) {
-        throw new Error("Designation is required");
-      }
-
-      const payload = {
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
-        email: formData.email.trim().toLowerCase(),
-        dateOfBirth: formData.dateOfBirth.toISOString(),
-        designation: formData.designation.trim()
-      };
-
-      const empId = loggedInUser?._id || loggedInUser?.id;
-
-      if (!empId) {
-        throw new Error("Employee Id missing");
-      }
-
-      const response = await updateEmployee({ empId, ...payload });
-
-      if (!response?.success) {
-        throw new Error(response?.message || "Failed to update employee");
-      }
-
-      toast.success("Employee details updated successfully");
-
-      setEmployees((prev) =>
-        prev.map((e) =>
-          (e._id === empId || e.id === empId)
-            ? { ...e, ...payload }
-            : e
-        )
-      );
-
-    } catch (error) {
-      let msg = "Something went wrong while updating employee details";
-      if (error.response?.data?.message) {
-        msg = error.response.data.message;
-      } else if (error.message) {
-        msg = error.message;
-      }
-      console.error("Employee updation failed", error);
-      toast.error(msg);
-
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchEmployees = async () => {
-    try {
-      const response = await getOrganizationUsers();
-      setEmployees(response?.users || []);
-    } catch (error) {
-      console.error("Failed to fetch employees", error);
-      toast.error("Could not fetch employees");
-    }
-  };
-
-  const fetchTasksDetails = async () => {
-    try {
-      const response = await getTaskDetails();
-      if (response?.success) {
-        setTasks(response.tasks || []);
-      } else {
-        toast.error(response?.message || "Failed to load tasks");
-      }
-    } catch (error) {
-      console.error("Failed to fetch tasks", error);
-      toast.error("Could not fetch tasks");
-    }
-  };
-
-  useEffect(() => {
-    fetchEmployees();
-    fetchTasksDetails();
-  }, []);
-
-  const employeeTasks = useMemo(() => {
-    if (!employee?._id) return [];
-
-    return tasks.filter(
-      (task) => task.assignedTo === employee._id
-    );
-  }, [tasks, employee]);
 
   return (
     <div className="pb-10">
