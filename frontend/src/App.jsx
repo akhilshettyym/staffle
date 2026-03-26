@@ -25,18 +25,21 @@ import EmployeeInProgressTasksPage from "./pages/EmployeePages/EmployeeInprogres
 import SuperAdminDashboardPage from "./pages/SuperAdminPages/SuperAdminDashboardPage";
 
 import { fetchOrganization } from "./slices/organizationSlice";
+import SuperAdminApproveOrganizationsPage from "./pages/SuperAdminPages/SuperAdminApproveOrganizationsPage";
+import SuperAdminReactivateOrganizationsPage from "./pages/SuperAdminPages/SuperAdminReactivateOrganizationsPage";
+import SuperAdminRevokeOrganizationsPage from "./pages/SuperAdminPages/SuperAdminRevokeOrganizationsPage";
+import SuperAdminRejectedOrganizationsPage from "./pages/SuperAdminPages/SuperAdminRejectedOrganizationsPage";
 
 const App = () => {
 
   const dispatch = useDispatch();
 
   const { loaded } = useSelector((state) => state.organization);
-
   const loggedOutUser = useSelector((state) => state.auth?.token);
-  // console.log("TEST", test)
+  const superAdmin = useSelector((state) => state.auth?.role === "SUPER_ADMIN");
 
   useEffect(() => {
-    if (!loaded && loggedOutUser) {
+    if (!loaded && loggedOutUser && !superAdmin) {
       dispatch(fetchOrganization());
     }
   }, [loaded, dispatch]);
@@ -109,6 +112,16 @@ const App = () => {
 
         {/* /superadmin/superadmin-dashboard */}
         <Route path="/superadmin/superadmin-dashboard" element={<SuperAdminDashboardPage />} />
+
+        <Route path="/superadmin/approve-organizations" element={<SuperAdminApproveOrganizationsPage />} />
+
+        <Route path="/superadmin/rejected-organizations" element={<SuperAdminRejectedOrganizationsPage />} />
+
+        <Route path="/superadmin/revoke-organizations" element={<SuperAdminRevokeOrganizationsPage />} />
+
+        <Route path="/superadmin/reactivate-organizations" element={<SuperAdminReactivateOrganizationsPage />} />
+
+        {/* <Route path="/superadmin/" */}
 
         {/* ----------------------------------------------------------------------------------------------------------------------- */}
 
