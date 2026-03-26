@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import PriorityTag from "../Basics/PriorityTag";
 import CustomTooltip from "../Basics/CustomTooltip";
-import EmployeeTaskListNo from "./EmployeeTaskListNo";
 import DateConversion from "../Basics/DateConversion";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
 import useEmployeeTaskStatus from "../../hooks/EmployeeHooks/useEmployeeTaskStatus";
+import TaskListNo from "../Basics/TaskListNo";
 
 const EmployeeTaskStatus = () => {
 
@@ -20,7 +20,7 @@ const EmployeeTaskStatus = () => {
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Task Status </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
-      <EmployeeTaskListNo tasks={employeeTasks} />
+      <TaskListNo tasks={employeeTasks} />
 
       <div className="flex items-center gap-2 mt-5">
         <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Tasks in queue </h1>

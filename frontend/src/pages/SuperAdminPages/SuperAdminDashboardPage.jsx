@@ -1,5 +1,6 @@
 import SuperAdminControlPanel from "../../components/SuperAdmin/SuperAdminControlPanel";
 import SuperAdminDashboard from "../../components/SuperAdmin/SuperAdminDashboard";
+import SuperAdminOrganizationStatus from "../../components/SuperAdmin/SuperAdminOrganizationStatus";
 import SuperAdminTotalCount from "../../components/SuperAdmin/SuperAdminTotalCount";
 import { Header } from "../../constants/imports";
 
@@ -10,6 +11,7 @@ const SuperAdminDashboardPage = () => {
             <Header />
             <SuperAdminTotalCount />
             <SuperAdminControlPanel />
+            <SuperAdminOrganizationStatus />
             <SuperAdminDashboard />
         </div>
     );

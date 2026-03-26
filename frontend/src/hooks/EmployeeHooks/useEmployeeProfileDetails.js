@@ -1,16 +1,16 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { updateEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
 import useTasksDetails from "../../utils/useTasksDetails";
 import useEmployeesDetails from "../../utils/useEmployeesDetails";
+import { updateEmployee } from "../../api/admin";
 
 const useEmployeeProfileDetails = () => {
 
     const [loading, setLoading] = useState(false);
 
     const { tasks, fetchTasksDetails } = useTasksDetails();
-    const { employees, fetchEmployees } = useEmployeesDetails();
+    const { employees, setEmployees, fetchEmployees } = useEmployeesDetails();
 
     const employee = useSelector((state) => state.auth?.user || "");
     const loggedInUser = employees.find((e) => e._id === employee._id || e.id === employee._id);

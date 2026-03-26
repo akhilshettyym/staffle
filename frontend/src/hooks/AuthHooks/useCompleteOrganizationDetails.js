@@ -27,7 +27,13 @@ const useCompleteOrganizationDetails = () => {
         navigate("/register-organization");
     }
 
-    return { admin, employees, orgCountry, organization, formattedDOB, fetchEmployees, fetchOrganization, handleRegisterOrg };
+    const refreshEmployeesData = async () => {
+        await Promise.all([
+            fetchEmployees(),
+        ]);
+    };
+
+    return { admin, employees, orgCountry, organization, formattedDOB, fetchEmployees, refreshEmployeesData, fetchOrganization, handleRegisterOrg };
 };
 
 export default useCompleteOrganizationDetails;

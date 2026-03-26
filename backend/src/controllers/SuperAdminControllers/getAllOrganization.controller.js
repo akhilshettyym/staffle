@@ -5,7 +5,7 @@ export const getAllOrganizationDetails = async (req, res) => {
     try {
         const organizations = await orgModel
             .find({})
-            .select("uuid orgName orgDomain orgCountry status createdBy createdAt");
+            .select("uuid orgName orgDomain orgDescription orgCountry status createdBy createdAt");
 
         if (!organizations) {
             return res.status(404).json({

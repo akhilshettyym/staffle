@@ -2,28 +2,31 @@ import express from "express";
 import { PERMISSIONS } from "../constants/permissions.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import { requirePermission } from "../middleware/permission.middleware.js";
-import { requireAdmin } from "../middleware/role.middleware.js";
-import { addEmployeeController } from "../controllers/EmployeeControllers/addEmployee.controller.js";
-import { updateEmployeeController } from "../controllers/EmployeeControllers/updateEmployee.controller.js";
-import { deactivateEmployeeController } from "../controllers/EmployeeControllers/deactivateEmployee.controller.js";
-import { reactivateEmployeeController } from "../controllers/EmployeeControllers/reactivateEmployee.controller.js";
 import { getOrganizationUsers } from "../controllers/EmployeeControllers/getOrgUsers.controller.js";
 import { getOrganizationInactiveUsers } from "../controllers/EmployeeControllers/getOrgInactiveUsers.controller.js";
+import { acceptTaskController } from "../controllers/TaskControllers/acceptTask.controller.js";
+import { requestTaskRejectionController } from "../controllers/TaskControllers/requestTaskRejection.controller.js";
+import { markTaskAsCompletedController } from "../controllers/TaskControllers/markTaskAsCompleted.controller.js";
+import { markTaskAsFailedController } from "../controllers/TaskControllers/markTaskAsFailed.controller.js";
+import { requireEmployee } from "../middleware/role.middleware.js";
+import { updateEmployeeController } from "../controllers/EmployeeControllers/updateEmployee.controller.js";
 
 const router = express.Router();
 
-/* POST /api/employee/add-employee */
-router.post("/add-employee", authMiddleware, requirePermission(PERMISSIONS.CREATE_EMPLOYEE), addEmployeeController);
+/* PATCH /api/employee/tasks/accept-task/:taskId */
+router.patch("/tasks/accept-task/:taskId", authMiddleware, requireEmployee, requirePermission(PERMISSIONS.ACCEPT_TASK), acceptTaskController);
+
+/* PATCH /api/employee/tasks/reject-task/:taskId */
+router.patch("/tasks/reject-task/:taskId", authMiddleware, requireEmployee, requirePermission(PERMISSIONS.REQUEST_REJECT_TASK), requestTaskRejectionController);
+
+/* PATCH /api/employee/tasks/mark-as-completed/:taskId */
+router.patch("/tasks/mark-as-completed/:taskId", authMiddleware, requireEmployee, requirePermission(PERMISSIONS.MARK_AS_COMPLETED), markTaskAsCompletedController);
+
+/* PATCH /api/employee/tasks/mark-as-failed/:taskId */
+router.patch("/tasks/mark-as-failed/:taskId", authMiddleware, requireEmployee, requirePermission(PERMISSIONS.MARK_AS_FAILED), markTaskAsFailedController);
 
 /* PATCH /api/employee/update-employee/:employeeId */
 router.patch("/update-employee/:employeeId", authMiddleware, requirePermission(PERMISSIONS.UPDATE_EMPLOYEE), updateEmployeeController);
-
-/* PATCH /api/employee/deactivate-employee/:empId */
-router.patch("/deactivate-employee/:empId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.DEACTIVATE_EMPLOYEE), deactivateEmployeeController);
-
-/* PATCH /api/employee/reactivate-employee/:empId */
-router.patch("/reactivate-employee/:empId", authMiddleware, requireAdmin, requirePermission(PERMISSIONS.REACTIVATE_EMPLOYEE), reactivateEmployeeController);
-
 
 /* GET /api/employee/get-employees */
 router.get("/get-employees", authMiddleware, requirePermission(PERMISSIONS.VIEW_EMPLOYEES), getOrganizationUsers);

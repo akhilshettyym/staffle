@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { requestRejection } from "../../api/tasks";
 import toast from "react-hot-toast";
+import { requestRejection } from "../../api/employee";
 
 const useEmployeeFailedTaskModal = ({ taskId, onClose, onSuccess }) => {
 

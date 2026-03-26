@@ -3,7 +3,6 @@ import userModel from "../../models/user.model.js";
 import orgModel from "../../models/org.model.js";
 
 export async function userLoginController(req, res) {
-
     try {
         const { email, password } = req.body;
 
@@ -15,7 +14,10 @@ export async function userLoginController(req, res) {
         }
 
         const normalizedEmail = email.toLowerCase();
-        const user = await userModel.findOne({ email: normalizedEmail }).select("+password");
+
+        const user = await userModel
+            .findOne({ email: normalizedEmail })
+            .select("+password");
 
         if (!user) {
             return res.status(401).json({
@@ -58,20 +60,40 @@ export async function userLoginController(req, res) {
                 });
             }
 
+            if (organization.status === "PENDING") {
+                return res.status(403).json({
+                    success: false,
+                    message: "Your organization is pending approval. You will be able to login once it is approved."
+                });
+            }
+
+            if (organization.status === "REJECTED") {
+                return res.status(403).json({
+                    success: false,
+                    message: "Your organization request has been rejected. Please contact support."
+                });
+            }
+
+            if (organization.status === "REVOKED") {
+                return res.status(403).json({
+                    success: false,
+                    message: "Your organization access has been revoked. Please contact system administrator."
+                });
+            }
+
             if (organization.status !== "ACTIVE") {
                 return res.status(403).json({
                     success: false,
-                    message: `Organization approval status is ${organization.status}. Login not allowed until approved.`
+                    message: `Organization is currently ${organization.status}. Login not allowed.`
                 });
             }
         }
 
-        const token = jwt.sign(
-            {
-                userId: user._id,
-                role: user.role,
-                orgId: user.organizationId
-            },
+        const token = jwt.sign({
+            userId: user._id,
+            role: user.role,
+            orgId: user.organizationId
+        },
             process.env.JWT_SECRET,
             { expiresIn: "3d" }
         );

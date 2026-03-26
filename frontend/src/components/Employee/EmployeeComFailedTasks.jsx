@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import EmployeeTaskCard from "./EmployeeTaskCard";
 import CustomTooltip from "../Basics/CustomTooltip";
-import EmployeeTaskListNo from "./EmployeeTaskListNo";
 import useEmployeeComFailedTasks from "../../hooks/EmployeeHooks/useEmployeeComFailedTasks";
+import TaskListNo from "../Basics/TaskListNo";
 
 const EmployeeComFailedTasks = () => {
 
@@ -21,7 +21,7 @@ const EmployeeComFailedTasks = () => {
 
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
-            <EmployeeTaskListNo tasks={employeeTasks} />
+            <TaskListNo tasks={employeeTasks} />
 
             <div className="flex gap-4 mb-8 mt-10">
                 <button onClick={() => setActiveTab("completed-tasks")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition 

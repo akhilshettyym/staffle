@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { acceptTask, markAsCompleted } from "../../api/tasks";
 import toast from "react-hot-toast";
+import { acceptTask, markAsCompleted } from "../../api/employee";
 
 const useEmployeeTaskCard = ({ task, onTaskStatusChange }) => {
 

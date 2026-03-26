@@ -3,7 +3,7 @@ import CustomTooltip from "../Basics/CustomTooltip";
 import AdminUpdateAdminDetails from "./AdminUpdateAdminDetails";
 import AdminUpdateOrganizationDetails from "./AdminUpdateOrganizationDetails";
 import useAdminProfileDetails from "../../hooks/AdminHooks/useAdminProfileDetails";
-import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
+import TaskListNo from "../Basics/TaskListNo";
 
 const AdminProfileDetails = () => {
 
@@ -21,7 +21,7 @@ const AdminProfileDetails = () => {
             <h1 className="text-center font-bold text-[#FFDAB3] text-xl uppercase"> Admin Details </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
-            <EmployeeTaskListNo tasks={tasks} />
+            <TaskListNo tasks={tasks} />
 
             <div className="flex items-center gap-2 mb-5 mt-5">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium"> Update Admin / Org details </h1>

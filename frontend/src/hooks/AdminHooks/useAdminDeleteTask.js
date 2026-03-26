@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { deleteTask } from "../../api/tasks";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { deleteTaskSuccess } from "../../slices/taskSlice";
+import { deleteTask } from "../../api/admin";
 
 const useAdminDeleteTask = ({ taskId, refreshEmployeesData }) => {
 

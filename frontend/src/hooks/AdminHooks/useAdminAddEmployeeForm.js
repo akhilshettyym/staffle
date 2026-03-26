@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { addEmployee } from "../../api/employee";
 import toast from "react-hot-toast";
+import { addEmployee } from "../../api/admin";
 
-const useAdminAddEmployeeForm = (refreshEmployees) => {
+const useAdminAddEmployeeForm = ({refreshEmployeesData}) => {
 
     const [dob, setDob] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ const useAdminAddEmployeeForm = (refreshEmployees) => {
             }
 
             toast.success(response.message || "Employee added successfully");
-            refreshEmployees?.();
+            refreshEmployeesData?.();
             e.target.reset();
 
         } catch (error) {

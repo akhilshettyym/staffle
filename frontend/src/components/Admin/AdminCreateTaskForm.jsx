@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useAdminCreateTaskForm from "../../hooks/adminHooks/useAdminCreateTaskForm";
-import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
+import TaskListNo from "../Basics/TaskListNo";
 
 const AdminCreateTaskForm = () => {
 
@@ -32,7 +32,7 @@ const AdminCreateTaskForm = () => {
             <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Create Tasks </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
-            <EmployeeTaskListNo tasks={tasks} />
+            <TaskListNo tasks={tasks} />
 
             <div className="flex items-center gap-2 mb-5 mt-5">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Create new task </h1>

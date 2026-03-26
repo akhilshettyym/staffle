@@ -1,8 +1,8 @@
-import EmployeeTaskListNo from "./EmployeeTaskListNo";
 import EmployeeTaskCard from "./EmployeeTaskCard";
 import { useEffect } from "react";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useEmployeeNewTask from "../../hooks/EmployeeHooks/useEmployeeNewTask";
+import TaskListNo from "../Basics/TaskListNo";
 
 const EmployeeNewTask = () => {
 
@@ -20,7 +20,7 @@ const EmployeeNewTask = () => {
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> New Tasks </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
-      <EmployeeTaskListNo tasks={employeeTasks} />
+      <TaskListNo tasks={employeeTasks} />
 
       <div className="flex gap-4 mb-8 mt-10 flex-wrap">
         <button onClick={() => setActiveTab("new")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition

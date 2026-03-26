@@ -3,7 +3,7 @@ import AdminEditTaskModal from "./AdminEditTaskModal";
 import { useEffect, useMemo } from "react";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useAdminTasksTable from "../../hooks/AdminHooks/useAdminTasksTable";
-import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
+import TaskListNo from "../Basics/TaskListNo";
 
 const AdminTasksTable = () => {
 
@@ -32,7 +32,7 @@ const AdminTasksTable = () => {
             <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Created Tasks </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
-            <EmployeeTaskListNo tasks={tasks} />
+            <TaskListNo tasks={tasks} />
 
             <div className="flex items-center gap-2 mt-5">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium"> Tasks Created </h1>

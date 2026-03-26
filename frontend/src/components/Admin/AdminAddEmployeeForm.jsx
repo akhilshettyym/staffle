@@ -2,9 +2,9 @@ import { DatePicker, PasswordToggle } from "../../constants/imports";
 import "react-datepicker/dist/react-datepicker.css";
 import useAdminAddEmployeeForm from "../../hooks/AdminHooks/useAdminAddEmployeeForm";
 
-const AdminAddEmployeeForm = ({ refreshEmployees }) => {
+const AdminAddEmployeeForm = ({ refreshEmployeesData }) => {
 
-    const { dob, setDob, loading, handleAddEmployee } = useAdminAddEmployeeForm({ refreshEmployees });
+    const { dob, setDob, loading, handleAddEmployee } = useAdminAddEmployeeForm({ refreshEmployeesData });
 
     return (
         <>

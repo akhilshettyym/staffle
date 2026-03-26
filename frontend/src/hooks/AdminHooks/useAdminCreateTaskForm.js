@@ -1,9 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createTask, getTaskDetails } from "../../api/tasks";
+import { getTaskDetails } from "../../api/tasks";
 import { useDispatch, useSelector } from "react-redux";
 import { createTaskSuccess, setAllTasks } from "../../slices/taskSlice";
 import useEmployeesDetails from "../../utils/useEmployeesDetails";
+import { createTask } from "../../api/admin";
 
 const useAdminCreateTaskForm = () => {
 

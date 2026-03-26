@@ -4,7 +4,7 @@ import AdminAddedEmployees from "./AdminAddedEmployees";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useAdminEmployeeManager from "../../hooks/AdminHooks/useAdminEmployeeManager";
 import AdminInactiveEmployees from "./AdminInactiveEmployees";
-import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
+import TaskListNo from "../Basics/TaskListNo";
 
 const AdminEmployeeManager = () => {
 
@@ -22,7 +22,7 @@ const AdminEmployeeManager = () => {
             <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Employee Management </h1>
             <hr className="my-5 border border-[#FFDAB3]/40" />
 
-            <EmployeeTaskListNo tasks={tasks} />
+            <TaskListNo tasks={tasks} />
 
             <div className="flex items-center gap-2 mb-5 mt-5">
                 <h1 className="text-lg uppercase text-[#FFDAB3] font-medium"> Add more employees to the Org. </h1>

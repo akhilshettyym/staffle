@@ -1,4 +1,4 @@
-const EmployeeTaskListNo = ({ tasks }) => {
+const TaskListNo = ({ tasks }) => {
 
     const taskCounts = tasks.reduce(
         (acc, task) => {
@@ -49,4 +49,4 @@ const EmployeeTaskListNo = ({ tasks }) => {
     )
 }
 
-export default EmployeeTaskListNo;
+export default TaskListNo;

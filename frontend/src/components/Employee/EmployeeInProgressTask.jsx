@@ -1,8 +1,8 @@
 import EmployeeTaskCard from "./EmployeeTaskCard";
-import EmployeeTaskListNo from "./EmployeeTaskListNo";
 import { useEffect } from "react";
 import CustomTooltip from "../Basics/CustomTooltip";
 import useEmployeeInProgressTask from "../../hooks/EmployeeHooks/useEmployeeInProgressTask";
+import TaskListNo from "../Basics/TaskListNo";
 
 const EmployeeInProgressTask = () => {
 
@@ -20,7 +20,7 @@ const EmployeeInProgressTask = () => {
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> In Progress Tasks </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
-      <EmployeeTaskListNo tasks={employeeTasks} />
+      <TaskListNo tasks={employeeTasks} />
 
       <div className="flex items-center gap-2 mt-5">
         <h1 className="text-lg uppercase text-[#FFDAB3] font-medium line-clamp-2"> Tasks in progress </h1>

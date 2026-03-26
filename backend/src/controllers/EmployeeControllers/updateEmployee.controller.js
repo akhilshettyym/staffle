@@ -6,12 +6,12 @@ export const updateEmployeeController = async (req, res) => {
         const { employeeId } = req.params;
         const loggedInUser = req.user;
 
-        if (loggedInUser.role !== "ADMIN") {
-            return res.status(403).json({
-                success: false,
-                message: "Only admins can update employee details",
-            });
-        }
+        // if (loggedInUser.role !== "ADMIN") {
+        //     return res.status(403).json({
+        //         success: false,
+        //         message: "Only admins can update employee details",
+        //     });
+        // }
 
         const { firstName, lastName, email, dateOfBirth, designation } = req.body;
 

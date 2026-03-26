@@ -5,7 +5,7 @@ import useCompleteOrganizationDetails from "../../hooks/AuthHooks/useCompleteOrg
 
 const CompleteOrganizationDetails = () => {
 
-    const { admin, employees, orgCountry, organization, formattedDOB, fetchEmployees, fetchOrganization, handleRegisterOrg } = useCompleteOrganizationDetails();
+    const { admin, employees, orgCountry, organization, formattedDOB, fetchEmployees, fetchOrganization, refreshEmployeesData, handleRegisterOrg } = useCompleteOrganizationDetails();
 
     useEffect(() => {
         fetchEmployees();
@@ -62,7 +62,7 @@ const CompleteOrganizationDetails = () => {
                 </div>
             </div>
 
-            <AdminAddEmployeeForm refreshEmployees={fetchEmployees} />
+            <AdminAddEmployeeForm refreshEmployeesData={refreshEmployeesData} />
 
             {renderEmployeeDetails({ employees })}
 
@@ -71,7 +71,7 @@ const CompleteOrganizationDetails = () => {
 
                 <p className="mt-3 text-sm text-[#FFDAB3]/60 text-center"> You can add more employees later from the dashboard. </p>
             </div>
-
+  
         </div>
     );
 };

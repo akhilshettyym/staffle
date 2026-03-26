@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import useAdminTaskStatusTable from "../../hooks/AdminHooks/useAdminTaskStatusTable";
-import EmployeeTaskListNo from "../Employee/EmployeeTaskListNo";
 import AdminTaskStatusFailedTasks from "./AdminTaskStatusFailedTasks";
 import AdminTaskStatusCreatedTasks from "./AdminTaskStatusCreatedTasks";
 import AdminTaskStatusReqRejection from "./AdminTaskStatusReqRejection";
 import AdminTaskStatusInProgressTasks from "./AdminTaskStatusInProgressTasks";
 import AdminTaskStatusCompletedTasks from "./AdminTaskStatusCompletedTasks";
+import TaskListNo from "../Basics/TaskListNo";
 
 const AdminTaskStatusTable = () => {
 
@@ -23,7 +23,7 @@ const AdminTaskStatusTable = () => {
       <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Task Status </h1>
       <hr className="my-5 border border-[#FFDAB3]/40" />
 
-      <EmployeeTaskListNo tasks={tasks} />
+      <TaskListNo tasks={tasks} />
 
       <div className="flex gap-4 mb-8 mt-10">
         <button onClick={() => setActiveTab("created-tasks")}

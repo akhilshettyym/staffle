@@ -5,7 +5,7 @@ export async function createOrganization(payload) {
     validatePayload(payload);
 
     try {
-        const res = await api.post(`${import.meta.env.VITE_API_CREATE_ORG}`, payload);
+        const res = await api.post(`${import.meta.env.VITE_API_AUTH_CREATE_ORGANIZATION}`, payload);
         return res.data;
     } catch (error) {
         handleAuthError(error);
@@ -16,7 +16,7 @@ export async function login(payload) {
     validatePayload(payload);
 
     try {
-        const res = await api.post(`${import.meta.env.VITE_API_LOGIN}`, payload);
+        const res = await api.post(`${import.meta.env.VITE_API_AUTH_LOGIN}`, payload);
         return res.data;
     } catch (error) {
         handleAuthError(error);
@@ -25,7 +25,7 @@ export async function login(payload) {
 
 export async function logoutUser() {
     try {
-        const res = await api.post(`${import.meta.env.VITE_API_LOGOUT}`);
+        const res = await api.post(`${import.meta.env.VITE_API_AUTH_LOGOUT}`);
         return res.data;
     } catch (error) {
         handleAuthError(error);

@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
-import { useState, DateConversion, PriorityTag, toast, ConfirmModal } from "../../constants/imports";
+import { DateConversion, PriorityTag, ConfirmModal } from "../../constants/imports";
 import EmployeeFailedTaskModal from "./EmployeeFailedTaskModal";
 import { BiSolidError } from "react-icons/bi";
 import EmployeeTaskDetailsModal from "./EmployeeTaskDetailsModal";
-import { acceptTask, markAsCompleted } from "../../api/tasks";
 import useEmployeeTaskCard from "../../hooks/EmployeeHooks/useEmployeeTaskCard";
 
 const EmployeeTaskCard = ({ task, index, onTaskStatusChange }) => {

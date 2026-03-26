@@ -1,3 +1,4 @@
+import { validateId } from "./helpers/apiHelpers";
 import api from "./instance/axios";
 
 export async function getAllOrganizationDetails() {
@@ -13,4 +14,44 @@ export async function getAllEmployeesDetails() {
 export async function getAlltasksDetails() {
     const res = await api.get(`${import.meta.env.VITE_API_SUPERADMIN_GET_ALL_TASKS}`);
     return res.data;
+}
+
+export async function approveOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`${import.meta.env.VITE_API_SUPERADMIN_APPROVE_ORGANIZATION}/${orgId}`);
+    return res.data;
+}
+
+export async function rejectOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`${import.meta.env.VITE_API_SUPERADMIN_REJECT_ORGANIZATION}/${orgId}`);
+    return res.data;
+}
+
+export async function revokeOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`${import.meta.env.VITE_API_SUPERADMIN_REVOKE_ORGANIZATION}/${orgId}`);
+    return res.data;
+}
+
+export async function reActivateOrganization(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.patch(`${import.meta.env.VITE_API_SUPERADMIN_RE_ACTIVATE_ORGANIZATION}/${orgId}`);
+    return res.data;
+}
+
+export async function deleteRejectedOrganization({ orgId }) {
+    validateId(orgId, "Organization ID");
+
+    try {
+        const res = await api.delete(`${import.meta.env.VITE_API_SUPERADMIN_DELETE_ORGANIZATION}/${orgId}`);
+        return res.data;
+
+    } catch (error) {
+        handleApiError(error);
+    }
 }
