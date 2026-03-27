@@ -16,6 +16,7 @@ const useEmployeesDetails = () => {
             } else {
                 toast.error(response?.message || "Failed to load employees");
             }
+            
         } catch (error) {
             console.error("Failed to fetch employees:", error);
             toast.error("Could not fetch employees");

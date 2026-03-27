@@ -16,6 +16,7 @@ const useTasksDetails = () => {
             } else {
                 toast.error(response?.message || "Failed to load tasks");
             }
+            
         } catch (error) {
             console.error("Failed to fetch tasks", error);
             toast.error("Could not fetch tasks");

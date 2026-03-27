@@ -11,6 +11,9 @@ import { approveOrganization } from "../controllers/SuperAdminControllers/approv
 import { getAllOrganizationDetails } from "../controllers/SuperAdminControllers/getAllOrganization.controller.js";
 import { reactivateOrganization } from "../controllers/SuperAdminControllers/reactivateOrganization.controller.js";
 import { deleteOrganizationController } from "../controllers/SuperAdminControllers/deleteOrganization.controller.js";
+import { getSpecificOrganizationDetails } from "../controllers/SuperAdminControllers/getSpecificOrganization.controller.js";
+import { getOrgSpecificEmployeeDetails } from "../controllers/SuperAdminControllers/getSpecificOrgEmployees.controller.js";
+import { getOrgSpecificTasksDetails } from "../controllers/SuperAdminControllers/getSpecificOrgTasks.controller.js";
 
 const router = express.Router();
 
@@ -37,5 +40,16 @@ router.patch("/re-activate-organization/:orgId", authMiddleware, requireSuperAdm
 
 /* DELETE /api/superadmin/delete-rejected-organization/:orgId */
 router.delete("/delete-rejected-organization/:orgId", authMiddleware, requireSuperAdmin, requirePermission(PERMISSIONS.DELETE_ORGANIZATION), deleteOrganizationController);
+
+
+/* GET /api/superadmin/get-specific-organization-details/:orgId */
+router.get("/get-specific-organization-details/:orgId", authMiddleware, requireSuperAdmin, requirePermission(PERMISSIONS.VIEW_ALL_ORGANIZATIONS), getSpecificOrganizationDetails);
+
+/* GET /api/superadmin/get-specific-employees-details/:orgId */
+router.get("/get-org-specific-employees/:orgId", authMiddleware, requireSuperAdmin, requirePermission(PERMISSIONS.VIEW_ALL_EMPLOYEES), getOrgSpecificEmployeeDetails);
+
+/* GET /api/superadmin/get-specific-tasks-details/:orgId */
+router.get("/get-org-specific-tasks/:orgId", authMiddleware, requireSuperAdmin, requirePermission(PERMISSIONS.VIEW_ALL_TASKS), getOrgSpecificTasksDetails);
+
 
 export default router;

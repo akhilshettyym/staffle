@@ -101,7 +101,7 @@ const useAdminUpdateOrganizationDetails = ({ refreshOrgData }) => {
         }
     };
 
-    return { loading, formData, handleChange, handleUpdateOrganization, fetchOrganization };
+    return { loading, formData, setOrganization, handleChange, handleUpdateOrganization, fetchOrganization };
 }
 
 export default useAdminUpdateOrganizationDetails;

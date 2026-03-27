@@ -11,6 +11,7 @@ const useOrganizationDetails = () => {
         try {
             const orgResponse = await getOrganizationDetails();
             setOrganization(orgResponse?.organization || []);
+            
         } catch (error) {
             console.error("Failed to fetch Organization details", error);
             toast.error("Could not fetch organization");

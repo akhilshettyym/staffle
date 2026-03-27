@@ -6,6 +6,27 @@ export async function getAllOrganizationDetails() {
     return res.data;
 }
 
+export async function getSpecificOrganizationDetails(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.get(`${import.meta.env.VITE_API_SUPERADMIN_GET_SPECIFIC_ORGANIZATIONS}/${orgId}`);
+    return res.data;
+}
+
+export async function getOrganizationSpecificEmployeeDetails(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.get(`${import.meta.env.VITE_API_SUPERADMIN_GET_SPECIFIC_EMPLOYEES}/${orgId}`);
+    return res.data;
+}
+
+export async function getOrganizationSpecificTasksDetails(orgId) {
+    validateId(orgId, "Organization ID");
+
+    const res = await api.get(`${import.meta.env.VITE_API_SUPERADMIN_GET_SPECIFIC_TASKS}/${orgId}`);
+    return res.data;
+}
+
 export async function getAllEmployeesDetails() {
     const res = await api.get(`${import.meta.env.VITE_API_SUPERADMIN_GET_ALL_EMPLOYEES}`);
     return res.data;

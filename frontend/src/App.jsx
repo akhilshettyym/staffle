@@ -29,6 +29,11 @@ import SuperAdminApproveOrganizationsPage from "./pages/SuperAdminPages/SuperAdm
 import SuperAdminReactivateOrganizationsPage from "./pages/SuperAdminPages/SuperAdminReactivateOrganizationsPage";
 import SuperAdminRevokeOrganizationsPage from "./pages/SuperAdminPages/SuperAdminRevokeOrganizationsPage";
 import SuperAdminRejectedOrganizationsPage from "./pages/SuperAdminPages/SuperAdminRejectedOrganizationsPage";
+import SuperAdminOrganizationDashboardPage from "./pages/SuperAdminPages/SuperAdminControllers/SuperAdminOrganizationDashboardPage";
+import SuperAdminAdminDashboardPage from "./pages/SuperAdminPages/SuperAdminControllers/SuperAdminAdminDashboardPage";
+import SuperAdminEmployeeDashboardPage from "./pages/SuperAdminPages/SuperAdminControllers/SuperAdminEmployeeDashboardPage";
+import SuperAdminTasksDashboardPage from "./pages/SuperAdminPages/SuperAdminControllers/SuperAdminTasksDashboardPage";
+import SuperAdminOrganizationDashboard from "./components/SuperAdmin/SuperAdminController/SuperAdminOrganizationDashboard";
 
 const App = () => {
 
@@ -113,15 +118,30 @@ const App = () => {
         {/* /superadmin/superadmin-dashboard */}
         <Route path="/superadmin/superadmin-dashboard" element={<SuperAdminDashboardPage />} />
 
+        {/* /superadmin/approve-organizations */}
         <Route path="/superadmin/approve-organizations" element={<SuperAdminApproveOrganizationsPage />} />
 
+        {/* /superadmin/rejected-organizations */}
         <Route path="/superadmin/rejected-organizations" element={<SuperAdminRejectedOrganizationsPage />} />
 
+        {/* /superadmin/revoke-organizations */}
         <Route path="/superadmin/revoke-organizations" element={<SuperAdminRevokeOrganizationsPage />} />
 
+        {/* /superadmin/reactivate-organizations */}
         <Route path="/superadmin/reactivate-organizations" element={<SuperAdminReactivateOrganizationsPage />} />
 
-        {/* <Route path="/superadmin/" */}
+
+        {/* /superadmin/control/organization-dashboard */}
+        <Route path="/superadmin/control/organization-dashboard/:orgId" element={<SuperAdminOrganizationDashboardPage />} />
+
+        {/* /superadmin/control/admin-dashboard */}
+        <Route path="/superadmin/control/admin-dashboard" element={<SuperAdminAdminDashboardPage />} />
+
+        {/* /superadmin/control/employee-dashboard */}
+        <Route path="/superadmin/control/employee-dashboard" element={<SuperAdminEmployeeDashboardPage />} />
+
+        {/* /superadmin/control/tasks-dashboard */}
+        <Route path="/superadmin/control/tasks-dashboard" element={<SuperAdminTasksDashboardPage />} />
 
         {/* ----------------------------------------------------------------------------------------------------------------------- */}
 
