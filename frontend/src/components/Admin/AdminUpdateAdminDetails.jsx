@@ -4,13 +4,25 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAdminUpdateAdminDetails from '../../hooks/AdminHooks/useAdminUpdateAdminDetails';
 import CustomTooltip from '../Basics/CustomTooltip';
 
-const AdminUpdateAdminDetails = ({ refreshAdminData }) => {
+const AdminUpdateAdminDetails = ({ refreshAdminData, admin }) => {
 
-    const { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees } = useAdminUpdateAdminDetails({ refreshAdminData });
+    const {
+        loading,
+        formData,
+        handleChange,
+        handleDateChange,
+        handleUpdateAdmin,
+        fetchEmployees
+    } = useAdminUpdateAdminDetails({
+        refreshAdminData,
+        adminOverride: admin
+    });
 
     useEffect(() => {
-        fetchEmployees();
-    }, []);
+        if (!admin) {
+            fetchEmployees();
+        }
+    }, [admin]);
 
     return (
         <div className='pb-10'>
@@ -54,7 +66,15 @@ const AdminUpdateAdminDetails = ({ refreshAdminData }) => {
                     <div className="w-full flex justify-center">
                         <div className="w-[50%] flex flex-col">
                             <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80 flex justify-center"> Date Of Birth </label>
-                            <DatePicker selected={formData.dateOfBirth} onChange={handleDateChange} placeholderText="Select date of birth" dateFormat="dd/MM/yyyy" maxDate={new Date()} wrapperClassName="w-full" className="mt-2 w-full appearance-none bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 pr-10 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <DatePicker
+                                selected={formData.dateOfBirth}
+                                onChange={handleDateChange}
+                                placeholderText="Select date of birth"
+                                dateFormat="dd/MM/yyyy"
+                                maxDate={new Date()}
+                                wrapperClassName="w-full"
+                                className="mt-2 w-full appearance-none bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 pr-10 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition"
+                            />
                         </div>
                     </div>
 

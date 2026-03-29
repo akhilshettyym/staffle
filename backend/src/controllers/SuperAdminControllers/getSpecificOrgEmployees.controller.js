@@ -10,7 +10,7 @@ export const getOrgSpecificEmployeeDetails = async (req, res) => {
                 organizationId: orgId,
                 role: { $ne: "SUPER_ADMIN" }
             })
-            .select("uuid firstName lastName email role designation employmentStatus organizationId createdAt");
+            .select("uuid firstName lastName email dateOfBirth role designation employmentStatus organizationId createdAt");
 
         return res.status(200).json({
             success: true,

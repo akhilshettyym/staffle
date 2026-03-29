@@ -25,7 +25,7 @@ const useAdminDeactivateEmployee = ({ empId, onClose, refreshEmployees }) => {
 
             toast.success("Employee deactivated successfully");
             await refreshEmployees();
-            onClose();
+            onClose?.();
             setShowConfirm(false);
 
         } catch (error) {

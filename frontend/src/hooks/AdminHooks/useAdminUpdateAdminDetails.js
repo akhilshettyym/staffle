@@ -3,13 +3,16 @@ import toast from "react-hot-toast";
 import { updateAdmin } from "../../api/admin";
 import useEmployeesDetails from "../../utils/useEmployeesDetails";
 
-const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
+const useAdminUpdateAdminDetails = ({ refreshAdminData, adminOverride }) => {
 
     const [loading, setLoading] = useState(false);
 
     const { employees, setEmployees, fetchEmployees } = useEmployeesDetails();
 
-    const admin = useMemo(() => employees.find((emp) => emp.role === "ADMIN"), [employees]);
+    const admin = useMemo(() => {
+        if (adminOverride) return adminOverride;
+        return employees.find((emp) => emp.role === "ADMIN");
+    }, [adminOverride, employees]);
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -20,15 +23,17 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
     });
 
     useEffect(() => {
-        if (admin) {
-            setFormData({
-                firstName: admin.firstName || "",
-                lastName: admin.lastName || "",
-                email: admin.email || "",
-                dateOfBirth: admin?.dateOfBirth ? new Date(admin.dateOfBirth) : null,
-                designation: admin.designation || ""
-            });
-        }
+        if (!admin) return;
+
+        const parsedDate = admin.dateOfBirth ? new Date(admin.dateOfBirth) : null;
+
+        setFormData({
+            firstName: admin.firstName || "",
+            lastName: admin.lastName || "",
+            email: admin.email || "",
+            dateOfBirth: parsedDate,
+            designation: admin.designation || ""
+        });
     }, [admin]);
 
     const handleChange = (e) => {
@@ -53,25 +58,11 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
         setLoading(true);
 
         try {
-            if (!formData.firstName?.trim()) {
-                throw new Error("First Name is required");
-            }
-
-            if (!formData.lastName?.trim()) {
-                throw new Error("Last Name is required");
-            }
-
-            if (!formData.email?.trim()) {
-                throw new Error("Email is required");
-            }
-
-            if (!formData.dateOfBirth) {
-                throw new Error("Date of birth is required");
-            }
-
-            if (!formData.designation?.trim()) {
-                throw new Error("Designation is required");
-            }
+            if (!formData.firstName?.trim()) throw new Error("First Name is required");
+            if (!formData.lastName?.trim()) throw new Error("Last Name is required");
+            if (!formData.email?.trim()) throw new Error("Email is required");
+            if (!formData.dateOfBirth) throw new Error("Date of birth is required");
+            if (!formData.designation?.trim()) throw new Error("Designation is required");
 
             const payload = {
                 firstName: formData.firstName.trim(),
@@ -83,10 +74,6 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
 
             const empId = admin?._id || admin?.id;
 
-            if (!empId) {
-                throw new Error("Employee Id missing");
-            }
-
             const response = await updateAdmin({ empId, ...payload });
 
             if (!response?.success) {
@@ -94,7 +81,7 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
             }
 
             toast.success("Admin details updated successfully");
-            refreshAdminData();
+            refreshAdminData?.();
 
             setEmployees((prev) =>
                 prev.map((e) =>
@@ -106,12 +93,12 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
 
         } catch (error) {
             let msg = "Something went wrong while updating admin";
-            if (error.response?.data?.message) {
+
+            if (error.response?.data?.message)
                 msg = error.response.data.message;
-            } else if (error.message) {
+            else if (error.message)
                 msg = error.message;
-            }
-            console.error("Admin updation failed", error);
+
             toast.error(msg);
 
         } finally {
@@ -120,6 +107,6 @@ const useAdminUpdateAdminDetails = ({ refreshAdminData }) => {
     };
 
     return { loading, formData, handleChange, handleDateChange, handleUpdateAdmin, fetchEmployees };
-}
+};
 
 export default useAdminUpdateAdminDetails;
