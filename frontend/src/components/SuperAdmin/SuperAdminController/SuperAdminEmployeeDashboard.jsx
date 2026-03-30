@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useSuperAdminGetOrgSpecificEmployeeDetails from "../../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificEmployeeDetails";
 import useSuperAdminGetOrgSpecificOrganizationDetails from "../../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificOrganizationDetails";
 import AdminAddEmployeeForm from "../../Admin/AdminAddEmployeeForm";
+import SuperAdminEmployeeDetails from "./SuperAdminControlledComponents/SuperAdminEmployeeDetails";
 
 const SuperAdminEmployeeDashboard = () => {
 
@@ -51,7 +52,10 @@ const SuperAdminEmployeeDashboard = () => {
         )}
 
         {activeTab === "employee-details" && (
-          <></>
+          <SuperAdminEmployeeDetails
+            employees={employees}
+            refreshEmployees={fetchOrgSpecificEmployees}
+          />
         )}
 
       </div>
