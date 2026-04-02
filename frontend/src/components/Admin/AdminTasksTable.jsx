@@ -22,6 +22,15 @@ const AdminTasksTable = () => {
         });
     }, [tasks]);
 
+    const getStatusLabel = (status) => {
+        switch (status) {
+            case "REJECTION_REQUESTED":
+                return "REQ_REJ";
+            default:
+                return status;
+        }
+    };
+
     useEffect(() => {
         fetchTasksDetails();
     }, []);
@@ -74,7 +83,7 @@ const AdminTasksTable = () => {
                                 </span>
 
                                 <span className="w-1/6 text-[#FFDAB3] text-sm font-medium capitalize">
-                                    {task.status}
+                                    {getStatusLabel(task.status)}
                                 </span>
 
                                 <span className="w-1/6 text-[#FFDAB3] text-sm font-medium capitalize">

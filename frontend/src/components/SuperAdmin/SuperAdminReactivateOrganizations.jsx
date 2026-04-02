@@ -13,6 +13,10 @@ const SuperAdminReactivateOrganizations = () => {
   return (
     <div className="pb-10 mt-5">
 
+      <hr className="my-5 border border-[#FFDAB3]/40" />
+      <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Reactivate Organization </h1>
+      <hr className="my-5 border border-[#FFDAB3]/40" />
+
       {revokedOrganizations.length === 0 ? (
         <div className="bg-[#1B211A] rounded-2xl p-10 mt-5 border border-[#FFDAB3]/30 shadow-inner">
           <p className="text-center text-[#F8F8F2]/60 text-sm">

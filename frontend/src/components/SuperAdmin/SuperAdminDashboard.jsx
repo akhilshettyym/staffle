@@ -13,7 +13,11 @@ const SuperAdminDashboard = () => {
   }, []);
 
   return (
-    <div className="pb-10 pt-5">
+    <div className="pb-10">
+
+      <hr className="my-5 border border-[#FFDAB3]/40" />
+      <h1 className="font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Reactivate Organization </h1>
+      <hr className="my-5 border border-[#FFDAB3]/40" />
 
       <div className="bg-[#1B211A] rounded-2xl p-4 border border-[#FFDAB3]/25">
 

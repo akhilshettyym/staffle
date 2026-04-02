@@ -17,6 +17,10 @@ const SuperAdminOrganizationDashboard = () => {
   return (
     <div className="pb-10">
 
+<hr className="my-5 border border-[#FFDAB3]/40" />
+      <h1 className="mt-5 font-bold text-[#FFDAB3] text-xl uppercase flex flex-col items-center"> Organization Details </h1>
+      <hr className="my-5 border border-[#FFDAB3]/40" />
+
       <div className="flex gap-4 mt-5">
         <button onClick={() => setActiveTab("organization-details")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
           ${activeTab === "organization-details"

@@ -30,12 +30,12 @@ const SuperAdminViewOrganization = ({ specificOrganization, admins = [], employe
                 <div>
                     <h2 className="text-2xl font-bold text-[#FFDAB3] uppercase tracking-wide"> {specificOrganization?.orgName} </h2>
 
-                    <p className="text-xs text-[#F8F8F2]/60 mt-1"> {specificOrganization?.orgDomain} </p>
+                    <p className="text-sm text-[#F8F8F2]/60 mt-1"> {specificOrganization?.orgDomain} </p>
                 </div>
 
                 <div className="text-right">
-                    <p className="text-[10px] text-[#F8F8F2]/60 uppercase"> Organization ID </p>
-                    <p className="text-xs text-[#FFDAB3]"> {specificOrganization?._id} </p>
+                    <p className="text-[12px] text-[#F8F8F2]/60 uppercase"> Organization ID </p>
+                    <p className="text-sm text-[#FFDAB3]"> {specificOrganization?._id} </p>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@ const SuperAdminViewOrganization = ({ specificOrganization, admins = [], employe
             </div>
 
             <div>
-                <p className="text-[10px] text-[#F8F8F2]/60 uppercase mb-2"> Description </p>
+                <p className="text-[12px] text-[#F8F8F2]/60 uppercase mb-2"> Description </p>
 
                 <div className="bg-[#2C3930]/20 border border-[#FFDAB3]/20 rounded-xl p-4 text-[#FFDAB3] text-sm leading-relaxed">
                     {specificOrganization?.orgDescription || "No description provided"}

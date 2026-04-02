@@ -22,7 +22,7 @@ const EmployeeNewTask = () => {
 
       <TaskListNo tasks={employeeTasks} />
 
-      <div className="flex gap-4 mb-8 mt-10 flex-wrap">
+      <div className="flex gap-4 mb-5 mt-10 flex-wrap">
         <button onClick={() => setActiveTab("new")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition
           ${activeTab === "new"
             ? "bg-[#FFDAB3] text-[#1B211A]"

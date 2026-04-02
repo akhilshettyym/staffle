@@ -23,7 +23,7 @@ const EmployeeComFailedTasks = () => {
 
             <TaskListNo tasks={employeeTasks} />
 
-            <div className="flex gap-4 mb-8 mt-10">
+            <div className="flex gap-4 mb-5 mt-10">
                 <button onClick={() => setActiveTab("completed-tasks")} className={`px-5 py-2 rounded-md uppercase text-sm font-semibold transition 
                 ${activeTab === "completed-tasks"
                         ? "bg-[#FFDAB3] text-[#1B211A]"
