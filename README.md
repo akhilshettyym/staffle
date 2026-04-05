@@ -1,5 +1,7 @@
 # File Tree: STAFFLE
 
+### Backend file/folder structure
+
 ```
 ├── 📁 backend
 │   ├── 📁 src
@@ -76,8 +78,10 @@
 │   ├── ⚙️ package-lock.json
 │   ├── ⚙️ package.json
 │   └── 📄 server.js
+```
 
-
+### Frontend file/folder structire
+```
 ├── 📁 frontend
 │   ├── 📁 public
 │   │   └── 🖼️ vite.svg
