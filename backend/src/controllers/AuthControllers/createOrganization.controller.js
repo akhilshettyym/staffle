@@ -120,6 +120,7 @@ export async function createOrganizationController(req, res) {
         });
 
     } catch (error) {
+        console.log("TEST ERROR:", error)
         await session.abortTransaction();
         return res.status(500).json({
             success: false,
