@@ -16,9 +16,6 @@ const payload = {
 };
 
 describe("Auth Routes", () => {
-
-  /* CREATE ORGANIZATION */
-
   test("Create Organization", async () => {
     const res = await api.post("/api/auth/create-organization").send(payload);
 
@@ -47,8 +44,6 @@ describe("Auth Routes", () => {
     expect(res.statusCode).toBe(400);
     expect(res.body.success).toBe(false);
   });
-
-  /* LOGIN */
 
   describe("Login", () => {
     test("Should login successfully", async () => {
@@ -109,8 +104,6 @@ describe("Auth Routes", () => {
       expect(res.body.success).toBe(false);
     });
   });
-
-  /* LOGOUT  */
 
   describe("Logout", () => {
     test("Should logout successfully", async () => {

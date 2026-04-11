@@ -34,4 +34,5 @@ router.get("/get-employees", authMiddleware, requirePermission(PERMISSIONS.VIEW_
 /* GET /api/employee/get-inactive-employees */
 router.get("/get-inactive-employees", authMiddleware, requirePermission(PERMISSIONS.VIEW_EMPLOYEES), getOrganizationInactiveUsers);
 
+
 export default router;
