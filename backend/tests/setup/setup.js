@@ -4,32 +4,24 @@ dotenv.config();
 import mongoose from "mongoose";
 import { MongoMemoryReplSet } from "mongodb-memory-server";
 
-import "../src/models/user.model.js";
-import "../src/models/org.model.js";
-
 let replset;
 
 beforeAll(async () => {
   process.env.JWT_SECRET = "testsecret";
 
   replset = await MongoMemoryReplSet.create({
-    replSet: {
-      count: 1,
-      storageEngine: "wiredTiger",
-    },
+    replSet: { count: 1, storageEngine: "wiredTiger" },
   });
 
   await mongoose.connect(replset.getUri());
-
-  await mongoose.connection.syncIndexes();
 });
 
 afterEach(async () => {
   const collections = mongoose.connection.collections;
 
-  await Promise.all(
-    Object.values(collections).map((col) => col.deleteMany())
-  );
+  for (const key in collections) {
+    await collections[key].deleteMany({});
+  }
 });
 
 afterAll(async () => {
