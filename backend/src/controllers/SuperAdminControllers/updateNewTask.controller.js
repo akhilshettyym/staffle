@@ -15,7 +15,6 @@ export const updateNewTaskController = async (req, res) => {
       priority,
     } = req.body;
 
-    // validate orgId
     if (!orgId) {
       return res.status(400).json({
         success: false,
@@ -39,7 +38,6 @@ export const updateNewTaskController = async (req, res) => {
       });
     }
 
-    // find task inside org
     const task = await taskModel.findOne({
       _id: taskId,
       organizationId: orgId,
@@ -52,7 +50,6 @@ export const updateNewTaskController = async (req, res) => {
       });
     }
 
-    // allow only NEW / FAILED
     if (task.status !== "NEW" && task.status !== "FAILED") {
       return res.status(400).json({
         success: false,
@@ -60,7 +57,6 @@ export const updateNewTaskController = async (req, res) => {
       });
     }
 
-    // validate assigned user
     if (assignedTo) {
       const assignedUser = await userModel.findById(assignedTo);
 
@@ -81,13 +77,11 @@ export const updateNewTaskController = async (req, res) => {
       task.assignedTo = assignedTo;
     }
 
-    // update fields
     if (title !== undefined) task.title = title;
     if (category !== undefined) task.category = category;
     if (description !== undefined) task.description = description;
     if (priority !== undefined) task.priority = priority;
 
-    // validate due date
     if (dueDate !== undefined && dueDate !== null && dueDate !== "") {
       const parsedDate = new Date(dueDate);
 
@@ -110,7 +104,6 @@ export const updateNewTaskController = async (req, res) => {
       task.dueDate = parsedDate;
     }
 
-    // if FAILED → reset lifecycle
     if (task.status === "FAILED") {
       task.status = "NEW";
 
