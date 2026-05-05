@@ -16,15 +16,15 @@ const LoginForm = () => {
         <form onSubmit={handleLogin} className="flex flex-col items-center gap-7">
 
           <div className="w-full">
-            <label className="block text-md uppercase tracking-wide text-[#FFDAB3]/80 mb-2"> Email Address </label>
+            <label htmlFor="email" className="block text-md uppercase tracking-wide text-[#FFDAB3]/80 mb-2"> Email Address </label>
 
-            <input value={email} onChange={onEmailChange} required type="email" placeholder="Enter your email" className="w-80 bg-[#0F1412] border border-[#FFDAB3]/20 rounded-2xl px-5 py-3 text-[#FFDAB3] outline-none placeholder:text-gray-400 focus:border-[#FFDAB3] focus:ring-2 focus:ring-[#FFDAB3]/20 transition-all duration-200" />
+            <input id="email" name="email" value={email} onChange={onEmailChange} required type="email" placeholder="Enter your email" autoComplete="email" className="w-80 bg-[#0F1412] border border-[#FFDAB3]/20 rounded-2xl px-5 py-3 text-[#FFDAB3] outline-none placeholder:text-gray-400 focus:border-[#FFDAB3] focus:ring-2 focus:ring-[#FFDAB3]/20 transition-all duration-200" />
           </div>
 
           <div className="w-full">
-            <label className="block text-md uppercase tracking-wide text-[#FFDAB3]/80 mb-2"> Password </label>
+            <label htmlFor="password" className="block text-md uppercase tracking-wide text-[#FFDAB3]/80 mb-2"> Password </label>
 
-            <PasswordToggle value={password} onChange={onPasswordChange} placeholder="Enter your password" className="w-80 bg-[#0F1412] border border-[#FFDAB3]/20 rounded-2xl px-5 py-3 text-[#FFDAB3] outline-none placeholder:text-gray-400 focus:border-[#FFDAB3] focus:ring-2 focus:ring-[#FFDAB3]/20 transition-all duration-200" />
+            <PasswordToggle name="password" id="password" value={password} onChange={onPasswordChange} placeholder="Enter your password" className="w-80 bg-[#0F1412] border border-[#FFDAB3]/20 rounded-2xl px-5 py-3 text-[#FFDAB3] outline-none placeholder:text-gray-400 focus:border-[#FFDAB3] focus:ring-2 focus:ring-[#FFDAB3]/20 transition-all duration-200" />
           </div>
 
           <button type="submit" disabled={loading} className="mt-3 w-full bg-[#FFDAB3] text-[#1B211A] font-semibold py-3 rounded-full hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-md shadow-[#FFDAB3]/10 uppercase"> {loading ? "Logging In..." : "Login"} </button>

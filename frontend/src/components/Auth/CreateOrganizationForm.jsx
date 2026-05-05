@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PasswordToggle from "../Basics/PasswordToggle";
-import useCreateOrganizationForm from "../../hooks/AuthHooks/CreateOrgHook/useCreateOrganizationForm";
+import useCreateOrganizationForm from "../../hooks/AuthHooks/useCreateOrganizationForm";
 
 const CreateOrganizationForm = () => {
 
@@ -28,43 +28,43 @@ const CreateOrganizationForm = () => {
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> First Name </label>
-                            <input name="firstName" type="text" placeholder="Enter your first name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="firstName" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> First Name </label>
+                            <input id="firstName" name="firstName" type="text" placeholder="Enter your first name" autoComplete="given-name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email Address </label>
-                            <input name="email" type="email" placeholder="Enter your email" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="email" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email Address </label>
+                            <input id="email" name="email" type="email" placeholder="Enter your email" autoComplete="email" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                         </div>
 
                         <div className="mt-6">
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80 mr-10"> Date of Birth </label>
-                            <DatePicker selected={dob} onChange={setDob} placeholderText="DD/MM/YYYY" dateFormat="dd/MM/yyyy" maxDate={new Date()} showYearDropdown scrollableYearDropdown yearDropdownItemNumber={80} className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="dateOfBirth" className="text-md uppercase tracking-wide text-[#FFDAB3]/80 mr-10"> Date of Birth </label>
+                            <DatePicker id="dateOfBirth" selected={dob} onChange={setDob} placeholderText="DD/MM/YYYY" dateFormat="dd/MM/yyyy" maxDate={new Date()} showYearDropdown scrollableYearDropdown yearDropdownItemNumber={80} className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                             <input type="hidden" name="dateOfBirth" value={dob ? dob.toString() : ""} />
                         </div>
                     </div>
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Last Name </label>
-                            <input name="lastName" type="text" placeholder="Enter your last name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="lastName" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Last Name </label>
+                            <input id="lastName" name="lastName" type="text" placeholder="Enter your last name" autoComplete="family-name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Password </label>
-                            <PasswordToggle name="password" placeholder="Create a strong password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
+                            <label htmlFor="password" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Password </label>
+                            <PasswordToggle id="password" name="password" placeholder="Create a strong password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Confirm Password </label>
-                            <PasswordToggle name="confirmPassword" onBlur={handleConfirmPasswordBlur} placeholder="Confirm password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
+                            <label htmlFor="confirmPassword" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Confirm Password </label>
+                            <PasswordToggle id="confirmPassword" name="confirmPassword" onBlur={handleConfirmPasswordBlur} placeholder="Confirm password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
                         </div>
                     </div>
 
                     <div className="w-full flex justify-center">
                         <div className="w-[60%]">
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Admin Designation </label>
-                            <input name="designation" type="text" placeholder="Enter your designation" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="designation" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Admin Designation </label>
+                            <input id="designation" name="designation" type="text" placeholder="Enter your designation" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                         </div>
                     </div>
 
@@ -74,15 +74,15 @@ const CreateOrganizationForm = () => {
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Name </label>
-                            <input name="orgName" type="text" placeholder="Enter organization name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="orgName" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Name </label>
+                            <input id="orgName" name="orgName" type="text" placeholder="Enter organization name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                         </div>
                     </div>
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Country </label>
-                            <select name="orgCountry" defaultValue="" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition">
+                            <label htmlFor="orgCountry" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Country </label>
+                            <select id="orgCountry" name="orgCountry" defaultValue="" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition">
                                 <option value="" disabled> Select organization country </option>
                                 <option value="IN">INDIA</option>
                                 <option value="US">USA</option>
@@ -94,16 +94,16 @@ const CreateOrganizationForm = () => {
 
                     <div className="w-full flex justify-center">
                         <div className="w-[60%] flex flex-col">
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80 flex justify-center"> Organization Domain </label>
-                            <input name="orgDomain" type="text" placeholder="Enter organization domain"
+                            <label htmlFor="orgDomain" className="text-md uppercase tracking-wide text-[#FFDAB3]/80 flex justify-center"> Organization Domain </label>
+                            <input id="orgDomain" name="orgDomain" type="text" placeholder="Enter organization domain"
                                 className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition"
                             />
                         </div>
                     </div>
 
                     <div className="w-full flex flex-col">
-                        <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Description </label>
-                        <textarea name="orgDescription" rows="5" placeholder="Briefly describe what your organization does" className="bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-4 text-[#FFDAB3] outline-none resize-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition mt-2" />
+                        <label htmlFor="orgDescription" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Organization Description </label>
+                        <textarea id="orgDescription" name="orgDescription" rows="5" placeholder="Briefly describe what your organization does" className="bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-4 text-[#FFDAB3] outline-none resize-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition mt-2" />
                     </div>
 
                     <div className="w-full flex flex-col items-center pt-2">
