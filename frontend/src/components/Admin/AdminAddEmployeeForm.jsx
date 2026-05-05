@@ -17,36 +17,36 @@ const AdminAddEmployeeForm = ({ refreshEmployeesData }) => {
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> First Name </label>
-                            <input name="firstName" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your first name" />
+                            <label htmlFor="firstName" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> First Name </label>
+                            <input id="firstName" name="firstName" type="text" required autoComplete="given-name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your first name" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email </label>
-                            <input name="email" type="email" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your email" />
+                            <label htmlFor="email" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Email </label>
+                            <input id="email" name="email" type="email" required autoComplete="email" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your email" />
                         </div>
 
                         <div className="mt-2">
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80 mr-10"> Date of Birth </label>
-                            <DatePicker selected={dob} onChange={setDob} placeholderText="DD/MM/YYYY" dateFormat="dd/MM/yyyy" maxDate={new Date()} showYearDropdown scrollableYearDropdown yearDropdownItemNumber={80} className="mt-6 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
+                            <label htmlFor="dateOfBirth" className="text-md uppercase tracking-wide text-[#FFDAB3]/80 mr-10"> Date of Birth </label>
+                            <DatePicker id="dateOfBirth" selected={dob} onChange={setDob} placeholderText="DD/MM/YYYY" dateFormat="dd/MM/yyyy" maxDate={new Date()} showYearDropdown scrollableYearDropdown yearDropdownItemNumber={80} className="mt-6 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" />
                             <input type="hidden" name="dateOfBirth" value={dob ? dob.toString() : ""} />
                         </div>
                     </div>
 
                     <div className="w-full md:w-[48%] flex flex-col gap-6">
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Last Name </label>
-                            <input name="lastName" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your last name" />
+                            <label htmlFor="lastName" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Last Name </label>
+                            <input id="lastName" name="lastName" type="text" required autoComplete="family-name" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your last name" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Password </label>
-                            <PasswordToggle name="password" placeholder="Create a strong password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
+                            <label htmlFor="password" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Password </label>
+                            <PasswordToggle id="password" name="password" placeholder="Create a strong password" className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" iconClassName="top-[55%]" />
                         </div>
 
                         <div>
-                            <label className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Designation </label>
-                            <input name="designation" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your designation" />
+                            <label htmlFor="designation" className="text-md uppercase tracking-wide text-[#FFDAB3]/80"> Designation </label>
+                            <input id="designation" name="designation" type="text" required className="mt-2 w-full bg-[#0F1412] border border-[#FFDAB3]/30 rounded-2xl px-4 py-3 text-[#FFDAB3] outline-none focus:border-[#FFDAB3] focus:ring-1 focus:ring-[#FFDAB3]/50 transition" placeholder="Enter your designation" />
                         </div>
                     </div>
 
