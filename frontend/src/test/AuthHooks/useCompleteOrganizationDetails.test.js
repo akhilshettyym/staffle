@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react'
-import { vi } from 'vitest'
-import useCompleteOrganizationDetails from '../../hooks/AuthHooks/useCompleteOrganizationDetails'
+import { renderHook, act } from '@testing-library/react';
+import { vi } from 'vitest';
+import useCompleteOrganizationDetails from '../../hooks/AuthHooks/useCompleteOrganizationDetails';
 
 vi.mock('react-hot-toast', () => ({
     default: {
@@ -48,6 +48,13 @@ describe('useCompleteOrganizationDetails', () => {
 
     beforeEach(() => {
         vi.clearAllMocks()
+    })
+
+    beforeEach(() => {
+        vi.spyOn(console, 'error').mockImplementation(() => { })
+    })
+    afterEach(() => {
+        console.error.mockRestore()
     })
 
     it('should derive admin correctly', () => {

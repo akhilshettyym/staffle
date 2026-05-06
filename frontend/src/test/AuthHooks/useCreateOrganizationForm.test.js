@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react'
-import { vi } from 'vitest'
-import useCreateOrganizationForm from '../../hooks/AuthHooks/useCreateOrganizationForm'
+import { renderHook, act } from '@testing-library/react';
+import { vi } from 'vitest';
+import useCreateOrganizationForm from '../../hooks/AuthHooks/useCreateOrganizationForm';
 
 vi.mock('../../api/auth', () => ({
     createOrganization: vi.fn(),
@@ -30,6 +30,13 @@ describe('useCreateOrganizationForm', () => {
 
     beforeEach(() => {
         vi.clearAllMocks()
+    })
+
+    beforeEach(() => {
+        vi.spyOn(console, 'error').mockImplementation(() => { })
+    })
+    afterEach(() => {
+        console.error.mockRestore()
     })
 
     const createMockEvent = () => {

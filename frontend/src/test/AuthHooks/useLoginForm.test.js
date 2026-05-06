@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react'
-import { vi } from 'vitest'
-import useLoginForm from '../../hooks/AuthHooks/useLoginForm'
+import { renderHook, act } from '@testing-library/react';
+import { vi } from 'vitest';
+import useLoginForm from '../../hooks/AuthHooks/useLoginForm';
 
 vi.mock('../../api/auth', () => ({
   login: vi.fn(),
@@ -41,6 +41,13 @@ describe('useLoginForm', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
+
+  beforeEach(() => {
+        vi.spyOn(console, 'error').mockImplementation(() => { })
+    })
+    afterEach(() => {
+        console.error.mockRestore()
+    })
 
   const createMockEvent = () => ({
     preventDefault: vi.fn(),
