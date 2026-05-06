@@ -1,4 +1,4 @@
-import CreateOrganizationForm from "../../components/Auth/CreateOrganizationForm.jsx.jsx";
+import CreateOrganizationForm from "../../components/Auth/CreateOrganizationForm";
 
 const CreateOrganizationPage = () => {
 
