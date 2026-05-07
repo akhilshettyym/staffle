@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useEmployeeTaskCard from '../../hooks/EmployeeHooks/useEmployeeTaskCard';
 
 vi.mock('../../api/employee', () => ({
@@ -23,15 +23,15 @@ vi.mock('react-redux', () => ({
         }),
 }))
 
-import { acceptTask, markAsCompleted } from '../../api/employee';
 import toast from 'react-hot-toast';
+import { acceptTask, markAsCompleted } from '../../api/employee';
 
 describe('useEmployeeTaskCard', () => {
 
     beforeEach(() => {
         vi.clearAllMocks()
     })
-    
+
     beforeEach(() => {
         vi.spyOn(console, 'error').mockImplementation(() => { })
     })

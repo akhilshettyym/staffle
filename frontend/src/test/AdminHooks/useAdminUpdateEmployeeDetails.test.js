@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useAdminUpdateEmployeeDetails from '../../hooks/AdminHooks/useAdminUpdateEmployeeDetails';
 
 vi.mock('../../api/admin', () => ({
@@ -10,8 +10,8 @@ vi.mock('react-hot-toast', () => ({
     default: { success: vi.fn(), error: vi.fn() },
 }))
 
-import { updateEmployee } from '../../api/admin';
 import toast from 'react-hot-toast';
+import { updateEmployee } from '../../api/admin';
 
 describe('useAdminUpdateEmployeeDetails', () => {
 

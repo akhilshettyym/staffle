@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
-import useAdminRejectRejectionModal from "../../hooks/AdminHooks/useAdminRejectRejectionModal";
 import { reviewRejection } from "../../api/admin";
+import { renderHook, act } from "@testing-library/react";
+import useAdminRejectRejectionModal from "../../hooks/AdminHooks/useAdminRejectRejectionModal";
 
 vi.mock("../../api/admin", () => ({
     reviewRejection: vi.fn(),
@@ -22,7 +22,6 @@ describe("useAdminRejectRejectionModal", () => {
             })
         );
 
-        // Long enough reason to pass validation (≥15 words)
         const validReason =
             "This is a detailed rejection reason that contains more than fifteen words " +
             "to satisfy the validation logic and allow the submission to proceed correctly.";

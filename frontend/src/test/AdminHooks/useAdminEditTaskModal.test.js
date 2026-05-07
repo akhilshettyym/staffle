@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useAdminEditTaskModal from '../../hooks/AdminHooks/useAdminEditTaskModal';
 
 vi.mock('../../api/admin', () => ({
@@ -25,8 +25,8 @@ vi.mock('../../utils/useEmployeesDetails', () => ({
     }),
 }))
 
-import { updateTask } from '../../api/admin';
 import toast from 'react-hot-toast';
+import { updateTask } from '../../api/admin';
 
 describe('useAdminEditTaskModal', () => {
 

@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
-import useHook from "../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificOrganizationDetails";
+import { renderHook, act } from "@testing-library/react";
 import { getSpecificOrganizationDetails } from "../../api/superadmin";
+import useHook from "../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificOrganizationDetails";
 
 vi.mock("../../api/superadmin", () => ({
     getSpecificOrganizationDetails: vi.fn(),

@@ -1,8 +1,8 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi } from "vitest";
-import useSuperAdminEditTaskModal from "../../hooks/SuperAdminHooks/useSuperAdminEditTaskModal";
-import { updateNewTask } from "../../api/superadmin";
 import toast from "react-hot-toast";
+import { updateNewTask } from "../../api/superadmin";
+import { renderHook, act } from "@testing-library/react";
+import useSuperAdminEditTaskModal from "../../hooks/SuperAdminHooks/useSuperAdminEditTaskModal";
 
 vi.mock("../../api/superadmin", () => ({
     updateNewTask: vi.fn(),

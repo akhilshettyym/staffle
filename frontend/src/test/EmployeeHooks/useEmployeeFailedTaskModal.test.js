@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useEmployeeFailedTaskModal from '../../hooks/EmployeeHooks/useEmployeeFailedTaskModal';
 
 vi.mock('../../api/employee', () => ({
@@ -13,8 +13,8 @@ vi.mock('react-hot-toast', () => ({
     },
 }))
 
-import { requestRejection } from '../../api/employee';
 import toast from 'react-hot-toast';
+import { requestRejection } from '../../api/employee';
 
 describe('useEmployeeFailedTaskModal', () => {
     beforeEach(() => {

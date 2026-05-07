@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useCompleteOrganizationDetails from '../../hooks/AuthHooks/useCompleteOrganizationDetails';
 
 vi.mock('react-hot-toast', () => ({
