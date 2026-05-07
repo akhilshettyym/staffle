@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useCreateOrganizationForm from '../../hooks/AuthHooks/useCreateOrganizationForm';
 
 vi.mock('../../api/auth', () => ({
@@ -23,8 +23,8 @@ vi.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
 }))
 
-import { createOrganization } from '../../api/auth'
-import toast from 'react-hot-toast'
+import toast from 'react-hot-toast';
+import { createOrganization } from '../../api/auth';
 
 describe('useCreateOrganizationForm', () => {
 

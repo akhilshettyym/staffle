@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useLoginForm from '../../hooks/AuthHooks/useLoginForm';
 
 vi.mock('../../api/auth', () => ({
@@ -31,10 +31,10 @@ vi.mock('../../slices/organizationSlice', () => ({
   fetchOrganization: vi.fn(() => ({ type: 'org/fetchOrganization' })),
 }))
 
-import { login } from '../../api/auth'
-import toast from 'react-hot-toast'
-import { setCredentials } from '../../slices/authSlice'
-import { fetchOrganization } from '../../slices/organizationSlice'
+import toast from 'react-hot-toast';
+import { login } from '../../api/auth';
+import { setCredentials } from '../../slices/authSlice';
+import { fetchOrganization } from '../../slices/organizationSlice';
 
 describe('useLoginForm', () => {
 
@@ -43,11 +43,11 @@ describe('useLoginForm', () => {
   })
 
   beforeEach(() => {
-        vi.spyOn(console, 'error').mockImplementation(() => { })
-    })
-    afterEach(() => {
-        console.error.mockRestore()
-    })
+    vi.spyOn(console, 'error').mockImplementation(() => { })
+  })
+  afterEach(() => {
+    console.error.mockRestore()
+  })
 
   const createMockEvent = () => ({
     preventDefault: vi.fn(),

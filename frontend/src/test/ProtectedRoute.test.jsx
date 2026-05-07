@@ -1,13 +1,12 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-
 import ProtectedRoute from '../routes/ProtectedRoutes';
 import { logout as logoutRedux } from '../slices/authSlice';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { clearOrganization } from '../slices/organizationSlice';
-import toast from 'react-hot-toast';
+import { render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('react-hot-toast', () => ({
     default: {
@@ -98,7 +97,7 @@ describe('ProtectedRoute', () => {
     it('should show login toast when no token', async () => {
         renderWithProviders(
             <ProtectedRoute allowedRoles={['ADMIN']}>
-                <div>Protected Content</div>
+                <div> Protected Content </div>
             </ProtectedRoute>,
             { token: null, role: null }
         );

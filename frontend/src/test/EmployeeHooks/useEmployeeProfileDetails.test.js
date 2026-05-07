@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useEmployeeProfileDetails from '../../hooks/EmployeeHooks/useEmployeeProfileDetails';
 
 vi.mock('../../api/admin', () => ({
@@ -39,8 +39,8 @@ vi.mock('react-redux', () => ({
         }),
 }))
 
-import { updateEmployee } from '../../api/admin';
 import toast from 'react-hot-toast';
+import { updateEmployee } from '../../api/admin';
 
 describe('useEmployeeProfileDetails', () => {
 

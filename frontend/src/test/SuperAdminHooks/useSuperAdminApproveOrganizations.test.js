@@ -1,8 +1,8 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi } from "vitest";
-import useSuperAdminApproveOrganizations from "../../hooks/SuperAdminHooks/useSuperAdminApproveOrganizations";
-import { approveOrganization, rejectOrganization } from "../../api/superadmin";
 import toast from "react-hot-toast";
+import { renderHook, act } from "@testing-library/react";
+import { approveOrganization, rejectOrganization } from "../../api/superadmin";
+import useSuperAdminApproveOrganizations from "../../hooks/SuperAdminHooks/useSuperAdminApproveOrganizations";
 
 vi.mock("../../api/superadmin", () => ({
     approveOrganization: vi.fn(),

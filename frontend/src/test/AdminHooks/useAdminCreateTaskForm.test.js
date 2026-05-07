@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useAdminCreateTaskForm from '../../hooks/AdminHooks/useAdminCreateTaskForm';
 
 vi.mock('../../api/admin', () => ({
@@ -28,8 +28,8 @@ vi.mock('react-hot-toast', () => ({
     default: { success: vi.fn(), error: vi.fn() },
 }))
 
-import { createTask } from '../../api/admin';
 import toast from 'react-hot-toast';
+import { createTask } from '../../api/admin';
 
 describe('useAdminCreateTaskForm', () => {
 
@@ -73,5 +73,4 @@ describe('useAdminCreateTaskForm', () => {
 
         expect(toast.error).toHaveBeenCalled()
     })
-
 })

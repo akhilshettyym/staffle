@@ -1,8 +1,8 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi } from "vitest";
-import useSuperAdminAdminDetails from "../../hooks/SuperAdminHooks/useSuperAdminAdminDetails";
-import { deleteAdminEmployee } from "../../api/superadmin";
 import toast from "react-hot-toast";
+import { renderHook, act } from "@testing-library/react";
+import { deleteAdminEmployee } from "../../api/superadmin";
+import useSuperAdminAdminDetails from "../../hooks/SuperAdminHooks/useSuperAdminAdminDetails";
 
 vi.mock("../../api/superadmin", () => ({
     deleteAdminEmployee: vi.fn(),

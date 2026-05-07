@@ -1,8 +1,8 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi } from "vitest";
-import useSuperAdminAddMoreAdmins from "../../hooks/SuperAdminHooks/useSuperAdminAddMoreAdmins";
-import { addAdmin } from "../../api/superadmin";
 import toast from "react-hot-toast";
+import { addAdmin } from "../../api/superadmin";
+import { renderHook, act } from "@testing-library/react";
+import useSuperAdminAddMoreAdmins from "../../hooks/SuperAdminHooks/useSuperAdminAddMoreAdmins";
 
 vi.mock("../../api/superadmin", () => ({
     addAdmin: vi.fn(),

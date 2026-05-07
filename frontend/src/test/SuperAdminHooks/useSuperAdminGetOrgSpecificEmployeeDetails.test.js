@@ -1,27 +1,27 @@
-import { renderHook, act } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
-import useHook from "../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificEmployeeDetails";
+import { renderHook, act } from "@testing-library/react";
 import { getOrganizationSpecificEmployeeDetails } from "../../api/superadmin";
+import useHook from "../../hooks/SuperAdminHooks/useSuperAdminGetOrgSpecificEmployeeDetails";
 
 vi.mock("../../api/superadmin", () => ({
-   getOrganizationSpecificEmployeeDetails: vi.fn(),
+    getOrganizationSpecificEmployeeDetails: vi.fn(),
 }));
 
 describe("useSuperAdminGetOrgSpecificEmployeeDetails", () => {
 
-   it("should fetch employees", async () => {
-       getOrganizationSpecificEmployeeDetails.mockResolvedValue({
-           employees: [],
-       });
+    it("should fetch employees", async () => {
+        getOrganizationSpecificEmployeeDetails.mockResolvedValue({
+            employees: [],
+        });
 
-       const { result } = renderHook(() =>
-           useHook({ orgId: "1" })
-       );
+        const { result } = renderHook(() =>
+            useHook({ orgId: "1" })
+        );
 
-       await act(async () => {
-           await result.current.fetchOrgSpecificEmployees(true);
-       });
+        await act(async () => {
+            await result.current.fetchOrgSpecificEmployees(true);
+        });
 
-       expect(getOrganizationSpecificEmployeeDetails).toHaveBeenCalled();
-   });
+        expect(getOrganizationSpecificEmployeeDetails).toHaveBeenCalled();
+    });
 });

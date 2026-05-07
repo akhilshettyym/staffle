@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import useHeader from '../../hooks/BasicHooks/useHeader';
 
 vi.mock('../../api/auth', () => ({
@@ -50,10 +50,10 @@ vi.mock('../../slices/organizationSlice', () => ({
     clearOrganization: vi.fn(() => ({ type: 'org/clear' })),
 }))
 
-import { logoutUser } from '../../api/auth'
-import toast from 'react-hot-toast'
-import { logout } from '../../slices/authSlice'
-import { clearOrganization } from '../../slices/organizationSlice'
+import toast from 'react-hot-toast';
+import { logoutUser } from '../../api/auth';
+import { logout } from '../../slices/authSlice';
+import { clearOrganization } from '../../slices/organizationSlice';
 
 describe('useHeader', () => {
 
